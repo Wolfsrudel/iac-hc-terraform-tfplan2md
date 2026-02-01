@@ -5,6 +5,42 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+<a name="1.8.0"></a>
+## [1.8.0](https://github.com/oocx/tfplan2md/compare/v1.7.0...v1.8.0) (2026-02-01)
+
+### ✨ Features
+
+* add refactoring metadata to report model ([dce7095](https://github.com/oocx/tfplan2md/commit/dce7095890bc45fcc2ea5a12ebdb25a6780867ab))
+* annotate summary lines for refactoring ([d20ec23](https://github.com/oocx/tfplan2md/commit/d20ec23c02e9f6bb903e0b3aa3d6645603658a97))
+* improve refactoring summary details ([5e8f0e0](https://github.com/oocx/tfplan2md/commit/5e8f0e043f04a8219fa55fce75953f76a6beec49))
+* parse import and moved metadata ([83fb1a1](https://github.com/oocx/tfplan2md/commit/83fb1a139fe7f946b1d8ce7318e31768cc6feb9c))
+* raise Scriban loop limit ([7c38c1b](https://github.com/oocx/tfplan2md/commit/7c38c1b6257430275086c5d55e53184b2750575a))
+* render refactoring summary section ([2c2c4a4](https://github.com/oocx/tfplan2md/commit/2c2c4a40940caba0be708999bc08db6f5a570ad7))
+
+### 🐛 Bug Fixes
+
+* align refactoring summary table formatting ([1b21e8f](https://github.com/oocx/tfplan2md/commit/1b21e8fc64c4742fccdf94d5c36baa4de700dd5f))
+
+### 📚 Documentation
+
+* add architecture for terraform refactoring visibility ([7aef9f7](https://github.com/oocx/tfplan2md/commit/7aef9f7154da039dc3b2ed5a07be8891d4e1876d))
+* add code review for terraform-import-moved-blocks ([95bc614](https://github.com/oocx/tfplan2md/commit/95bc61414bd6634ce8b3ca5707b3be39e5625be9))
+* add feature specification for 057-terraform-import-moved-blocks ([b3d3ceb](https://github.com/oocx/tfplan2md/commit/b3d3cebaef54d3264ace258509a4ac7b053a1e51))
+* add tasks for terraform import and moved blocks ([eb1353f](https://github.com/oocx/tfplan2md/commit/eb1353f25452c4dbe41348600517b3a3fecb35a7))
+* add test plan for 057-terraform-import-moved-blocks ([add57ed](https://github.com/oocx/tfplan2md/commit/add57ed5ee27250d98e455f410a49aafbac4b2f5))
+* add UAT report for Terraform import and moved blocks ([2e2479b](https://github.com/oocx/tfplan2md/commit/2e2479bd6c2782fdb53313fc18eca356f8cb7fdf))
+* mark task 1 parsing complete ([2c0f8b9](https://github.com/oocx/tfplan2md/commit/2c0f8b98e720f46fe609eab0d8a8baf450cd269b))
+* mark task 2 loop limit complete ([edd21e8](https://github.com/oocx/tfplan2md/commit/edd21e891c16954f0686fd56db04c3b864f54336))
+* mark task 3 report model complete ([3cbf291](https://github.com/oocx/tfplan2md/commit/3cbf291bbf9732772230762204014cfa92cd90a6))
+* mark task 4 summary html complete ([4a97353](https://github.com/oocx/tfplan2md/commit/4a973531acfba707317328e2ffce95dede3b0767))
+* mark task 5 templates complete ([c732351](https://github.com/oocx/tfplan2md/commit/c73235153d149a9061d90d0f8cac1556235c6a00))
+* mark UAT task complete ([58d56bc](https://github.com/oocx/tfplan2md/commit/58d56bc6fdc313a7e9c7ad9d1cae7cda3b69d24e))
+* regenerate demo artifacts ([e339e9c](https://github.com/oocx/tfplan2md/commit/e339e9c60f60f0006c7114cebf7e1368a4608686))
+* regenerate demo artifacts for refactoring ([967fdd6](https://github.com/oocx/tfplan2md/commit/967fdd687430cb1fe5c266a054d20ad07c1c34a5))
+* regenerate demo artifacts for refactoring ([ca87097](https://github.com/oocx/tfplan2md/commit/ca87097ef125cfc5b51a850f42098bb38a6c3590))
+* update code review with blocker for missing code analysis ([5ab8c32](https://github.com/oocx/tfplan2md/commit/5ab8c324f800f3450440ddbfb33be528512605e1))
+* update demo artifacts for refactoring summary ([3fce43c](https://github.com/oocx/tfplan2md/commit/3fce43cb10ed569bf5d357167431de6b0baee247))
+
 <a name="1.7.0"></a>
 ## [1.7.0](https://github.com/oocx/tfplan2md/compare/v1.6.0...v1.7.0) (2026-02-01)
 
