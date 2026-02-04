@@ -5,6 +5,38 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+<a name="1.10.0"></a>
+## [1.10.0](https://github.com/oocx/tfplan2md/compare/v1.9.0...v1.10.0) (2026-02-04)
+
+### ✨ Features
+
+* add Tool column to code analysis findings tables ([35ffcf9](https://github.com/oocx/tfplan2md/commit/35ffcf98fa5e6a778613ebb8186163a5f0c7bd66))
+* update agents for dual UAT artifacts workflow ([dc0c66d](https://github.com/oocx/tfplan2md/commit/dc0c66d8c549813a17ac3e1470ac8487c148e0a8))
+* **059:** Add architecture design for tool column feature ([9f678ce](https://github.com/oocx/tfplan2md/commit/9f678ce6ea455868bb2ef7c9f6470009fc7c5506))
+* **agents:** enhance code reviewer strictness with skeptical review mindset ([fb0cce9](https://github.com/oocx/tfplan2md/commit/fb0cce955c1acbc49e7b95b77b70fdd731fa7878))
+
+### 🐛 Bug Fixes
+
+* handle empty tool names correctly in templates ([6bdea73](https://github.com/oocx/tfplan2md/commit/6bdea734a2c5b901c8c595aa6ab3d091569ba996))
+* **screenshots:** make GitHub light-mode screenshots actually light ([f22eea4](https://github.com/oocx/tfplan2md/commit/f22eea4a4207b5fd8764032e41a88a7ba7ebd71a))
+
+### ♻️ Refactoring
+
+* **agents:** address code review feedback on strictness language ([5376d9c](https://github.com/oocx/tfplan2md/commit/5376d9ce39ba7921e655d7ffc305211370bb8bca))
+
+### 📚 Documentation
+
+* add code review report for Tool column feature ([782d31b](https://github.com/oocx/tfplan2md/commit/782d31b27fdf8b22c23b252dd2f6a39d209c7b75))
+* add multi-model-review findings ([35f478c](https://github.com/oocx/tfplan2md/commit/35f478c9d3ccfdef78db623e4a8a50a303b9bc37))
+* add release notes for Tool column feature ([d3d25f5](https://github.com/oocx/tfplan2md/commit/d3d25f5462e2b397dfb2a4d2180c1ca554c5e70a))
+* add test plan and UAT test plan for feature 059 tool column ([4a09a5e](https://github.com/oocx/tfplan2md/commit/4a09a5edfafc1e62a3b3b20d32f6b9e41076c14f))
+* finalize architecture for tool column in findings tables ([a20e635](https://github.com/oocx/tfplan2md/commit/a20e635b1ee0e25ee4f64c861207bc57b9af636b))
+* generate demo artifacts with Tool column feature ([91161ad](https://github.com/oocx/tfplan2md/commit/91161ada078e4913edc1d7f4bf0e4543123312ae))
+* mark all tasks complete for Tool column feature ([c2a4a11](https://github.com/oocx/tfplan2md/commit/c2a4a11daee98fbe3ffb818354e86a4f7a2f2977))
+* update documentation for dual UAT artifacts workflow ([47ac3a2](https://github.com/oocx/tfplan2md/commit/47ac3a223e612f9cac4f03ccd7a944e89668753e))
+* update features.md with Tool column documentation ([e2e1614](https://github.com/oocx/tfplan2md/commit/e2e161476ec776f28b349624adc6bbe3538651b4))
+* **059:** Add implementation tasks breakdown ([23ef199](https://github.com/oocx/tfplan2md/commit/23ef19901222e599e864b71991953f4c70dfddf0))
+
 <a name="1.9.0"></a>
 ## [1.9.0](https://github.com/oocx/tfplan2md/compare/v1.8.0...v1.9.0) (2026-02-03)
 
