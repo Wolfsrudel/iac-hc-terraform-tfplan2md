@@ -5,6 +5,34 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+<a name="1.11.0"></a>
+## [1.11.0](https://github.com/oocx/tfplan2md/compare/v1.10.0...v1.11.0) (2026-02-04)
+
+### ✨ Features
+
+* add custom template for azurerm_firewall_application_rule_collection ([685b37c](https://github.com/oocx/tfplan2md/commit/685b37cbcc9f8ace4649602dea8de6acc7b4e1c4))
+* add Scriban template for firewall application rules ([e310a23](https://github.com/oocx/tfplan2md/commit/e310a23060cdf4590f8907ba0df8385597647ce6))
+* add view model factory for firewall application rules ([7ebe723](https://github.com/oocx/tfplan2md/commit/7ebe723c7bd33d676986177b792ddf61b1620500))
+* add view models for firewall application rule collection ([04052ff](https://github.com/oocx/tfplan2md/commit/04052ffc8d3751c3bc12f26b702a9eb88c8559c5))
+* integrate firewall application rule factory into rendering pipeline ([b5008b3](https://github.com/oocx/tfplan2md/commit/b5008b3a772379e5fe30583d9bfdfe0109e12f44))
+
+### 🐛 Bug Fixes
+
+* add FirewallApplicationRuleCollection mapping to AotScriptObjectMapper ([88161b3](https://github.com/oocx/tfplan2md/commit/88161b3317ae3cb7ff00216890c4440001a2fb70))
+* handle number values in GetString for protocol port parsing ([42cc49c](https://github.com/oocx/tfplan2md/commit/42cc49c9d6bb42d518651e3d470d034759e87466))
+* use correct 'protocols' property name in firewall application rule factory ([df9f0e6](https://github.com/oocx/tfplan2md/commit/df9f0e6d47c5fcd1063add8da3b01018e6253970))
+
+### 📚 Documentation
+
+* add architecture for azurerm_firewall_application_rule_collection template ([941026b](https://github.com/oocx/tfplan2md/commit/941026b08ed9c455e5ae60cbd55bec8e34f440c4))
+* add azurerm_firewall_application_rule_collection to documentation ([74a402e](https://github.com/oocx/tfplan2md/commit/74a402e1bc6bea0fee55ff8bdfee0c916f9d7525))
+* add code review for azurerm_firewall_application_rule_collection feature ([1cd0aee](https://github.com/oocx/tfplan2md/commit/1cd0aee3ad2a3267496d0e3034773781ad072c5f))
+* add feature specification for 060-azurerm-firewall-application-rule-template ([2882198](https://github.com/oocx/tfplan2md/commit/2882198040ef624269d4b7ac44c08010eed78d28))
+* add release notes for azurerm_firewall_application_rule_collection ([a989b58](https://github.com/oocx/tfplan2md/commit/a989b584f589c2c87172ac9072eccd3b4dc7e504))
+* add test plan and UAT plan for firewall application rule template ([4cb40e5](https://github.com/oocx/tfplan2md/commit/4cb40e5a2931616b8033e472380b01b49bdedda2))
+* approve azurerm_firewall_application_rule_collection after protocol fix ([e714af1](https://github.com/oocx/tfplan2md/commit/e714af1b2212e6b0dea6cc2c0e04a33d7f796d78))
+* regenerate demo artifacts after protocol fix ([6bc65a6](https://github.com/oocx/tfplan2md/commit/6bc65a6b5cbe4d7748f0a0ff04f9cea603b4cc27))
+
 <a name="1.10.0"></a>
 ## [1.10.0](https://github.com/oocx/tfplan2md/compare/v1.9.0...v1.10.0) (2026-02-04)
 
