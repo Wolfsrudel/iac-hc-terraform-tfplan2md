@@ -5,6 +5,63 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+<a name="1.12.0"></a>
+## [1.12.0](https://github.com/oocx/tfplan2md/compare/v1.11.0...v1.12.0) (2026-02-07)
+
+### ✨ Features
+
+* add change icons to variable groups ([6fa6253](https://github.com/oocx/tfplan2md/commit/6fa6253cca687846792e25b80fd10c880c0b1f2f))
+* add formatter and icon registries ([d18359c](https://github.com/oocx/tfplan2md/commit/d18359c5c0e93c2be804648b997305cb12532415))
+* add json-based icon provider ([87303a0](https://github.com/oocx/tfplan2md/commit/87303a0c6383782ae3a587d1627309fb3a7baf09))
+* add pattern-matching registry core ([277c8a1](https://github.com/oocx/tfplan2md/commit/277c8a102e9bc6101b55dd863f5ffa2a15f31548))
+* add provider snapshot coverage ([2553d87](https://github.com/oocx/tfplan2md/commit/2553d87b48751a31f805bd53290f6f4a609e76e7))
+* integrate registries into scriban helpers ([f79be9f](https://github.com/oocx/tfplan2md/commit/f79be9f48c4fc27717e88504c3aa2f00c9b916bd))
+* migrate provider icon rules to registry ([6a1fe80](https://github.com/oocx/tfplan2md/commit/6a1fe80df77417cfd7d30cccd06dbe7f3105bb31))
+* migrate VS Code agents to use askQuestions tool ([2680a37](https://github.com/oocx/tfplan2md/commit/2680a378710b41260c7de37c2cb8fbd09c190dd4))
+* remove get_icon template usage ([c6ce911](https://github.com/oocx/tfplan2md/commit/c6ce911f15390025d36fb234981a4e4c9600417c))
+* wire provider registries into startup ([edd49ec](https://github.com/oocx/tfplan2md/commit/edd49ec7a5988e77cbb859fbe22fc6d63e6a19f7))
+* **workflow:** add workflow_dispatch to release workflow for manual triggering ([b11e481](https://github.com/oocx/tfplan2md/commit/b11e48143b4607e5372beb06ae67296ff7ca7eb2))
+
+### 🐛 Bug Fixes
+
+* centralize action icons and restore azuread icons ([db2a796](https://github.com/oocx/tfplan2md/commit/db2a7968a0dae171c09f301cb5cbbf293cae0532))
+* prevent git credential helper hang in WSL when interop is disabled ([8f2df53](https://github.com/oocx/tfplan2md/commit/8f2df5350681dec404c8a0f219462f3d64cabcb5))
+* revert ci.yml changes and remove RELEASE_TRIGGER_INSTRUCTIONS.md ([ce3c959](https://github.com/oocx/tfplan2md/commit/ce3c959d9d6d31e3e31c28f12d0c1fd2a469c46b))
+* **uat:** restore 4-argument signature for validate_artifact ([2c88b38](https://github.com/oocx/tfplan2md/commit/2c88b3844636cbbd43c1c7c924403a90668123c3))
+* **workflow:** move tag after commit amend in CI workflow ([5b84833](https://github.com/oocx/tfplan2md/commit/5b84833442996a06adfd390357324cc40ce60fcd))
+* **workflow:** remove [skip ci] to allow release workflow to run ([c3fbed0](https://github.com/oocx/tfplan2md/commit/c3fbed03b4b25543306afc886d552430abe9f8a3))
+
+### ♻️ Refactoring
+
+* address code review feedback ([0de6377](https://github.com/oocx/tfplan2md/commit/0de63779312a751aa9abaddabf2e0ad4c3c1cdcd))
+
+### 📚 Documentation
+
+* add architecture documentation for extensible provider registry system ([e9cbca2](https://github.com/oocx/tfplan2md/commit/e9cbca283133f60ad8a9d5c82684b6c196bb5941))
+* add code review for extensible-provider-registry ([880d8cc](https://github.com/oocx/tfplan2md/commit/880d8cc030adccc0b5ade525bae21fc5a30f1c17))
+* add feature specification for 061-extensible-provider-registry ([bfedf2e](https://github.com/oocx/tfplan2md/commit/bfedf2ebf6350be65b0aa5af32c900d9c060de7a))
+* add instructions for triggering v1.11.0 release ([a506960](https://github.com/oocx/tfplan2md/commit/a506960a54ab93b1df7eae87b8815d4eaa258f85))
+* add release notes for 061-extensible-provider-registry ([7ad9ee8](https://github.com/oocx/tfplan2md/commit/7ad9ee88c08f729b20010a982909b0798dd5ab98))
+* add sub-agent strategy, billing guidance, and best practices for context rot reduction ([5d96e3b](https://github.com/oocx/tfplan2md/commit/5d96e3baac3acfd7847678c70212ffe5cad59ff0))
+* add tasks for extensible-provider-registry ([2e2f446](https://github.com/oocx/tfplan2md/commit/2e2f446719a80977e86b616fb000b09c0213f12c))
+* add test plan and uat plan for 061-extensible-provider-registry ([4a80433](https://github.com/oocx/tfplan2md/commit/4a80433a8f956953d3d44508b8c2fb1fa8f25ac7))
+* add UAT report for extensible provider registry ([9ff9cb1](https://github.com/oocx/tfplan2md/commit/9ff9cb1a854dae410c85504233f316bf967f5e76))
+* clarify task tool vs task agent type naming in sub-agent documentation ([bda1081](https://github.com/oocx/tfplan2md/commit/bda10819818e37093fcf7f8f2cf4d3f840be6dcb))
+* mark task 1 as complete ([62cce1a](https://github.com/oocx/tfplan2md/commit/62cce1a079c020f5ec3ea42f1c415e0990e90487))
+* mark task 2 as complete ([4d95553](https://github.com/oocx/tfplan2md/commit/4d95553a605a35b33f8b47a3c42abc39ed12859c))
+* mark task 3 as complete ([b69c33f](https://github.com/oocx/tfplan2md/commit/b69c33f18cbb97946d7fc9a7887198d800af088e))
+* mark task 4 as complete ([5839453](https://github.com/oocx/tfplan2md/commit/58394537693fa70893f6fe8d6b154810fc63b4c2))
+* mark task 5 as complete ([21da240](https://github.com/oocx/tfplan2md/commit/21da240ff2f2dc52fc542c9c48746b4ccf5312b9))
+* mark task 6 as complete ([685002a](https://github.com/oocx/tfplan2md/commit/685002abd2bc13dab34145601adc2fba41c3fe4f))
+* mark task 8 complete ([ec08fc4](https://github.com/oocx/tfplan2md/commit/ec08fc4d34b5233be9451e9bc83e050d9d542d1f))
+* note action icon centralization ([aafea28](https://github.com/oocx/tfplan2md/commit/aafea2849e98006215176d8e737d6953c74ffe40))
+* update agents.md to reference askQuestions tool ([7e1354d](https://github.com/oocx/tfplan2md/commit/7e1354d08a9d5b1ffd0777c35704bb7d608508c1))
+* update architecture for extensible provider registry post-implementation review ([b9ce37a](https://github.com/oocx/tfplan2md/commit/b9ce37a38e651e2a4619110c5f36efcdbe59cabf))
+* update code review — approve extensible provider registry ([5f0733c](https://github.com/oocx/tfplan2md/commit/5f0733c6b0597ed74ffaec2198f46b1f86345aaa))
+* update comprehensive demo and code review artifacts ([6d5f633](https://github.com/oocx/tfplan2md/commit/6d5f633df9c0ce6385989499a1a0808744ea0f3e))
+* update task 7 checklist ([2e49cb7](https://github.com/oocx/tfplan2md/commit/2e49cb7c0a05007234507b63efb207f8a8d0144e))
+* **workflow:** improved instructions for chrome devtools ([985c058](https://github.com/oocx/tfplan2md/commit/985c05829335743bc36a84c01ff36555e258a7fe))
+
 <a name="1.11.0"></a>
 ## [1.11.0](https://github.com/oocx/tfplan2md/compare/v1.10.0...v1.11.0) (2026-02-04)
 
