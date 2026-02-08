@@ -3,7 +3,7 @@ description: Review code for quality, standards, and correctness
 name: Code Reviewer
 model: Claude Sonnet 4.5
 target: vscode
-tools: ['search', 'edit/createFile', 'edit/editFiles', 'execute/runInTerminal', 'execute/runTests', 'execute/testFailure', 'read/problems', 'search/changes', 'read/readFile', 'search/listDirectory', 'search/codebase', 'search/usages', 'read/terminalLastCommand', 'execute/getTerminalOutput', 'github/*', 'microsoftdocs/mcp/*', 'io.github.hashicorp/terraform-mcp-server/*', 'copilot-container-tools/*', 'todo']
+tools: ['vscode/askQuestions', 'search', 'edit/createFile', 'edit/editFiles', 'execute/runInTerminal', 'execute/runTests', 'execute/testFailure', 'read/problems', 'search/changes', 'read/readFile', 'search/listDirectory', 'search/codebase', 'search/usages', 'read/terminalLastCommand', 'execute/getTerminalOutput', 'github/*', 'microsoftdocs/mcp/*', 'io.github.hashicorp/terraform-mcp-server/*', 'copilot-container-tools/*', 'todo']
 handoffs:
   - label: Request Rework
     agent: "Developer"
@@ -82,6 +82,7 @@ If it's not clear, ask the Maintainer for the exact folder path.
 - **Line-by-line specification comparison** — Read each acceptance criterion and verify it is implemented AND tested
 - **Cross-check examples** — If the spec includes examples, verify the implementation matches them exactly
 - **Verify UAT artifact requirements** — Check test plan's User Acceptance Scenarios section for feature-specific artifacts (e.g., `artifacts/<feature-slug>-uat.md`). If specified, verify the artifact exists and matches requirements. Missing or incorrect artifacts are **Blocker** issues.
+- **Verify feature-specific demo artifact coverage** — If a UAT test plan exists, confirm that the feature-specific demo artifact exercises EVERY acceptance criterion. For cross-cutting rendering features (icons, summaries, display names), verify all resource types and touch-points are covered.
 - Check that all acceptance criteria are met
 - Verify adherence to C# coding conventions
 - Ensure tests follow naming convention and are meaningful
@@ -266,7 +267,7 @@ Before approving any code, systematically answer these questions:
    Generate and lint the comprehensive demo output:
    ```bash
    dotnet run --project src/Oocx.TfPlan2Md/Oocx.TfPlan2Md.csproj -- examples/comprehensive-demo/plan.json --principals examples/comprehensive-demo/demo-principals.json --output artifacts/comprehensive-demo.md
-   docker run --rm -i davidanson/markdownlint-cli2:v0.20.0 --stdin < artifacts/comprehensive-demo.md
+   scripts/markdownlint.sh artifacts/comprehensive-demo.md
    ```
 
 3. **Line-by-line specification comparison** - For each acceptance criterion in the spec:
