@@ -5,6 +5,47 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+<a name="1.13.0"></a>
+## [1.13.0](https://github.com/oocx/tfplan2md/compare/v1.12.0...v1.13.0) (2026-02-08)
+
+### ✨ Features
+
+* add pim and role policy summaries ([502024d](https://github.com/oocx/tfplan2md/commit/502024d3ad16167ff175aaa64d30c84a93768b9c))
+* add private dns a record summaries ([38144cd](https://github.com/oocx/tfplan2md/commit/38144cd5719d70e65eb032b121b76666220a7f37))
+* broaden azure resource id detection ([84e0d6c](https://github.com/oocx/tfplan2md/commit/84e0d6c5f0945c696dca740134ec1fb3317ae6d4))
+* enrich azure display formatting ([6748677](https://github.com/oocx/tfplan2md/commit/6748677dc6fb8f4a574ffa53c5b1f6a47456b0c7))
+* enrich azure scope formatting ([e4f46f5](https://github.com/oocx/tfplan2md/commit/e4f46f5f41423e4ec4568404d879a468f6c59aff))
+* extend azure mapping loader and tests ([cd1b458](https://github.com/oocx/tfplan2md/commit/cd1b458f3539a778dbdc7ddc3b3ef2f39441f5a9))
+* move private dns summary to azurerm factory ([0c673f0](https://github.com/oocx/tfplan2md/commit/0c673f06919d06a057e5f1c6b12798c06acdb146))
+* resolve azure role definitions ([fa3e744](https://github.com/oocx/tfplan2md/commit/fa3e744be41967c462d4f2ae2711957a81b3bf34))
+* track failed resolution diagnostics ([56b1178](https://github.com/oocx/tfplan2md/commit/56b1178ac754fce8b60b0f8e74d6b3b07f23d422))
+
+### 🐛 Bug Fixes
+
+* adjust azure display summaries ([bdbd94c](https://github.com/oocx/tfplan2md/commit/bdbd94c4ef5a7dbbe434b1233837592205925993))
+
+### 📚 Documentation
+
+* add ADR-006 dependency injection strategy investigation ([923cfee](https://github.com/oocx/tfplan2md/commit/923cfee5abce7faf4f36e576145ad2fb27e751a7))
+* add architecture for azure display enhancements ([2bcea57](https://github.com/oocx/tfplan2md/commit/2bcea57cd78baec281964f36ca836d4abe6d3d6c))
+* add code review for azure-display-enhancements ([c78a9dd](https://github.com/oocx/tfplan2md/commit/c78a9ddf99daa91fd6d2e2a4a8e69e4ca7707f06))
+* add feature specification for 063-azure-display-enhancements ([6d442a2](https://github.com/oocx/tfplan2md/commit/6d442a24e5120ab0bda53ead97b6c4d68e227d17))
+* add focused azure display uat artifacts ([efcbf88](https://github.com/oocx/tfplan2md/commit/efcbf8883007064afb2d491b4cd82554fdb2087e))
+* add release notes for azure display enhancements ([8f619da](https://github.com/oocx/tfplan2md/commit/8f619daca63dc76320ff304a653b6a91871addb4))
+* add tasks for azure display enhancements ([f866ee3](https://github.com/oocx/tfplan2md/commit/f866ee38d236fcdf0a10e15e438c9eafcfebf536))
+* add test and UAT plans for azure display enhancements ([6d7344b](https://github.com/oocx/tfplan2md/commit/6d7344b9b205d3347b8c97fcf83df546c7679eed))
+* add UAT report for Azure display enhancements (FAILED) ([ec1f9c8](https://github.com/oocx/tfplan2md/commit/ec1f9c8ec1bd3cfb2ec8613cb2e8331f4befc759))
+* include artifact inconsistency finding in UAT report ([8996f5a](https://github.com/oocx/tfplan2md/commit/8996f5a201494d3461c81d25e6ea3a6eca96fc03))
+* mark task 1 complete ([869c1e4](https://github.com/oocx/tfplan2md/commit/869c1e46dafc2e76b25182d29906736d78571a4c))
+* mark task 2 complete ([1dd66d9](https://github.com/oocx/tfplan2md/commit/1dd66d9fee623b0eabd9386c2269c4d191af0984))
+* mark task 3 complete ([c71d14e](https://github.com/oocx/tfplan2md/commit/c71d14e9d4293306760e44366a363a13ed0c060a))
+* mark task 4 complete ([5ce33a5](https://github.com/oocx/tfplan2md/commit/5ce33a53713cdde6891c84f9ed382ee5baa1cd25))
+* mark task 6 complete ([c258009](https://github.com/oocx/tfplan2md/commit/c258009376d29beb1b3f1b3de13964a1fbade391))
+* refresh demo artifacts for azure display ([e881f4d](https://github.com/oocx/tfplan2md/commit/e881f4dfadf6df838015e69fdff2ac2679f51dda))
+* regenerate demo artifacts for azure display enhancements ([87faf56](https://github.com/oocx/tfplan2md/commit/87faf5697e9c9bc73845b6e945f64828954a20e3))
+* update demo artifacts for azure display enhancements ([cafb432](https://github.com/oocx/tfplan2md/commit/cafb4328ab3f4b65cda89d6e104391570f882be2))
+* update UAT report with failure findings and retrospective ([f5e00e0](https://github.com/oocx/tfplan2md/commit/f5e00e0341c87c87dd2baa16b0cefb674e14a2bb))
+
 <a name="1.12.0"></a>
 ## [1.12.0](https://github.com/oocx/tfplan2md/compare/v1.11.0...v1.12.0) (2026-02-07)
 
