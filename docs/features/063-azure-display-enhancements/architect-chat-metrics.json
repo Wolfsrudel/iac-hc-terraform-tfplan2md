@@ -1,0 +1,93 @@
+{
+  "metadata": {
+    "source": "architect.chat.json",
+    "analysis_date": "2026-02-08",
+    "generator": "extract-metrics.sh"
+  },
+  "session": {
+    "total_requests": 2,
+    "start_timestamp": 1770481371351,
+    "end_timestamp": 1770482248090,
+    "session_duration_sec": 876.739,
+    "user_wait_time_sec": 0,
+    "agent_work_time_sec": 779.662
+  },
+  "model_usage": [
+    {
+      "model": "claude-opus-4.6",
+      "count": 2
+    }
+  ],
+  "tool_usage": [
+    {
+      "tool": "readFile",
+      "count": 34
+    },
+    {
+      "tool": "findTextInFiles",
+      "count": 7
+    },
+    {
+      "tool": "manage_todo_list",
+      "count": 6
+    },
+    {
+      "tool": "run_in_terminal",
+      "count": 6
+    },
+    {
+      "tool": "findFiles",
+      "count": 4
+    },
+    {
+      "tool": "askQuestions",
+      "count": 1
+    },
+    {
+      "tool": "createFile",
+      "count": 1
+    }
+  ],
+  "automation": {
+    "approval_types": [
+      {
+        "type": 1,
+        "count": 59
+      }
+    ],
+    "total_invocations": 59,
+    "auto_approved": 59,
+    "manual_approved": 0,
+    "automation_rate_pct": 100
+  },
+  "model_success": [
+    {
+      "model": "claude-opus-4.6",
+      "total": 2,
+      "complete": 2,
+      "failed": 0
+    }
+  ],
+  "rejection_analysis": [
+    {
+      "model": "claude-opus-4.6",
+      "total_requests": 2,
+      "cancelled": 0,
+      "failed": 0,
+      "tool_rejections": 0,
+      "error_codes": [],
+      "rejection_rate": 0
+    }
+  ],
+  "file_edits": [],
+  "response_times": [
+    {
+      "model": "claude-opus-4.6",
+      "count": 2,
+      "avg_sec": 389,
+      "total_sec": 779
+    }
+  ],
+  "errors": [],
+  "user_feedback": []
+}
