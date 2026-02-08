@@ -189,6 +189,17 @@ Follow the project's coding conventions strictly:
    ```
    - This prevents merge conflicts later
    - Required for both initial implementation and rework after failed PR/CI validation
+   
+   **If uncommitted changes exist** (from previous agents or saved exports):
+   ```bash
+   # Stash the changes instead of blocking
+   git stash push -m "pre-existing changes at session start"
+   
+   # Complete your work, then restore if needed
+   git stash pop
+   ```
+   - Never block on existing changes—stash them and continue
+   - This commonly happens during rework sessions or after manual file saves
 
 2. **Review all inputs** - Read the specification, architecture, tasks, and test plan thoroughly.
 
@@ -242,8 +253,16 @@ Follow the project's coding conventions strictly:
       - All tests must pass with ZERO skipped tests
       - If tests are skipped, identify reason and ask Maintainer to resolve
    
-   b. **Verify markdown quality (REQUIRED)**:
-      - Use `generate-demo-artifacts` skill to regenerate all demo artifacts
+   b. **Generate UAT artifacts (CRITICAL - Check Test Plan First)**:
+      - **Read the test plan's User Acceptance Scenarios section**
+      - If test plan specifies a **feature-specific artifact** (e.g., `artifacts/<feature-slug>-uat.md`):
+        - Create that exact artifact as specified
+        - Use a minimal test plan that exercises the feature changes
+        - **DO NOT substitute the comprehensive demo**
+      - If no feature-specific artifact is mentioned or for regression testing:
+        - Use `generate-demo-artifacts` skill to regenerate all demo artifacts
+   
+   c. **Verify markdown quality (REQUIRED)**:
       - Verify comprehensive-demo.md passes markdownlint with 0 errors:
         ```bash
         docker run --rm -i davidanson/markdownlint-cli2:v0.20.0 --stdin < artifacts/comprehensive-demo.md
