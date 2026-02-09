@@ -5,6 +5,49 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+<a name="1.15.0"></a>
+## [1.15.0](https://github.com/oocx/tfplan2md/compare/v1.14.0...v1.15.0) (2026-02-09)
+
+### ✨ Features
+
+* add architectural and snapshot guardrails to agent prompts ([c6753da](https://github.com/oocx/tfplan2md/commit/c6753dae42ce8f1b823dc2bab89dbbf4e1176b63))
+* add tenant and management group formatting ([ab1955c](https://github.com/oocx/tfplan2md/commit/ab1955c0c704fd5497a0b3175f2213af94b93bab))
+
+### 🐛 Bug Fixes
+
+* align management group scope formatting ([32494fd](https://github.com/oocx/tfplan2md/commit/32494fd15a3a8eb1f2bfd598fa628ea6ca458301))
+* align management group scope summaries ([2cb39a1](https://github.com/oocx/tfplan2md/commit/2cb39a10d5ef413ba0547fcd280d7fd37543b3f4))
+* align management group summary formatting ([1745c9f](https://github.com/oocx/tfplan2md/commit/1745c9fe8799695d0c0f68686202c0d2339fca04))
+* correct management group scope formatting ([50aa85a](https://github.com/oocx/tfplan2md/commit/50aa85ac9351f37b51b7fb9fccb12b64e142a838))
+* keep management group scope labels in code spans ([16b3887](https://github.com/oocx/tfplan2md/commit/16b38877464a522c3e19e5543ce28b801de7fad6))
+* place Azure icons inside code spans ([d73102d](https://github.com/oocx/tfplan2md/commit/d73102d75ee0ede523a146c29648e02aa50cfa4f))
+
+### 📚 Documentation
+
+* add architecture for tenant display mapping ([8fa4c8e](https://github.com/oocx/tfplan2md/commit/8fa4c8e5285136b45e9b2c4676806ec0d112db0a))
+* add code review for tenant display name mapping ([da54da8](https://github.com/oocx/tfplan2md/commit/da54da84c23c587e78d1e5e14585abdc87c1573b))
+* add feature specification for tenant display name mapping ([8ff289b](https://github.com/oocx/tfplan2md/commit/8ff289beeb7fcd67b9e11b27091e8644db6948d9))
+* add release notes and work protocol for 063 and 065 ([c514122](https://github.com/oocx/tfplan2md/commit/c5141227552ac98b4e4c7ad28dd8ed05092df7cf))
+* add tasks for tenant display mapping ([7cb44b7](https://github.com/oocx/tfplan2md/commit/7cb44b786456f63da2dcaf0cd5f0b93f308da18d))
+* add test plan and uat test plan for 065-tenant-display-mapping ([daee7e2](https://github.com/oocx/tfplan2md/commit/daee7e2196d55b8c4999b2a98bde11c83f32ac24))
+* add UAT report for 065-tenant-display-mapping ([3b549f2](https://github.com/oocx/tfplan2md/commit/3b549f2c58ac65b2f9b2d2dc73b3d209d95dd5b2))
+* add UAT report for 065-tenant-display-mapping (PASSED) ([a9d6353](https://github.com/oocx/tfplan2md/commit/a9d63535b289b420648a986be196ba8a5d218a9e))
+* approve Feature 065 for release and fix icon docs ([3be60b7](https://github.com/oocx/tfplan2md/commit/3be60b77e760b2e030f628785fb4f6bf9bbb4c6a))
+* correct UAT report for 065 with accurate results ([39e7fa5](https://github.com/oocx/tfplan2md/commit/39e7fa5140066b557bb5b340e557f0392511e399))
+* correct UAT report formatting for 065 ([84709ab](https://github.com/oocx/tfplan2md/commit/84709abc39d53bb0620c22b15d6eda3a5d79f5e0))
+* correct work protocol entry ([975b5f3](https://github.com/oocx/tfplan2md/commit/975b5f326ed55d57a7cf79df6190dbe4b9376d7f))
+* document Azure Display Enhancements with visual icons ([3b4ec60](https://github.com/oocx/tfplan2md/commit/3b4ec60159145faba98e1b91142b96c7f036677a))
+* fix work protocol duplication and content ([e279566](https://github.com/oocx/tfplan2md/commit/e279566c0140c03d7b9d78e0f91e95c98115b07a))
+* log Code Reviewer work in protocol ([554c7cb](https://github.com/oocx/tfplan2md/commit/554c7cbe64357058ce1def81beb7c60b04b9e132))
+* update demo artifacts for tenant mapping ([8bb40ec](https://github.com/oocx/tfplan2md/commit/8bb40ec5daf2b9c7c415c4edb37329d27af35233))
+* update tenant display name and management group icon formatting in specifications and UAT test plan ([97323be](https://github.com/oocx/tfplan2md/commit/97323bee460febe356bc78b26446355df859b096))
+* update tenant mapping guidance ([e6fa85e](https://github.com/oocx/tfplan2md/commit/e6fa85ec4a813f1486b8fa22d979b0071863e0ca))
+* update UAT report and work protocol for corrected test ([3d1427e](https://github.com/oocx/tfplan2md/commit/3d1427e7994b6d4c5488278f5362c6d0efcae22b))
+* update UAT report with correct PR links ([6612a3a](https://github.com/oocx/tfplan2md/commit/6612a3a7ac70f94752efc7ec6e3cbdca9f19ea39))
+* update UAT report with minimal feature plan PRs ([6606ebc](https://github.com/oocx/tfplan2md/commit/6606ebc16aa7952568d016a820f9d2159efd75c4))
+* update work protocol for snapshot fix ([47fc22f](https://github.com/oocx/tfplan2md/commit/47fc22fd49fbdb74021fafdf09dc3a21012ce6b8))
+* update work protocol with UAT tester feedback and problems encountered ([7ed1bf8](https://github.com/oocx/tfplan2md/commit/7ed1bf888a081364f691f445e307bed57711ad33))
+
 <a name="1.14.0"></a>
 ## [1.14.0](https://github.com/oocx/tfplan2md/compare/v1.13.1...v1.14.0) (2026-02-08)
 
