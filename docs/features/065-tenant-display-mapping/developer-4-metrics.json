@@ -1,0 +1,157 @@
+{
+  "metadata": {
+    "source": "developer 4.chat.json",
+    "analysis_date": "2026-02-09",
+    "generator": "extract-metrics.sh"
+  },
+  "session": {
+    "total_requests": 7,
+    "start_timestamp": 1770658870419,
+    "end_timestamp": 1770672560618,
+    "session_duration_sec": 13690.199,
+    "user_wait_time_sec": 7082648500.328,
+    "agent_work_time_sec": 1414.491
+  },
+  "model_usage": [
+    {
+      "model": "gpt-5.2-codex",
+      "count": 5
+    },
+    {
+      "model": "azure/Azure/Kimi-K2.5",
+      "count": 2
+    }
+  ],
+  "tool_usage": [
+    {
+      "tool": "run_in_terminal",
+      "count": 64
+    },
+    {
+      "tool": "readFile",
+      "count": 31
+    },
+    {
+      "tool": "manage_todo_list",
+      "count": 9
+    },
+    {
+      "tool": "applyPatch",
+      "count": 8
+    },
+    {
+      "tool": "findTextInFiles",
+      "count": 4
+    },
+    {
+      "tool": "get_terminal_output",
+      "count": 3
+    },
+    {
+      "tool": "mcp_github_get_pull_request",
+      "count": 2
+    },
+    {
+      "tool": "mcp_github_get_pull_request_status",
+      "count": 2
+    },
+    {
+      "tool": "askQuestions",
+      "count": 1
+    },
+    {
+      "tool": "listDirectory",
+      "count": 1
+    },
+    {
+      "tool": "terminal_last_command",
+      "count": 1
+    }
+  ],
+  "automation": {
+    "approval_types": [
+      {
+        "type": 1,
+        "count": 121
+      },
+      {
+        "type": 3,
+        "count": 4
+      },
+      {
+        "type": 4,
+        "count": 1
+      }
+    ],
+    "total_invocations": 126,
+    "auto_approved": 125,
+    "manual_approved": 1,
+    "automation_rate_pct": 99
+  },
+  "model_success": [
+    {
+      "model": "gpt-5.2-codex",
+      "total": 5,
+      "complete": 5,
+      "failed": 0
+    },
+    {
+      "model": "azure/Azure/Kimi-K2.5",
+      "total": 2,
+      "complete": 0,
+      "failed": 2
+    }
+  ],
+  "rejection_analysis": [
+    {
+      "model": "gpt-5.2-codex",
+      "total_requests": 5,
+      "cancelled": 0,
+      "failed": 0,
+      "tool_rejections": 0,
+      "error_codes": [],
+      "rejection_rate": 0
+    },
+    {
+      "model": "azure/Azure/Kimi-K2.5",
+      "total_requests": 2,
+      "cancelled": 0,
+      "failed": 2,
+      "tool_rejections": 0,
+      "error_codes": [
+        {
+          "code": "unknown",
+          "count": 2
+        }
+      ],
+      "rejection_rate": 100
+    }
+  ],
+  "file_edits": [
+    {
+      "status": "kept",
+      "count": 1
+    }
+  ],
+  "response_times": [
+    {
+      "model": "gpt-5.2-codex",
+      "count": 5,
+      "avg_sec": 279,
+      "total_sec": 1395
+    },
+    {
+      "model": "azure/Azure/Kimi-K2.5",
+      "count": 2,
+      "avg_sec": 9,
+      "total_sec": 18
+    }
+  ],
+  "errors": [
+    {
+      "message": "Sorry, no response was returned.",
+      "count": 2
+    }
+  ],
+  "user_feedback": []
+}

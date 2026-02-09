@@ -1,0 +1,114 @@
+{
+  "metadata": {
+    "source": "developer.chat.json",
+    "analysis_date": "2026-02-09",
+    "generator": "extract-metrics.sh"
+  },
+  "session": {
+    "total_requests": 12,
+    "start_timestamp": 1770570887940,
+    "end_timestamp": 1770577153053,
+    "session_duration_sec": 6265.113,
+    "user_wait_time_sec": 80.922,
+    "agent_work_time_sec": 1901.399
+  },
+  "model_usage": [
+    {
+      "model": "gpt-5.2-codex",
+      "count": 12
+    }
+  ],
+  "tool_usage": [
+    {
+      "tool": "readFile",
+      "count": 75
+    },
+    {
+      "tool": "findTextInFiles",
+      "count": 41
+    },
+    {
+      "tool": "applyPatch",
+      "count": 35
+    },
+    {
+      "tool": "run_in_terminal",
+      "count": 35
+    },
+    {
+      "tool": "manage_todo_list",
+      "count": 8
+    },
+    {
+      "tool": "createFile",
+      "count": 5
+    },
+    {
+      "tool": "listDirectory",
+      "count": 4
+    },
+    {
+      "tool": "mcp_microsoftdocs_microsoft_docs_search",
+      "count": 3
+    },
+    {
+      "tool": "findFiles",
+      "count": 1
+    },
+    {
+      "tool": "listCodeUsages",
+      "count": 1
+    }
+  ],
+  "automation": {
+    "approval_types": [
+      {
+        "type": 1,
+        "count": 207
+      },
+      {
+        "type": 4,
+        "count": 1
+      }
+    ],
+    "total_invocations": 208,
+    "auto_approved": 207,
+    "manual_approved": 1,
+    "automation_rate_pct": 99
+  },
+  "model_success": [
+    {
+      "model": "gpt-5.2-codex",
+      "total": 12,
+      "complete": 12,
+      "failed": 0
+    }
+  ],
+  "rejection_analysis": [
+    {
+      "model": "gpt-5.2-codex",
+      "total_requests": 12,
+      "cancelled": 0,
+      "failed": 0,
+      "tool_rejections": 0,
+      "error_codes": [],
+      "rejection_rate": 0
+    }
+  ],
+  "file_edits": [
+    {
+      "status": "kept",
+      "count": 30
+    }
+  ],
+  "response_times": [
+    {
+      "model": "gpt-5.2-codex",
+      "count": 12,
+      "avg_sec": 158,
+      "total_sec": 1901
+    }
+  ],
+  "errors": [],
+  "user_feedback": []
+}

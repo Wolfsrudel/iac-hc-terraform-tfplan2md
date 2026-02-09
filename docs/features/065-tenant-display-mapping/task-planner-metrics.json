@@ -1,0 +1,103 @@
+{
+  "metadata": {
+    "source": "task planner.chat.json",
+    "analysis_date": "2026-02-09",
+    "generator": "extract-metrics.sh"
+  },
+  "session": {
+    "total_requests": 3,
+    "start_timestamp": 1770570694732,
+    "end_timestamp": 1770570828452,
+    "session_duration_sec": 133.72,
+    "user_wait_time_sec": 0,
+    "agent_work_time_sec": 113.886
+  },
+  "model_usage": [
+    {
+      "model": "gemini-3-flash-preview",
+      "count": 3
+    }
+  ],
+  "tool_usage": [
+    {
+      "tool": "readFile",
+      "count": 14
+    },
+    {
+      "tool": "findFiles",
+      "count": 8
+    },
+    {
+      "tool": "run_in_terminal",
+      "count": 5
+    },
+    {
+      "tool": "createFile",
+      "count": 1
+    },
+    {
+      "tool": "listDirectory",
+      "count": 1
+    },
+    {
+      "tool": "replaceString",
+      "count": 1
+    }
+  ],
+  "automation": {
+    "approval_types": [
+      {
+        "type": 1,
+        "count": 29
+      },
+      {
+        "type": 3,
+        "count": 1
+      }
+    ],
+    "total_invocations": 30,
+    "auto_approved": 30,
+    "manual_approved": 0,
+    "automation_rate_pct": 100
+  },
+  "model_success": [
+    {
+      "model": "gemini-3-flash-preview",
+      "total": 3,
+      "complete": 2,
+      "failed": 1
+    }
+  ],
+  "rejection_analysis": [
+    {
+      "model": "gemini-3-flash-preview",
+      "total_requests": 3,
+      "cancelled": 1,
+      "failed": 0,
+      "tool_rejections": 0,
+      "error_codes": [
+        {
+          "code": "canceled",
+          "count": 1
+        }
+      ],
+      "rejection_rate": 33
+    }
+  ],
+  "file_edits": [],
+  "response_times": [
+    {
+      "model": "gemini-3-flash-preview",
+      "count": 3,
+      "avg_sec": 37,
+      "total_sec": 113
+    }
+  ],
+  "errors": [
+    {
+      "message": "Canceled",
+      "count": 1
+    }
+  ],
+  "user_feedback": []
+}
