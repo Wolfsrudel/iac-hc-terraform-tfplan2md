@@ -77,6 +77,280 @@ public class ArchitectureBoundaryTests
     }
 
     /// <summary>
+    /// Verifies that the Parsing layer does not depend on Platforms.
+    /// Core domain should be independent of platform metadata.
+    /// Known exemption: TfPlanJsonContext (JSON source generation limitation).
+    /// </summary>
+    [Test]
+    public void Parsing_ShouldNotDependOn_Platforms()
+    {
+        var result = Types.InCurrentDomain()
+            .That().ResideInNamespace("Oocx.TfPlan2Md.Parsing")
+            .And().DoNotHaveNameMatching("TfPlanJsonContext") // Exempt: JSON source generation requires all types in one context (Issue #TBD)
+            .ShouldNot().HaveDependencyOn("Oocx.TfPlan2Md.Platforms")
+            .GetResult();
+
+        if (!result.IsSuccessful)
+        {
+            throw new AssertionException(CreateViolationMessage(
+                "Parsing layer must not depend on Platforms",
+                "Core domain layer should be independent of platform-specific metadata concerns. Exemption: TfPlanJsonContext uses Platforms types for JSON source generation (System.Text.Json limitation).",
+                result.FailingTypes));
+        }
+    }
+
+    /// <summary>
+    /// Verifies that the Platforms layer does not depend on MarkdownGeneration.
+    /// Platform metadata should be independent of rendering concerns.
+    /// Known exemptions: 4 value formatter classes that need refactoring.
+    /// </summary>
+    [Test]
+    public void Platforms_ShouldNotDependOn_MarkdownGeneration()
+    {
+        var result = Types.InCurrentDomain()
+            .That().ResideInNamespace("Oocx.TfPlan2Md.Platforms")
+            .And().DoNotHaveNameMatching("AzureValueFormatterRegistration") // Exempt: Value formatter in Platforms, needs refactoring (Issue #TBD)
+            .And().DoNotHaveNameMatching("EnrichedAzureScopeFormatter")     // Exempt: Value formatter in Platforms, needs refactoring (Issue #TBD)
+            .And().DoNotHaveNameMatching("ManagementGroupIdFormatter")      // Exempt: Value formatter in Platforms, needs refactoring (Issue #TBD)
+            .And().DoNotHaveNameMatching("TenantIdFormatter")               // Exempt: Value formatter in Platforms, needs refactoring (Issue #TBD)
+            .ShouldNot().HaveDependencyOn("Oocx.TfPlan2Md.MarkdownGeneration")
+            .GetResult();
+
+        if (!result.IsSuccessful)
+        {
+            throw new AssertionException(CreateViolationMessage(
+                "Platforms layer must not depend on MarkdownGeneration",
+                "Platforms layer should provide metadata only, not rendering concerns. This maintains separation between data and presentation. Exemptions: 4 value formatters need to be moved to MarkdownGeneration layer.",
+                result.FailingTypes));
+        }
+    }
+
+    /// <summary>
+    /// Verifies that the MarkdownGeneration layer does not depend on Providers.
+    /// General rendering logic should not depend on specific providers.
+    /// Known exemptions: 3 AOT script mapping files that need refactoring.
+    /// </summary>
+    [Test]
+    public void MarkdownGeneration_ShouldNotDependOn_Providers()
+    {
+        var result = Types.InCurrentDomain()
+            .That().ResideInNamespace("Oocx.TfPlan2Md.MarkdownGeneration")
+            .And().DoNotHaveNameMatching("LargeValueSummary")      // Exempt: AOT script object mapping, needs refactoring (Issue #TBD)
+            .And().DoNotHaveNameMatching("ResourceChangeModel")    // Exempt: AOT script object mapping, needs refactoring (Issue #TBD)
+            .And().DoNotHaveNameMatching("AotScriptObjectMapper")  // Exempt: AOT script object mapping, needs refactoring (Issue #TBD)
+            .ShouldNot().HaveDependencyOn("Oocx.TfPlan2Md.Providers")
+            .GetResult();
+
+        if (!result.IsSuccessful)
+        {
+            throw new AssertionException(CreateViolationMessage(
+                "MarkdownGeneration layer must not depend on Providers",
+                "General rendering logic should not depend on specific providers. Provider-specific rendering should happen in the Providers layer. Exemptions: 3 files use AOT script mapping that needs to be refactored to provider self-registration.",
+                result.FailingTypes));
+        }
+    }
+
+    /// <summary>
+    /// Verifies that the CodeAnalysis layer does not depend on MarkdownGeneration.
+    /// Static analysis should be independent of rendering concerns.
+    /// </summary>
+    [Test]
+    public void CodeAnalysis_ShouldNotDependOn_MarkdownGeneration()
+    {
+        var result = Types.InCurrentDomain()
+            .That().ResideInNamespace("Oocx.TfPlan2Md.CodeAnalysis")
+            .ShouldNot().HaveDependencyOn("Oocx.TfPlan2Md.MarkdownGeneration")
+            .GetResult();
+
+        if (!result.IsSuccessful)
+        {
+            throw new AssertionException(CreateViolationMessage(
+                "CodeAnalysis layer must not depend on MarkdownGeneration",
+                "Static analysis results should be independent of rendering concerns, allowing analysis to be used in different contexts.",
+                result.FailingTypes));
+        }
+    }
+
+    /// <summary>
+    /// Verifies that the Diagnostics layer has no dependencies on domain layers.
+    /// Diagnostics is a cross-cutting concern that should remain independent.
+    /// </summary>
+    [Test]
+    public void Diagnostics_ShouldNotDependOn_AnyLayer()
+    {
+        var result = Types.InCurrentDomain()
+            .That().ResideInNamespace("Oocx.TfPlan2Md.Diagnostics")
+            .ShouldNot().HaveDependencyOnAny(
+                "Oocx.TfPlan2Md.CLI",
+                "Oocx.TfPlan2Md.Parsing",
+                "Oocx.TfPlan2Md.MarkdownGeneration",
+                "Oocx.TfPlan2Md.Providers",
+                "Oocx.TfPlan2Md.Platforms",
+                "Oocx.TfPlan2Md.CodeAnalysis")
+            .GetResult();
+
+        if (!result.IsSuccessful)
+        {
+            throw new AssertionException(CreateViolationMessage(
+                "Diagnostics layer must not depend on any domain layer",
+                "Cross-cutting concerns like diagnostics should not depend on domain layers, ensuring they can be used anywhere without circular dependencies.",
+                result.FailingTypes));
+        }
+    }
+
+    // === LAYER DEPENDENCY RULES (ALLOWED - DOCUMENTATION) ===
+
+    /// <summary>
+    /// Documents that the CLI layer is allowed to depend on all layers.
+    /// CLI is the top-level orchestration layer.
+    /// </summary>
+    [Test]
+    public void CLI_CanDependOn_AllLayers()
+    {
+        // This test documents that CLI is allowed to depend on all layers (orchestration layer).
+        // CLI is the top-level layer that coordinates all other layers.
+        // No verification needed - this rule allows dependencies.
+        var result = Types.InCurrentDomain()
+            .That().ResideInNamespace("Oocx.TfPlan2Md.CLI")
+            .Should().HaveDependencyOnAny(
+                "Oocx.TfPlan2Md.Parsing",
+                "Oocx.TfPlan2Md.MarkdownGeneration")
+            .GetResult();
+
+        if (!result.IsSuccessful)
+        {
+            throw new AssertionException(
+                "CLI should depend on other layers (orchestration layer). If this test fails, CLI may not be using domain layers.");
+        }
+    }
+
+    /// <summary>
+    /// Documents that the MarkdownGeneration layer is allowed to depend on Parsing.
+    /// Rendering logic needs access to parsed domain models.
+    /// </summary>
+    [Test]
+    public void MarkdownGeneration_CanDependOn_Parsing()
+    {
+        // This test documents that MarkdownGeneration SHOULD depend on Parsing.
+        // Rendering logic needs access to parsed domain models to generate output.
+        var result = Types.InCurrentDomain()
+            .That().ResideInNamespace("Oocx.TfPlan2Md.MarkdownGeneration")
+            .Should().HaveDependencyOn("Oocx.TfPlan2Md.Parsing")
+            .GetResult();
+
+        if (!result.IsSuccessful)
+        {
+            throw new AssertionException(
+                "MarkdownGeneration should depend on Parsing (rendering needs parsed data). If this test fails, the architecture may be incorrect.");
+        }
+    }
+
+    /// <summary>
+    /// Documents that the Providers layer is allowed to depend on Parsing and MarkdownGeneration.
+    /// Provider-specific rendering extends base rendering capabilities.
+    /// </summary>
+    [Test]
+    public void Providers_CanDependOn_ParsingAndMarkdownGeneration()
+    {
+        // This test documents that Providers SHOULD depend on both Parsing and MarkdownGeneration.
+        // Provider-specific rendering extends base rendering and uses parsed models.
+        var parsingResult = Types.InCurrentDomain()
+            .That().ResideInNamespace("Oocx.TfPlan2Md.Providers")
+            .Should().HaveDependencyOn("Oocx.TfPlan2Md.Parsing")
+            .GetResult();
+
+        var mdResult = Types.InCurrentDomain()
+            .That().ResideInNamespace("Oocx.TfPlan2Md.Providers")
+            .Should().HaveDependencyOn("Oocx.TfPlan2Md.MarkdownGeneration")
+            .GetResult();
+
+        if (!parsingResult.IsSuccessful || !mdResult.IsSuccessful)
+        {
+            throw new AssertionException(
+                "Providers should depend on both Parsing and MarkdownGeneration (provider-specific templates extend base rendering). If this test fails, the architecture may be incorrect.");
+        }
+    }
+
+    // === NAMING CONVENTION RULES ===
+
+    /// <summary>
+    /// Verifies that all exception classes end with "Exception" suffix.
+    /// Standard .NET naming convention for exception types.
+    /// </summary>
+    [Test]
+    public void Exceptions_ShouldHave_ExceptionSuffix()
+    {
+#pragma warning disable MA0074 // NetArchTest.Rules doesn't support StringComparison parameter
+        var result = Types.InCurrentDomain()
+            .That().Inherit(typeof(Exception))
+            .And().ResideInNamespace("Oocx.TfPlan2Md")
+            .Should().HaveNameEndingWith("Exception")
+            .GetResult();
+#pragma warning restore MA0074
+
+        if (!result.IsSuccessful)
+        {
+            var violations = result.FailingTypes?.Select(t => t.FullName) ?? [];
+            throw new AssertionException(
+                $"All exception classes must end with 'Exception' suffix (.NET naming convention). Violations: {string.Join(", ", violations)}");
+        }
+    }
+
+    /// <summary>
+    /// Verifies that all test classes end with "Tests" suffix.
+    /// Project naming convention for test discoverability.
+    /// </summary>
+    [Test]
+    public void Tests_ShouldHave_TestsSuffix()
+    {
+#pragma warning disable MA0074 // NetArchTest.Rules doesn't support StringComparison parameter
+        var result = Types.InCurrentDomain()
+            .That().ResideInNamespace("Oocx.TfPlan2Md.TUnit")
+            .And().AreClasses()
+            .And().DoNotHaveNameMatching("AssemblyInfo")
+            .And().DoNotHaveNameMatching(".*Helper")
+            .And().DoNotHaveNameMatching(".*Util")
+            .And().DoNotHaveNameMatching(".*EntryPoint")          // Exclude test platform entry point
+            .And().DoNotHaveNameMatching(".*Extensions")          // Exclude extension registration classes
+            .And().DoNotHaveNameMatching(".*Fixture")             // Exclude test fixtures (setup/teardown classes)
+            .And().DoNotResideInNamespace("Oocx.TfPlan2Md.TUnit.Assertions")
+            .And().DoNotResideInNamespace("Oocx.TfPlan2Md.TUnit.TestData")
+            .Should().HaveNameEndingWith("Tests")
+            .GetResult();
+#pragma warning restore MA0074
+
+        if (!result.IsSuccessful)
+        {
+            var violations = result.FailingTypes?.Select(t => t.FullName) ?? [];
+            throw new AssertionException(
+                $"All test classes should end with 'Tests' suffix (project naming convention). Violations: {string.Join(", ", violations)}");
+        }
+    }
+
+    /// <summary>
+    /// Verifies that all interface names start with "I" prefix.
+    /// Standard .NET naming convention for interface types.
+    /// </summary>
+    [Test]
+    public void Interfaces_ShouldHave_IPrefix()
+    {
+#pragma warning disable MA0074 // NetArchTest.Rules doesn't support StringComparison parameter
+        var result = Types.InCurrentDomain()
+            .That().AreInterfaces()
+            .And().ResideInNamespace("Oocx.TfPlan2Md")
+            .Should().HaveNameStartingWith("I")
+            .GetResult();
+#pragma warning restore MA0074
+
+        if (!result.IsSuccessful)
+        {
+            var violations = result.FailingTypes?.Select(t => t.FullName) ?? [];
+            throw new AssertionException(
+                $"All interface names must start with 'I' prefix (.NET naming convention). Violations: {string.Join(", ", violations)}");
+        }
+    }
+
+    /// <summary>
     /// Creates a formatted violation message with all required components.
     /// </summary>
     /// <param name="rule">The architectural rule that was violated.</param>
