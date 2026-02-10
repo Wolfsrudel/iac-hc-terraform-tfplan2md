@@ -108,13 +108,14 @@ Based on analysis of the current codebase structure (`src/Oocx.TfPlan2Md/`), the
 1. **Parsing → MarkdownGeneration**: ❌ Forbidden (prevents circular dependency)
 2. **Parsing → CLI**: ❌ Forbidden (core domain shouldn't know about UI)
 3. **Parsing → Providers**: ❌ Forbidden (core domain shouldn't know about providers)
-4. **Platforms → MarkdownGeneration**: ❌ Forbidden (metadata layer independent of rendering)
-5. **CodeAnalysis → MarkdownGeneration**: ❌ Forbidden (analysis independent of rendering)
-6. **MarkdownGeneration → Providers**: ❌ Forbidden (general rendering shouldn't depend on specific providers)
-7. **CLI → ***: ✅ Allowed (orchestration layer can use everything)
-8. **MarkdownGeneration → Parsing**: ✅ Allowed (rendering needs parsed data)
-9. **Providers → Parsing**: ✅ Allowed (providers need domain model)
-10. **Providers → MarkdownGeneration**: ✅ Allowed (provider-specific templates extend base rendering)
+4. **CodeAnalysis → MarkdownGeneration**: ❌ Forbidden (analysis independent of rendering)
+5. **MarkdownGeneration → Providers**: ❌ Forbidden (general rendering shouldn't depend on specific providers)
+6. **CLI → ***: ✅ Allowed (orchestration layer can use everything)
+7. **MarkdownGeneration → Parsing**: ✅ Allowed (rendering needs parsed data)
+8. **Platforms → Parsing**: ✅ Allowed (platform metadata needs domain model)
+9. **Platforms → MarkdownGeneration**: ✅ Allowed (platform-specific rendering uses general infrastructure)
+10. **Providers → Parsing**: ✅ Allowed (providers need domain model)
+11. **Providers → MarkdownGeneration**: ✅ Allowed (provider-specific templates extend base rendering)
 
 ### Naming Conventions
 

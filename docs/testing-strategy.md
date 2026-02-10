@@ -130,7 +130,7 @@ Architecture tests analyze compiled assemblies using .NET reflection to verify:
 
 1. **Layer Dependency Rules** - Enforce which namespaces can depend on which others:
    - ✅ `Parsing` layer must NOT depend on `MarkdownGeneration` (prevents circular dependencies)
-   - ✅ `Platforms` layer must NOT depend on `MarkdownGeneration` (keeps metadata independent)
+   - ✅ `Platforms` layer CAN depend on `MarkdownGeneration` (platform-specific rendering uses infrastructure)
    - ✅ `MarkdownGeneration` layer must NOT depend on `Providers` (general rendering independent of specific providers)
    - And 7 other dependency rules covering all architectural layers
 
@@ -194,9 +194,8 @@ Related: docs/adr-007-architecture-boundary-enforcement.md
 
 #### Known Exemptions
 
-8 files have documented exemptions for architectural violations that require refactoring:
+4 files have documented exemptions for architectural violations that require refactoring:
 - 1 file: `Parsing → Platforms` (JSON source generation limitation)
-- 4 files: `Platforms → MarkdownGeneration` (value formatters in wrong layer)
 - 3 files: `MarkdownGeneration → Providers` (AOT script mapping needs refactoring)
 
 These exemptions are documented in the test file with clear justification comments. Tests fail for NEW violations only.

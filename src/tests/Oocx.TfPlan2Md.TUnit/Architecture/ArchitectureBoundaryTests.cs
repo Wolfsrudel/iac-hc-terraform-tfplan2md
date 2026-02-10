@@ -100,32 +100,6 @@ public class ArchitectureBoundaryTests
     }
 
     /// <summary>
-    /// Verifies that the Platforms layer does not depend on MarkdownGeneration.
-    /// Platform metadata should be independent of rendering concerns.
-    /// Known exemptions: 4 value formatter classes that need refactoring.
-    /// </summary>
-    [Test]
-    public void Platforms_ShouldNotDependOn_MarkdownGeneration()
-    {
-        var result = Types.InCurrentDomain()
-            .That().ResideInNamespace("Oocx.TfPlan2Md.Platforms")
-            .And().DoNotHaveNameMatching("AzureValueFormatterRegistration") // Exempt: Value formatter in Platforms, needs refactoring (Issue #TBD)
-            .And().DoNotHaveNameMatching("EnrichedAzureScopeFormatter")     // Exempt: Value formatter in Platforms, needs refactoring (Issue #TBD)
-            .And().DoNotHaveNameMatching("ManagementGroupIdFormatter")      // Exempt: Value formatter in Platforms, needs refactoring (Issue #TBD)
-            .And().DoNotHaveNameMatching("TenantIdFormatter")               // Exempt: Value formatter in Platforms, needs refactoring (Issue #TBD)
-            .ShouldNot().HaveDependencyOn("Oocx.TfPlan2Md.MarkdownGeneration")
-            .GetResult();
-
-        if (!result.IsSuccessful)
-        {
-            throw new AssertionException(CreateViolationMessage(
-                "Platforms layer must not depend on MarkdownGeneration",
-                "Platforms layer should provide metadata only, not rendering concerns. This maintains separation between data and presentation. Exemptions: 4 value formatters need to be moved to MarkdownGeneration layer.",
-                result.FailingTypes));
-        }
-    }
-
-    /// <summary>
     /// Verifies that the MarkdownGeneration layer does not depend on Providers.
     /// General rendering logic should not depend on specific providers.
     /// Known exemptions: 3 AOT script mapping files that need refactoring.
@@ -242,6 +216,27 @@ public class ArchitectureBoundaryTests
         {
             throw new AssertionException(
                 "MarkdownGeneration should depend on Parsing (rendering needs parsed data). If this test fails, the architecture may be incorrect.");
+        }
+    }
+
+    /// <summary>
+    /// Documents that the Platforms layer is allowed to depend on MarkdownGeneration.
+    /// Platform-specific rendering needs access to general rendering infrastructure.
+    /// </summary>
+    [Test]
+    public void Platforms_CanDependOn_MarkdownGeneration()
+    {
+        // This test documents that Platforms can depend on MarkdownGeneration.
+        // Platform-specific rendering (formatters, icons, labels) requires MarkdownGeneration services.
+        var result = Types.InCurrentDomain()
+            .That().ResideInNamespace("Oocx.TfPlan2Md.Platforms")
+            .Should().HaveDependencyOn("Oocx.TfPlan2Md.MarkdownGeneration")
+            .GetResult();
+
+        if (!result.IsSuccessful)
+        {
+            throw new AssertionException(
+                "Platforms should depend on MarkdownGeneration (platform-specific rendering uses general infrastructure). If this test fails, the architecture may need review.");
         }
     }
 

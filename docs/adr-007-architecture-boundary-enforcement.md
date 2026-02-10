@@ -20,8 +20,7 @@ However, there is currently no automated verification that these boundaries are 
 
 **Current Violations:**
 1. **Parsing → Platforms**: `TfPlanJsonContext.cs` references `PrincipalMappingFile` from Platforms for JSON source generation
-2. **Platforms → MarkdownGeneration**: Four formatter classes in Platforms depend on MarkdownGeneration services (value formatters)
-3. **MarkdownGeneration → Providers**: Three files reference provider-specific models (AzureRM, AzureDevOps) for AOT script object mapping
+2. **MarkdownGeneration → Providers**: Three files reference provider-specific models (AzureRM, AzureDevOps) for AOT script object mapping
 
 These violations indicate architectural drift and potential for circular dependencies as the codebase grows. Implementing automated architecture boundary enforcement will:
 - Prevent new violations during development
@@ -132,7 +131,6 @@ While ArchUnitNET offers more features, NetArchTest's simplicity and perfect TUn
 
 - **Existing violations must be addressed** before rules can be enforced:
   - Parsing → Platforms violation (JSON source generation)
-  - Platforms → MarkdownGeneration violations (value formatters)
   - MarkdownGeneration → Providers violations (AOT script mapping)
 - **Not a complete solution** - only enforces namespace-level rules, not all architectural concerns
 - **Requires discipline** - rules can be bypassed with suppressions if not carefully reviewed
@@ -146,12 +144,7 @@ The existing violations fall into three categories:
    - **Rationale for exemption:** System.Text.Json source generation requires all serialized types to be referenced in the same `JsonSerializerContext`. Moving `PrincipalMappingFile` to Parsing would create a reverse dependency. This is a tooling limitation, not an architectural flaw.
    - **Recommendation:** Document as an acceptable exception with clear justification in architecture tests.
 
-2. **Value Formatters (Platforms → MarkdownGeneration):**
-   - **Architectural context:** Value formatters in the Platforms layer provide platform-specific rendering (icons, labels, formatting) that depends on MarkdownGeneration services.
-   - **Recommendation:** This is expected for platform-specific rendering shared across providers. Platforms includes both metadata AND platform-specific rendering.
-   - **Short-term:** Document as known violation with tracking issue for potential refactoring to improve separation.
-
-3. **AOT Script Mapping (MarkdownGeneration → Providers):**
+2. **AOT Script Mapping (MarkdownGeneration → Providers):**
    - **Architectural issue:** Core MarkdownGeneration should not depend on provider-specific types.
    - **Recommendation:** Use abstraction or dynamic registration to break the direct dependency. Provider models should register themselves with MarkdownGeneration, not be referenced directly.
    - **Short-term:** Document as known violation with tracking issue.

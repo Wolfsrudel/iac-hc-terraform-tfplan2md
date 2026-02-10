@@ -487,7 +487,7 @@ Automated enforcement of architectural layer boundaries using architecture tests
 Key architectural rules enforced by tests:
 
 - ✅ **Parsing** layer must NOT depend on `MarkdownGeneration` (prevents circular dependencies)
-- ✅ **Platforms** layer must NOT depend on `MarkdownGeneration` (keeps metadata independent of rendering)
+- ✅ **Platforms** layer CAN depend on `MarkdownGeneration` (platform-specific rendering uses general infrastructure)
 - ✅ **MarkdownGeneration** layer must NOT depend on `Providers` (general rendering independent of specific providers)
 - ✅ Exception classes must end with `Exception` suffix (naming convention)
 

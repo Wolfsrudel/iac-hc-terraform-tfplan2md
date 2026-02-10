@@ -40,7 +40,7 @@ The tfplan2md codebase is organized into 8 architectural layers, each with speci
 | **Parsing** | `Oocx.TfPlan2Md.Parsing` | Terraform JSON parsing, domain model creation | None (core domain) | CLI, MarkdownGeneration, Providers, Platforms* |
 | **MarkdownGeneration** | `Oocx.TfPlan2Md.MarkdownGeneration` | Template rendering, report building, markdown generation | Parsing, Platforms | Providers* |
 | **Providers** | `Oocx.TfPlan2Md.Providers.*` | Provider-specific rendering (AzureRM, AzApi, AzureDevOps, AzureAD) | Parsing, MarkdownGeneration, Platforms | - |
-| **Platforms** | `Oocx.TfPlan2Md.Platforms.*` | Platform-specific rendering and metadata (Azure roles, principals, scopes, formatters) | Parsing | MarkdownGeneration* |
+| **Platforms** | `Oocx.TfPlan2Md.Platforms.*` | Platform-specific rendering and metadata (Azure roles, principals, scopes, formatters) | Parsing, MarkdownGeneration | - |
 | **CodeAnalysis** | `Oocx.TfPlan2Md.CodeAnalysis` | SARIF parsing, security findings integration | Parsing | MarkdownGeneration |
 | **Diagnostics** | `Oocx.TfPlan2Md.Diagnostics` | Error reporting, diagnostic context | None | All domain layers |
 | **RenderTargets** | `Oocx.TfPlan2Md.RenderTargets` | Output target configuration (GitHub, Azure DevOps) | None | All domain layers |
@@ -154,15 +154,7 @@ public class TerraformPlanParser
 
 **Known Exemption:** `TfPlanJsonContext.cs` - JSON source generation requires all serialized types in one context (System.Text.Json limitation). See [Known Exemptions](#known-exemptions).
 
-#### 5. Platforms → MarkdownGeneration ❌*
-
-**Rule:** The Platforms layer must not depend on the MarkdownGeneration layer.
-
-**Rationale:** Platforms should provide metadata only, not rendering concerns. This maintains separation between data and presentation.
-
-**Known Exemptions:** 4 value formatter classes need refactoring. See [Known Exemptions](#known-exemptions).
-
-#### 6. MarkdownGeneration → Providers ❌*
+#### 5. MarkdownGeneration → Providers ❌*
 
 **Rule:** The MarkdownGeneration layer must not depend on the Providers layer.
 
@@ -170,13 +162,13 @@ public class TerraformPlanParser
 
 **Known Exemptions:** 3 AOT script mapping files need refactoring. See [Known Exemptions](#known-exemptions).
 
-#### 7. CodeAnalysis → MarkdownGeneration ❌
+#### 6. CodeAnalysis → MarkdownGeneration ❌
 
 **Rule:** The CodeAnalysis layer must not depend on the MarkdownGeneration layer.
 
 **Rationale:** Static analysis results should be independent of rendering concerns, allowing analysis to be used in different contexts.
 
-#### 8. Diagnostics → Any Domain Layer ❌
+#### 7. Diagnostics → Any Domain Layer ❌
 
 **Rule:** The Diagnostics layer must not depend on any domain layer (CLI, Parsing, MarkdownGeneration, Providers, Platforms, CodeAnalysis).
 
@@ -186,17 +178,23 @@ public class TerraformPlanParser
 
 These rules document expected dependency directions. They verify the architecture is correct:
 
-#### 9. CLI → All Layers ✅
+#### 8. CLI → All Layers ✅
 
 **Rule:** The CLI layer can depend on all other layers.
 
 **Rationale:** CLI is the top-level orchestration layer that coordinates all other layers. This is the entry point for the application.
 
-#### 10. MarkdownGeneration → Parsing ✅
+#### 9. MarkdownGeneration → Parsing ✅
 
 **Rule:** The MarkdownGeneration layer should depend on Parsing.
 
 **Rationale:** Rendering logic needs access to parsed domain models to generate output. This is the expected and correct dependency direction.
+
+#### 10. Platforms → MarkdownGeneration ✅
+
+**Rule:** The Platforms layer should depend on MarkdownGeneration.
+
+**Rationale:** Platform-specific rendering needs the general rendering infrastructure. Value formatters, icon rendering, and label formatting require MarkdownGeneration services.
 
 #### 11. Providers → Parsing ✅
 
@@ -275,28 +273,7 @@ The following files violate architectural rules but are temporarily exempted wit
 
 **Tracking Issue:** None (accepted as permanent exception)
 
-### Category 2: Platforms → MarkdownGeneration (Value Formatters)
-
-**Files Affected:**
-- `src/Oocx.TfPlan2Md/Platforms/Azure/AzureValueFormatterRegistration.cs`
-- `src/Oocx.TfPlan2Md/Platforms/Azure/EnrichedAzureScopeFormatter.cs`
-- `src/Oocx.TfPlan2Md/Platforms/Azure/ManagementGroupIdFormatter.cs`
-- `src/Oocx.TfPlan2Md/Platforms/Azure/TenantIdFormatter.cs`
-
-**Violation:** These formatters implement rendering logic (`IValueFormatter` interface from MarkdownGeneration) but are located in the Platforms layer.
-
-**Justification:** Value formatters in the Platforms layer depend on MarkdownGeneration services for rendering.
-
-**Resolution Options:**
-- **Option A (Recommended):** Move formatters to MarkdownGeneration and reference Platforms for metadata (allowed direction)
-- **Option B:** Introduce a new "Formatters" layer between Platforms and MarkdownGeneration
-- **Option C:** Abstract the formatter interface to remove the MarkdownGeneration dependency
-
-**Tracking Issue:** TBD (create issue for refactoring)
-
-**Priority:** Low - Current implementation works, but violates clean architecture principles.
-
-### Category 3: MarkdownGeneration → Providers (AOT Script Mapping)
+### Category 2: MarkdownGeneration → Providers (AOT Script Mapping)
 
 **Files Affected:**
 - `src/Oocx.TfPlan2Md/MarkdownGeneration/Helpers/ScribanHelpers/LargeValueSummary.cs`
