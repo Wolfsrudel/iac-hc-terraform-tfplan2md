@@ -74,3 +74,62 @@ The specification includes detailed layer definitions and 10 specific dependency
 
 - [ ] Specification approved by Maintainer
 - [ ] Ready for Architect handoff
+
+---
+
+### Architect - 2026-02-10
+
+**Summary:** Completed technical design for architecture boundary enforcement using NetArchTest.Rules.
+
+**Work Performed:**
+- Evaluated ArchUnitNET vs NetArchTest.Rules for TUnit compatibility
+- Conducted comprehensive codebase analysis to identify existing violations
+- Discovered 3 categories of violations affecting 8 files:
+  1. Parsing → Platforms (JSON source generation - 1 file)
+  2. Platforms → MarkdownGeneration (value formatters - 4 files)
+  3. MarkdownGeneration → Providers (AOT script mapping - 3 files)
+- Designed test structure with single-file approach (13 tests total)
+- Specified error message format for developer-friendly feedback
+- Documented exemption strategy for known violations
+- Planned CI integration (no changes required to pr-validation.yml)
+- Designed documentation structure for docs/architecture-rules.md
+
+**Artifacts Produced:**
+- `docs/adr-007-architecture-boundary-enforcement.md` - Complete ADR with library selection rationale
+- `docs/features/066-architecture-boundary-enforcement/architecture.md` - Detailed technical design
+- Updated work-protocol.md with findings
+
+**Key Decisions:**
+1. **Library Selected:** NetArchTest.Rules (1.3.2+)
+   - Rationale: Perfect TUnit compatibility (framework-agnostic), simple API, sufficient capabilities
+   - ArchUnitNET rejected due to manual TUnit integration required and unnecessary complexity
+2. **Violation Strategy:** Document and exempt 8 known violations temporarily
+   - Create tracking issues for future refactoring
+   - Tests fail for NEW violations only
+3. **Test Organization:** Single file with 13 test methods
+   - 10 dependency rules + 3 naming convention rules
+   - Clear naming pattern: `<Layer>_<ShouldNot>_<Rule>`
+4. **Error Messages:** Include rule statement, rationale, violations, and documentation links
+5. **Performance Target:** <10 seconds execution time (expected ~2-5 seconds)
+
+**Architectural Analysis:**
+- **Parsing → Platforms violation:** Acceptable exception (System.Text.Json limitation)
+- **Platforms → MarkdownGeneration violation:** Architectural issue requiring refactoring
+- **MarkdownGeneration → Providers violation:** Architectural issue requiring refactoring
+- All existing naming conventions comply (no violations found)
+
+**Open Questions Resolved:**
+1. ✅ Library choice: NetArchTest.Rules for TUnit compatibility
+2. ✅ Current violations: 8 files across 3 categories, all documented with remediation plans
+3. ✅ CompositionRoot/ProgramEntry: Exclude root namespace from layer rules (orchestration entry points)
+4. ✅ Test timeout: No special configuration needed, default TUnit timeout sufficient
+
+**Problems Encountered:**
+- None - analysis and design proceeded smoothly
+
+**Next Agent Recommendation:** **Quality Engineer** - to define test plan and test cases for:
+- Verifying all 13 architecture rules work correctly
+- Testing exemption handling
+- Validating error message clarity
+- Ensuring CI integration works
+- Performance testing (<10 second target)
