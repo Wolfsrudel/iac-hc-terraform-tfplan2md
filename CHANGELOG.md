@@ -5,6 +5,26 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+<a name="1.15.1"></a>
+## [1.15.1](https://github.com/oocx/tfplan2md/compare/v1.15.0...v1.15.1) (2026-02-10)
+
+### 🐛 Bug Fixes
+
+* remove duplicate headers in azapi_resource and azuredevops_variable_group templates ([c412792](https://github.com/oocx/tfplan2md/commit/c412792db8379af8a85054efe0196fe2e0f6440f))
+* use --no-follow-tags when pushing commit to ensure tag triggers Release workflow ([156c70f](https://github.com/oocx/tfplan2md/commit/156c70f1691d7da1bfa8ddb85aa24fe7d61cbeb1))
+
+### 📚 Documentation
+
+* add issue analysis for duplicate headers in azapi_resource and variable_group templates ([603b2ef](https://github.com/oocx/tfplan2md/commit/603b2ef994a917cc2d353c13ba357882194c0443))
+* add release notes for duplicate header bug fix ([f3b2d6a](https://github.com/oocx/tfplan2md/commit/f3b2d6a8ec13e235d0b98cbf8722f0075c8355fe))
+* add retrospective for Feature 065 with chat metrics ([bc2752d](https://github.com/oocx/tfplan2md/commit/bc2752d29cefca79b76364c89db64f2cbe2a44a2))
+* approve duplicate header fix after code review ([a5819ed](https://github.com/oocx/tfplan2md/commit/a5819edd19c77cc14b5e764103dd7640495a3406))
+* document new release screenshot wrapper script ([8ae62e8](https://github.com/oocx/tfplan2md/commit/8ae62e8719f63ac50ea249c9ceaad04ec9e10ed8))
+* update demo artifacts for duplicate header fix ([b211e0b](https://github.com/oocx/tfplan2md/commit/b211e0b8a2dbd06d3967cf629cc9776ead723a12))
+* update examples in features.md to remove duplicate headers ([43c4a0e](https://github.com/oocx/tfplan2md/commit/43c4a0e95d3df1fae41801726a4e19ab182ab64b))
+* update work protocol with developer completion ([d73e08a](https://github.com/oocx/tfplan2md/commit/d73e08aeac885e1c4835439b4021ec6c46f35ff8))
+* update work protocol with Release Manager entry ([708f2ed](https://github.com/oocx/tfplan2md/commit/708f2ed40e1666381dad51948f0c8dbbdd8c99fb))
+
 <a name="1.15.0"></a>
 ## [1.15.0](https://github.com/oocx/tfplan2md/compare/v1.14.0...v1.15.0) (2026-02-09)
 
