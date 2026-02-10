@@ -40,7 +40,7 @@ The tfplan2md codebase is organized into 8 architectural layers, each with speci
 | **Parsing** | `Oocx.TfPlan2Md.Parsing` | Terraform JSON parsing, domain model creation | None (core domain) | CLI, MarkdownGeneration, Providers, Platforms* |
 | **MarkdownGeneration** | `Oocx.TfPlan2Md.MarkdownGeneration` | Template rendering, report building, markdown generation | Parsing, Platforms | Providers* |
 | **Providers** | `Oocx.TfPlan2Md.Providers.*` | Provider-specific rendering (AzureRM, AzApi, AzureDevOps, AzureAD) | Parsing, MarkdownGeneration, Platforms | - |
-| **Platforms** | `Oocx.TfPlan2Md.Platforms.*` | Platform metadata (Azure roles, principals, scopes) | Parsing | MarkdownGeneration* |
+| **Platforms** | `Oocx.TfPlan2Md.Platforms.*` | Platform-specific rendering and metadata (Azure roles, principals, scopes, formatters) | Parsing | MarkdownGeneration* |
 | **CodeAnalysis** | `Oocx.TfPlan2Md.CodeAnalysis` | SARIF parsing, security findings integration | Parsing | MarkdownGeneration |
 | **Diagnostics** | `Oocx.TfPlan2Md.Diagnostics` | Error reporting, diagnostic context | None | All domain layers |
 | **RenderTargets** | `Oocx.TfPlan2Md.RenderTargets` | Output target configuration (GitHub, Azure DevOps) | None | All domain layers |
@@ -75,9 +75,10 @@ The tfplan2md codebase is organized into 8 architectural layers, each with speci
 - Build on MarkdownGeneration infrastructure
 
 #### Platforms Layer
+- Provide platform-specific rendering and formatting (icons, labels, value formatters)
 - Provide platform metadata (Azure roles, principals, management groups)
 - Load and parse mapping files
-- Independent of rendering concerns
+- Platform-specific rendering that's shared across providers
 
 #### CodeAnalysis Layer
 - Parse SARIF files
@@ -284,7 +285,7 @@ The following files violate architectural rules but are temporarily exempted wit
 
 **Violation:** These formatters implement rendering logic (`IValueFormatter` interface from MarkdownGeneration) but are located in the Platforms layer.
 
-**Justification:** Value formatters are rendering concerns, not platform metadata. The Platforms layer should provide data only.
+**Justification:** Value formatters in the Platforms layer depend on MarkdownGeneration services for rendering.
 
 **Resolution Options:**
 - **Option A (Recommended):** Move formatters to MarkdownGeneration and reference Platforms for metadata (allowed direction)

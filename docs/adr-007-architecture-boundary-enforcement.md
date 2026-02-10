@@ -11,7 +11,7 @@ The tfplan2md codebase has evolved with a clear namespace organization represent
 - Parsing (Terraform JSON parsing and domain models)
 - MarkdownGeneration (template rendering and report building)
 - Providers (provider-specific rendering: AzApi, AzureRM, AzureAD, AzureDevOps)
-- Platforms (platform metadata: Azure roles, principals)
+- Platforms (platform-specific rendering and metadata: Azure roles, principals, formatters)
 - CodeAnalysis (SARIF parsing and security findings)
 - Diagnostics (error reporting and diagnostic context)
 - RenderTargets (output target configuration: GitHub, Azure DevOps)
@@ -147,9 +147,9 @@ The existing violations fall into three categories:
    - **Recommendation:** Document as an acceptable exception with clear justification in architecture tests.
 
 2. **Value Formatters (Platforms → MarkdownGeneration):**
-   - **Architectural issue:** Value formatters are a rendering concern, not a platform metadata concern.
-   - **Recommendation:** Refactor formatters to live in MarkdownGeneration and have them reference Platforms (allowed direction). Alternatively, introduce a new "Formatters" layer between Platforms and MarkdownGeneration. This should be a future refactoring task, not blocking this feature.
-   - **Short-term:** Document as known violation with tracking issue.
+   - **Architectural context:** Value formatters in the Platforms layer provide platform-specific rendering (icons, labels, formatting) that depends on MarkdownGeneration services.
+   - **Recommendation:** This is expected for platform-specific rendering shared across providers. Platforms includes both metadata AND platform-specific rendering.
+   - **Short-term:** Document as known violation with tracking issue for potential refactoring to improve separation.
 
 3. **AOT Script Mapping (MarkdownGeneration → Providers):**
    - **Architectural issue:** Core MarkdownGeneration should not depend on provider-specific types.

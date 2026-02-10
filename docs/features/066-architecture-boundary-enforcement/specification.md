@@ -28,7 +28,7 @@ Add automated enforcement of architectural layer boundaries using ArchUnitNET. T
   - **Parsing layer** cannot depend on MarkdownGeneration (separation of parsing from rendering)
   - **MarkdownGeneration layer** can depend on Parsing (needs parsed data)
   - **Providers layer** can depend on Parsing and MarkdownGeneration (provider-specific rendering)
-  - **Platforms layer** can depend on Parsing (platform metadata without rendering concerns)
+  - **Platforms layer** can depend on Parsing (platform-specific rendering and metadata)
 - Enforce naming conventions (e.g., exceptions must end with "Exception" suffix)
 - Run architecture tests in CI with every PR as part of existing test suite
 - Provide clear error messages when architectural rules are violated
