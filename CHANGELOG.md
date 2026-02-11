@@ -5,6 +5,32 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+<a name="1.16.1"></a>
+## [1.16.1](https://github.com/oocx/tfplan2md/compare/v1.16.0...v1.16.1) (2026-02-11)
+
+### 🐛 Bug Fixes
+
+* update Azure AD group member counts after parent-child merging ([82a4533](https://github.com/oocx/tfplan2md/commit/82a4533fae929706b38de5490c1127c84efa2e1e))
+
+### ♻️ Refactoring
+
+* Improve pragma directive ordering in Program.cs ([e90cd4f](https://github.com/oocx/tfplan2md/commit/e90cd4f21e22c7424aeb3d7825e2a17d321ff56d))
+* move Azure AD group summary logic to provider layer ([2bd97e2](https://github.com/oocx/tfplan2md/commit/2bd97e2e9c765f5de4e4635622ed8d23cec8994f))
+
+### 📚 Documentation
+
+* add code review report for callback mechanism ([aa63a69](https://github.com/oocx/tfplan2md/commit/aa63a692221ccc39b17610d89e42494d5be7fedf))
+* add coding agent report_progress documentation ([98ebdf3](https://github.com/oocx/tfplan2md/commit/98ebdf334f8ba136c0487752d0f171196bd3d1f9))
+* add issue analysis for parent-child summary member counts ([0aeb548](https://github.com/oocx/tfplan2md/commit/0aeb548ec2f3a7dfd18d64f896197a8efd18fb72))
+* add UAT report and update work protocol (manual UAT required) ([fe6cd64](https://github.com/oocx/tfplan2md/commit/fe6cd640d2d94bd7ca60b0e9ed8b24b92b0fd9f9))
+* clarify askQuestions tool is VS Code-only ([df5450a](https://github.com/oocx/tfplan2md/commit/df5450a397a8e3ef10b6f49edcffdd270a8a4b94))
+* code review approval for parent-child summary member count fix ([d044711](https://github.com/oocx/tfplan2md/commit/d044711dfe7e592beacef68a514fc49a17bb073d))
+* confirm documentation accuracy after member count fix ([7a756ce](https://github.com/oocx/tfplan2md/commit/7a756ce0c08e8ddda849a17444b84b3b8040513e))
+* finalize retrospective for feature 068 ([b2e692b](https://github.com/oocx/tfplan2md/commit/b2e692bec88d4c1887e1bf326dcdb1d00acc1dda))
+* Fix documentation reference in Program.cs ([d1cc8fd](https://github.com/oocx/tfplan2md/commit/d1cc8fd96f7501aa3468e5fef799cc448457bc95))
+* update work protocol with Developer implementation notes ([69b79ec](https://github.com/oocx/tfplan2md/commit/69b79ec5fff56a4fa579a742f1e6e8cb586ed952))
+* Use standard reference format in Program.cs ([87f6b12](https://github.com/oocx/tfplan2md/commit/87f6b128aa2c8518dd1d240a01858a6e4b71ca0a))
+
 <a name="1.16.0"></a>
 ## [1.16.0](https://github.com/oocx/tfplan2md/compare/v1.15.1...v1.16.0) (2026-02-11)
 
