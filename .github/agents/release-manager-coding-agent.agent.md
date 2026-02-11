@@ -155,6 +155,7 @@ Before proceeding with the release, **verify the Work Protocol** (`work-protocol
 - Verify branch is up to date with main
 - Review commit messages follow conventional commit format
 - **Enforce commit type guardrails:** Verify that PRs which only change workflow/internal tooling (`.github/`, `scripts/`, `docs/`, `website/`) do NOT use `feat:` or `fix:` commit types. These must use `workflow:`, `docs:`, `chore:`, or `ci:` instead. Using `feat:` or `fix:` for non-code changes causes incorrect Versionize version bumps.
+- **Generate screenshots for visual features (MANDATORY):** If the release involves visual changes (Markdown rendering, layout, colors, UI/UX), screenshots are required and non-negotiable. Use `scripts/generate-release-screenshots.sh` which includes automatic retry logic.
 - Execute release steps autonomously (create PR, trigger workflows, monitor pipelines)
 - **Conflict Check (REQUIRED):** Before finalizing a merge, manually verify that critical documentation files (like `docs/architecture.md` or `docs/spec.md`) have not been accidentally reverted or corrupted by the merge process, even if the CLI reports success.
 - **Enforce `Rebase and merge` only** when merging PRs. If GitHub shows merge-commit or squash options, stop and fix branch protection; do not proceed until rebase-only is available. Use `scripts/pr-github.sh create-and-merge` (runs `--rebase --delete-branch`). Only use raw `gh pr merge --rebase --delete-branch` as a final fallback if the wrapper is unavailable.
@@ -168,6 +169,7 @@ Before proceeding with the release, **verify the Work Protocol** (`work-protocol
 - Proceeding with release if any check fails
 - Making exceptions to the release process
 - Releasing without complete code review approval
+- **If screenshot generation fails repeatedly** — Stop and report to Maintainer with full error details (never bypass or mark as optional)
 
 ### 🚫 Never Do
 - Edit CHANGELOG.md manually (auto-generated)
@@ -179,6 +181,8 @@ Before proceeding with the release, **verify the Work Protocol** (`work-protocol
 - Use the wrong tag or skip tag detection
 - Use squash merges or merge commits (UI buttons, API, or CLI)
 - Mix multiple unrelated changes in a single commit (keep commits focused on one topic)
+- **Proceed with text-only release notes when screenshots fail** — Screenshots are mandatory for visual features; stopping is better than releasing incomplete documentation
+- **Mark screenshots as "optional"** — Quality standards are non-negotiable; visual evidence is critical for UI/UX changes
 - Use `feat:` or `fix:` commit types for changes that only touch `.github/`, `scripts/`, `docs/`, or `website/` — these cause unintended version bumps
 - Place release notes in a pre-existing work item folder that belongs to a different issue or feature
 - Suggest skipping, disabling, or bypassing CI steps to "fix" a failing pipeline — always hand off to Developer to fix the root cause
@@ -306,16 +310,23 @@ Before releasing, verify:
        - 🔗 Commits (REQUIRED)
     - **🔗 Commits is mandatory**: list relevant user-facing commits for the release (short SHA + link + summary)
     - **▶️ Getting started**: include only if usage changed (new flags, env vars, required steps, migration notes)
-    - **📸 Screenshots**:
-       - Only include a screenshots section if you actually have screenshots to show.
-       - If the release changes rendered output / review experience, screenshots are required; generate them if missing.
-       - Release notes screenshots must be focused and small: **max 580×400**.
-       - Use only `*-crop*.png` files in release notes, or generate single screenshots using the release wrapper.
-       - **Recommended**: Use `scripts/generate-release-screenshots.sh` for release notes (optimized with sensible defaults):
+- **📸 Screenshots (MANDATORY for visual features)**:
+       - **CRITICAL**: If the release involves visual changes (Markdown rendering, layout, colors, UI/UX), screenshots are **MANDATORY** and non-negotiable.
+       - **MUST STOP if generation fails**: If screenshot generation fails due to timeouts or tooling issues, **DO NOT proceed with release**. Instead:
+           1. Report the failure to the Maintainer with full error details
+           2. Document the specific error (timeout, CDN failure, etc.)
+           3. Wait for tooling fix or Maintainer guidance
+           4. **Never** mark screenshots as "optional" or proceed with text-only release notes
+       - **Generate if missing**: Use `scripts/generate-release-screenshots.sh` which includes retry logic and verbose error reporting:
            - `scripts/generate-release-screenshots.sh --plan <plan.json> --output-prefix <name> --output-dir docs/features/NNN/ --selector "..."`
            - or `scripts/generate-release-screenshots.sh --markdown-file <md> --output-prefix <name> --output-dir docs/features/NNN/ --target-resource-id "..."`
-        - **Alternative**: Use `scripts/generate-screenshot.sh` for full control (light/dark, 1x/2x, thumbnails, lightbox)
+           - Script automatically retries 3 times with 5-second delays between attempts
+           - Provides detailed troubleshooting guidance on failure
+       - Release notes screenshots must be focused and small: **max 580×400 pixels**.
+       - Use only `*-crop*.png` files in release notes, or generate single screenshots using the release wrapper.
+       - **Alternative tool**: Use `scripts/generate-screenshot.sh` for full control (light/dark, 1x/2x, thumbnails, lightbox)
        - Prefer showing a single "after" screenshot for features; for bug fixes, include before/after when feasible.
+       - **Quality over speed**: Screenshots are critical evidence of visual improvements. Do not compromise release quality for workflow completion.
    
     **Save:** Create `release-notes.md` in the current work item folder (`docs/features/.../`, `docs/issues/.../`, or `docs/workflow/.../`).
     **Commit:** `docs: add release notes for <work-item>`
