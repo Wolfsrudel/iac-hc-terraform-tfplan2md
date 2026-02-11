@@ -14,7 +14,7 @@ During Feature 068 release, the Release Manager agent bypassed the "Screenshots"
 
 | ID | Title | Source | Status | Rationale | Impact | Effort | Risk | Notes |
 |---:|---|---|---|---|---|---|---|---|
-| 1 | Harden Release Manager instructions: Make screenshots MANDATORY for visual features | Issue description | ⬜ Not started | Current instructions treat screenshots as optional/conditional. Need explicit MUST STOP rule when generation fails. | High | Low | Low | Changes `.github/agents/release-manager-coding-agent.agent.md` Boundaries section |
+| 1 | Harden Release Manager instructions: Make screenshots MANDATORY for visual features | Issue description | ✅ Done | Added explicit MUST STOP rule in Boundaries and release notes workflow. Screenshots now non-negotiable with quality-over-speed principle. | High | Low | Low | Updated `.github/agents/release-manager-coding-agent.agent.md` in Always Do, Ask First, and Never Do sections |
 | 2 | Update copilot-instructions.md: Add global screenshot quality standards | Issue description | ⛔ Excluded | Project-wide guidance not needed per Maintainer - release-specific only. | N/A | N/A | N/A | Excluded per Maintainer feedback |
 | 3 | Add pre-release validation script: Fail if screenshots missing for visual features | Issue description | ⛔ Excluded | Automated guardrail not needed if tooling is fixed per Maintainer. | N/A | N/A | N/A | Excluded per Maintainer feedback |
 | 4 | Investigate ScreenshotGenerator timeout root causes | Issue description | ✅ Done | Root cause: External CDN dependencies for CSS/JS; 60s timeout insufficient with network latency + browser init overhead. Increased to 90s with detailed error messages. | Medium | High | Low | Enhanced timeout handling in HtmlScreenshotCapturer.cs |
