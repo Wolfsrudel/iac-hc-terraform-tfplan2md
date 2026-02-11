@@ -30,4 +30,14 @@ During Feature 068 release, the Release Manager agent bypassed the "Screenshots"
 - **Option 3 (Root cause fix):** **IDs 4, 5** — Address technical debt causing timeouts. Highest effort (debugging Playwright, implementing caching), uncertain impact (may not eliminate all failures). Best done after implementing guardrails to prevent workarounds.
 
 ## Decision
-*Waiting for Maintainer selection via PR comment.*
+**Maintainer selected: Tasks 4, 5, 6, then 1**
+
+Implementation order:
+1. Fix ScreenshotGenerator timeout root causes (task 4)
+2. Implement local CSS/asset caching (task 5)
+3. Enhance script with retry logic and verbose errors (task 6)
+4. Update Release Manager instructions (task 1)
+
+Tasks 2 and 3 excluded per Maintainer feedback:
+- Task 2 (copilot-instructions.md) - Not needed, release-specific only
+- Task 3 (validation script) - Not needed if tooling is fixed
