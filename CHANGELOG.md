@@ -5,6 +5,23 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+<a name="1.17.2"></a>
+## [1.17.2](https://github.com/oocx/tfplan2md/compare/v1.17.1...v1.17.2) (2026-02-14)
+
+### 🐛 Bug Fixes
+
+* add issue release notes for linux x64 linker fix ([d3fde60](https://github.com/oocx/tfplan2md/commit/d3fde6093d07dd5e5b295993f0a3b34c10cc170d))
+* handle Terraform 'read' action to prevent false 'Already imported' warnings ([c720e31](https://github.com/oocx/tfplan2md/commit/c720e31ecb15b27e6077a51793198e5028ec7327))
+* install clang for linux x64 NativeAOT publish ([6eda117](https://github.com/oocx/tfplan2md/commit/6eda1178dac8b7c1cba16a3a278baa88a250a47a))
+
+### 📚 Documentation
+
+* add code review for issue [#464](https://github.com/oocx/tfplan2md/issues/464) bug fix ([6a46146](https://github.com/oocx/tfplan2md/commit/6a46146b8e00db33f312c0b5b960bda7e38729f1))
+* add issue analysis for false positive 'Already imported' warning ([327104a](https://github.com/oocx/tfplan2md/commit/327104a4252062c9e31d737c68c97c919b58f126))
+* add release notes for issue [#464](https://github.com/oocx/tfplan2md/issues/464) bug fix ([1725311](https://github.com/oocx/tfplan2md/commit/172531193c15a99f49fd812b2f024b0bc0623fdf))
+* add work protocol for issue [#464](https://github.com/oocx/tfplan2md/issues/464) bug fix ([057be65](https://github.com/oocx/tfplan2md/commit/057be65795eec66412ff140243114738a52fbc05))
+* update work protocol with Release Manager actions ([4235c1d](https://github.com/oocx/tfplan2md/commit/4235c1d48cf3922b6fd7c875d21a165ce181595a))
+
 <a name="1.17.1"></a>
 ## [1.17.1](https://github.com/oocx/tfplan2md/compare/v1.17.0...v1.17.1) (2026-02-14)
 
