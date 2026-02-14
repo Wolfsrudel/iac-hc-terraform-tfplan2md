@@ -5,6 +5,89 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+<a name="1.17.0"></a>
+## [1.17.0](https://github.com/oocx/tfplan2md/compare/v1.16.3...v1.17.0) (2026-02-14)
+
+### ✨ Features
+
+* add actual PNG screenshots to release notes using screenshot generator tools ([acfaecb](https://github.com/oocx/tfplan2md/commit/acfaecbc20cb3475b0097254e7b495d04732320f))
+* add Azure RM parent-child row extractors and registrations ([0dd221f](https://github.com/oocx/tfplan2md/commit/0dd221fc2b5da8adad0b930f99587c20ceb59a05))
+* add Linux x64 binary build to release workflow ([9ff802d](https://github.com/oocx/tfplan2md/commit/9ff802d49671c5690156271450e26dcc6552db36))
+* extend parent-child grouping to Azure RM network resources ([26d1814](https://github.com/oocx/tfplan2md/commit/26d1814a76eb20b730af71ec833d1550a2f63f26))
+* generate real tfplan2md output for Azure RM Batch 2 UAT ([65f5792](https://github.com/oocx/tfplan2md/commit/65f57928e9ab3d7b1b12dce04f6c00d91abe2805))
+* implement parent-child resource grouping for Azure RM resources ([c3a221e](https://github.com/oocx/tfplan2md/commit/c3a221e10176501e02461b39401e8825e92c9db9))
+* restore Feature 016 NSG columns to parent-child framework ([1a9d1d8](https://github.com/oocx/tfplan2md/commit/1a9d1d8b703d3ecb6a18f824b4bfcaea5781fb7f))
+* **uat:** add Azure RM Batch 2 UAT artifact ([ac254b5](https://github.com/oocx/tfplan2md/commit/ac254b559c926d58d7a8e7f7dc58ef0f98453bae))
+
+### 🐛 Bug Fixes
+
+* add backticks to all non-diff values, preserve HTML diffs (SNAPSHOT_UPDATE_OK) ([0b32d08](https://github.com/oocx/tfplan2md/commit/0b32d085057a8a57bb4f4053a69555b8ade0dee4))
+* add space after value before pipe in NSG table template (fixes 4 test failures) ([823fe86](https://github.com/oocx/tfplan2md/commit/823fe868afde71649d949496cf5282e6812680d7))
+* add spaces before pipes in NSG security rules table (fixes 5 test failures) ([42b3679](https://github.com/oocx/tfplan2md/commit/42b3679a70bf4e1491b813c2ca44dd354d77feea))
+* add XML documentation and remove unused method ([1fa0d6d](https://github.com/oocx/tfplan2md/commit/1fa0d6db5a250c6232bc2b7d48f911611b5e5fda))
+* always show Terraform Resource column in child resource tables ([9bcfe48](https://github.com/oocx/tfplan2md/commit/9bcfe48d5a9677f4871b3c702923175ac66b3461))
+* bare dash without code tags, newlines instead of br in GitHub diffs (SNAPSHOT_UPDATE_OK) ([6b8a7b1](https://github.com/oocx/tfplan2md/commit/6b8a7b193dbdea13b94b9ebd80ffb67790e227da))
+* calculate summary counts before parent-child merging ([9721f83](https://github.com/oocx/tfplan2md/commit/9721f836bb4106e9177deefbf467f4e46a7e03a2))
+* complete inline diff implementation for child resources ([4c7084e](https://github.com/oocx/tfplan2md/commit/4c7084e210c02843b55ba6975f5d85fe662b4b00))
+* convert screenshot image syntax to working markdown links in release notes ([6369ae8](https://github.com/oocx/tfplan2md/commit/6369ae84e0af7908ebb693526b336306784005f4))
+* correct table rendering - no trailing spaces, proper newlines (SNAPSHOT_UPDATE_OK) ([926d35d](https://github.com/oocx/tfplan2md/commit/926d35d596528e801c51405a760f02b0add121b1))
+* eliminate DNS and NSG table duplication in Feature 068 ([926cf28](https://github.com/oocx/tfplan2md/commit/926cf28f039c03fc479b13ee562984a5977987cc))
+* improve UAT script error handling and agent instructions ([21c89e1](https://github.com/oocx/tfplan2md/commit/21c89e1d983b463880791a4720708656476f57e4))
+* prevent HTML tags in diff rendering for Azure RM row extractors ([dd8a567](https://github.com/oocx/tfplan2md/commit/dd8a56741869b57d19b282d98b9c64cc215d9e05))
+* regenerate azure-rm-batch-2-feature-test.md with ONLY Azure RM resources ([f5c331a](https://github.com/oocx/tfplan2md/commit/f5c331abf0e6f5899bee41890846fce096318048))
+* remove backticks from diff output for proper markdown rendering ([608bb17](https://github.com/oocx/tfplan2md/commit/608bb177d57e9f4a42d0e3fc5e821c8c20b44eba))
+* remove trailing spaces from _child_resources.sbn template (SNAPSHOT_UPDATE_OK) ([7c396bf](https://github.com/oocx/tfplan2md/commit/7c396bf1e27434446a8cba3188d4637a481a4332))
+* remove unnecessary Azure subscription check in uat-azdo.sh ([119ff0d](https://github.com/oocx/tfplan2md/commit/119ff0dc66e2bbb281d5f397f6eb2fae5f0c1e5c))
+* replace HTML-styled inline diffs with plain markdown format ([c856516](https://github.com/oocx/tfplan2md/commit/c8565163d811b119a50c3c510fe579a21ba88bad))
+* restore HTML span diff formatting with character-level highlighting ([885c3aa](https://github.com/oocx/tfplan2md/commit/885c3aa0bf753753332142e42ba57f25f020812a))
+* revert table template to working version from b33d08a (fixes all test failures) ([e05e792](https://github.com/oocx/tfplan2md/commit/e05e79230fbf6f8b2b53e53ba40db3fcc2ab1865))
+* revert to <br> tags in simple diffs, add detection in FormatChildValue (SNAPSHOT_UPDATE_OK) ([0b87a5b](https://github.com/oocx/tfplan2md/commit/0b87a5bf13e17dd9d42ea1fdd0a4a7ff7ce33542))
+* UAT issues - conditional Terraform Resource column, DNS types, inline UPDATE demos ([bed3adf](https://github.com/oocx/tfplan2md/commit/bed3adf2cf5f4c0e71656dd01a406f3de3f8eba9))
+* use Ubuntu 22.04 container for Linux x64 binary build to support Debian 12 ([039de6b](https://github.com/oocx/tfplan2md/commit/039de6b9e4dca7870f053b45f989866fe90018e9))
+* **azure-rm:** add ParentIdAttribute for name-based child matching ([898f65d](https://github.com/oocx/tfplan2md/commit/898f65d5df62f6860c3944942d0228af21c57b45))
+
+### ♻️ Refactoring
+
+* move Azure RM feature docs from 068 to new folder 072 ([9881476](https://github.com/oocx/tfplan2md/commit/9881476ab804cd85790cd598626ed6328833b8b9))
+
+### 📚 Documentation
+
+* add architecture for linux x64 binary distribution (Phase 1) ([7b48583](https://github.com/oocx/tfplan2md/commit/7b48583823be3cf9569f104ea9cc8a3151fcc842))
+* add Azure RM batch 2 architecture for parent-child resource grouping ([194d702](https://github.com/oocx/tfplan2md/commit/194d702c394f778c16457dea03453b21779c92ce))
+* add Azure RM batch 2 requirements for parent-child grouping ([6af7b5f](https://github.com/oocx/tfplan2md/commit/6af7b5f710ee35a5375fc4a1791b1a672073fba4))
+* add code review for HTML span diff restoration (692fcf0) ([cb2f40f](https://github.com/oocx/tfplan2md/commit/cb2f40f0257e48a4624a2f7d936bf28097cf9073))
+* add comprehensive code review for conditional Terraform Resource column ([b1caae7](https://github.com/oocx/tfplan2md/commit/b1caae705c5d69adf8d45b8498f47c3f1ff30e28))
+* add comprehensive test expectation update plan for HTML inline diff restoration ([3a6deec](https://github.com/oocx/tfplan2md/commit/3a6deec92e217f812b0b816a7fe4afb04e9ee57b))
+* add Developer entry to work protocol for Phase 1 implementation ([7f529ff](https://github.com/oocx/tfplan2md/commit/7f529ff58bdf45656c00332e8c2afa0e83f12a28))
+* add Developer work protocol entry for blocker fixes ([bf66da8](https://github.com/oocx/tfplan2md/commit/bf66da87518a1e077bdf00be15274f2a9a3d64de))
+* add feature specification for 461-multi-platform-binary-distribution (Phase 1: Linux x64) ([9f0b89f](https://github.com/oocx/tfplan2md/commit/9f0b89f95dcb1a06033b5b7978017743628f1953))
+* add feature test plan to GitHub UAT PR [#72](https://github.com/oocx/tfplan2md/issues/72) ([e4ed4ca](https://github.com/oocx/tfplan2md/commit/e4ed4ca37b956f2037218c6dfa67de3403a091b8))
+* add test plan and UAT test plan for Azure RM Batch 2 ([75080b1](https://github.com/oocx/tfplan2md/commit/75080b1e52e149418e3a7a050eb2f21857c72f88))
+* add UAT report and updated artifacts for commit 74f93d7 ([ff10400](https://github.com/oocx/tfplan2md/commit/ff10400bdddb649a233afe1ae41c4b2a58a02042))
+* add UAT tester work log entry for comprehensive fixes validation ([c848839](https://github.com/oocx/tfplan2md/commit/c84883967c93616ee87077710b00d880abff829f))
+* add work protocol entry for Azure DevOps PR [#74](https://github.com/oocx/tfplan2md/issues/74) artifact posting ([1506158](https://github.com/oocx/tfplan2md/commit/1506158b88df779f3af0ac8c005cf90bb7c73ef4))
+* code review completed - ADR-008 Phase 1 approved for UAT ([7f2e688](https://github.com/oocx/tfplan2md/commit/7f2e688aea49c23fbb2f2f50313818a694d3367c))
+* code review of backticks formatting fix (9c1079d + 98167ed) ([6c17237](https://github.com/oocx/tfplan2md/commit/6c172374d53b4a849769551360b23c58e9ac87b0))
+* code review of HTML inline diff test expectations update (e5971f1) ([c05cd6d](https://github.com/oocx/tfplan2md/commit/c05cd6d6b796edf390c2cd009eee4c812e417a1c))
+* code reviewer re-review approves Azure RM Batch 2 fixes ([07ebcc2](https://github.com/oocx/tfplan2md/commit/07ebcc2379fdb05685d0fa14d0001e4a96e04a21))
+* complete Phase 2 testing documentation (T008-T013) ([7c8e158](https://github.com/oocx/tfplan2md/commit/7c8e15818bfd8609ea7104af5f53d9840f4723ca))
+* complete UAT process for Azure RM Batch 2 ([52cc3ff](https://github.com/oocx/tfplan2md/commit/52cc3ffc976f6255a3eb5fb966ae3c7690a38ccb))
+* confirm Azure DevOps PR [#74](https://github.com/oocx/tfplan2md/issues/74) UAT comments were actually posted ([244e357](https://github.com/oocx/tfplan2md/commit/244e3578fee731fb0e2f959edec1cc5363a6b90c))
+* document Linux x64 binary distribution feature ([83250c0](https://github.com/oocx/tfplan2md/commit/83250c0b6303cd11841d906930055b2507af7a4a))
+* document UAT run with comprehensive fixes (commit 9f0db75) ([e77a0d9](https://github.com/oocx/tfplan2md/commit/e77a0d9a17babae2e10e689690011963f254e69c))
+* mark tasks T001-T007 as complete ([ba2151c](https://github.com/oocx/tfplan2md/commit/ba2151c217d040cc84f82e9328b099407cd737a4))
+* release coordination complete for ADR-008 Phase 1 ([5fbb16b](https://github.com/oocx/tfplan2md/commit/5fbb16b9f9cf4514b48130d2f442c0bb3fc59d46))
+* update agents.md with UAT plan workflow requirements ([1da415e](https://github.com/oocx/tfplan2md/commit/1da415ee0de03c440ef9495e725a10a1ed847bd9))
+* update documentation for Azure RM parent-child resource grouping batch 2 ([8ce94f5](https://github.com/oocx/tfplan2md/commit/8ce94f50863dbe64fdece61e5a7cee345d11a6a0))
+* update release notes for Feature 068 with Azure RM implementation and screenshots ([3f72248](https://github.com/oocx/tfplan2md/commit/3f722480983a92202e7000d28f92e58474302006))
+* update status and work protocol for Azure RM Batch 2 ([96248e7](https://github.com/oocx/tfplan2md/commit/96248e7d09dd14bc82b81f1cfc79e91812ac9162))
+* update UAT PRs with inline diff fix artifacts ([cb23b20](https://github.com/oocx/tfplan2md/commit/cb23b2048c4c57efec0198fb973e7c9a9ef1bb2a))
+* update UAT report with Azure DevOps PR [#74](https://github.com/oocx/tfplan2md/issues/74) artifact posting details ([21eaaa0](https://github.com/oocx/tfplan2md/commit/21eaaa0482d4824b432a99db356e530618625d5a))
+* update UAT report with HTML inline diff verification results ([3ca7c94](https://github.com/oocx/tfplan2md/commit/3ca7c94051e8b9c99b1539df5574a3617c75e4b3))
+* update UAT report with real tfplan2md output and GitHub PR [#72](https://github.com/oocx/tfplan2md/issues/72) ([8657b51](https://github.com/oocx/tfplan2md/commit/8657b512c7b9804ad9264f7f4e77be1406162413))
+* verify Azure DevOps PR [#74](https://github.com/oocx/tfplan2md/issues/74) thread 271 created with feature test artifact ([9c0e5d3](https://github.com/oocx/tfplan2md/commit/9c0e5d351d96005460a421eeb3189b8326bdc111))
+* **uat:** add Azure RM Batch 2 UAT report and work protocol entry ([5e9d0bd](https://github.com/oocx/tfplan2md/commit/5e9d0bdbb41aa5c27fa2d35d4ebf75e9aaad19f7))
+
 <a name="1.16.3"></a>
 ## [1.16.3](https://github.com/oocx/tfplan2md/compare/v1.16.2...v1.16.3) (2026-02-12)
 
