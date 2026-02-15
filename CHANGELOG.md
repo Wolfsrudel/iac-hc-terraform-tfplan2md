@@ -5,6 +5,36 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+<a name="1.18.0"></a>
+## [1.18.0](https://github.com/oocx/tfplan2md/compare/v1.17.3...v1.18.0) (2026-02-15)
+
+### ✨ Features
+
+* add Azure DevOps entity mappers (users, groups, projects) ([6ac5b83](https://github.com/oocx/tfplan2md/commit/6ac5b83ce575fcbfcde4c98297b9c73018d6065e))
+* add Azure DevOps principal mapping data model and parser ([b55aaf3](https://github.com/oocx/tfplan2md/commit/b55aaf31ade0e491ee6fed855de6dd944dc14abe))
+* add Azure DevOps sections to example mapping files and create TC-19 test ([c8106b4](https://github.com/oocx/tfplan2md/commit/c8106b43d218ad975279b74db28ef2ecdcca920f))
+* add value formatters for Azure DevOps entities ([a0104a9](https://github.com/oocx/tfplan2md/commit/a0104a9397183afe6bda7abe3b8e1f5c4d49d4ee))
+* complete azdo mapping integration and examples ([a531b22](https://github.com/oocx/tfplan2md/commit/a531b222d44962f181d7cda838dbd50bd338b037))
+* integrate Azure DevOps mappers with Scriban helpers and diagnostic output ([d00ed98](https://github.com/oocx/tfplan2md/commit/d00ed98b20420da5b0974db7b3642634231131e0))
+
+### 🐛 Bug Fixes
+
+* add icons to Azure DevOps principal formatters and fix team member/admin array formatting ([342005e](https://github.com/oocx/tfplan2md/commit/342005e819efbb5788796730c0a61b6f5fcab7e8))
+* release workflow now checks main branch HEAD for tag instead of workflow_run.head_sha ([1ce8473](https://github.com/oocx/tfplan2md/commit/1ce8473825c3a0241eea906a9f2090fd1a920f65))
+* **uat:** regenerate UAT artifacts using real tfplan2md CLI output ([e8130c8](https://github.com/oocx/tfplan2md/commit/e8130c881c94cfbe5baac63abff4c736d5de0372))
+
+### 📚 Documentation
+
+* add architecture for Azure DevOps principal mapping ([ab97e72](https://github.com/oocx/tfplan2md/commit/ab97e72fe3283ca8b9cc2295657d7af9ea48d656))
+* add Azure DevOps principal mapping documentation ([b499e38](https://github.com/oocx/tfplan2md/commit/b499e385e74c637cd4c0b8a49737532ff7f02345))
+* add comprehensive code review for Azure DevOps principal mapping ([252a061](https://github.com/oocx/tfplan2md/commit/252a06175d58794be3fc942dce89eac6bfa9adbf))
+* add comprehensive test plan and test cases for Azure DevOps principal mapping ([506627d](https://github.com/oocx/tfplan2md/commit/506627db24bfc35ba4cf0096a90124a5bba4ef06))
+* add feature specification for Azure DevOps principal mapping (085) ([c85fffe](https://github.com/oocx/tfplan2md/commit/c85fffef2f88a6c9af88042d5e2f87041f2895cb))
+* add task breakdown for Azure DevOps principal mapping (085) ([c3e71b1](https://github.com/oocx/tfplan2md/commit/c3e71b13eeb83fd9da6f5d880f98a3a77e7ef844))
+* add UAT Tester work protocol entry for feature 085 ([cf87f3b](https://github.com/oocx/tfplan2md/commit/cf87f3bd114ac600dbda8e7deabb4ab1bc811a7f))
+* architectural decision for azdo value formatters ([e2539d3](https://github.com/oocx/tfplan2md/commit/e2539d34a16569fc42bce307211ad25b6b7c85b6))
+* update work protocol with Release Manager entry ([69982be](https://github.com/oocx/tfplan2md/commit/69982bea7556e47d207cf1ba23734fedbeefb596))
+
 <a name="1.17.3"></a>
 ## [1.17.3](https://github.com/oocx/tfplan2md/compare/v1.17.2...v1.17.3) (2026-02-15)
 
