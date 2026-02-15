@@ -5,6 +5,24 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+<a name="1.17.3"></a>
+## [1.17.3](https://github.com/oocx/tfplan2md/compare/v1.17.2...v1.17.3) (2026-02-15)
+
+### 🐛 Bug Fixes
+
+* add icons for resource names and groups in Azure resource ID rendering ([2433b10](https://github.com/oocx/tfplan2md/commit/2433b10311b4463644a4124c76ce3ae9eb5dd22e))
+* restore code analysis in comprehensive-demo.md and fix agent instructions ([9f9ee0e](https://github.com/oocx/tfplan2md/commit/9f9ee0e259d6a70a8a09ee4cbc1a54a408ac9721))
+
+### 📚 Documentation
+
+* add code review for issue 465 (changes requested) ([9b95d18](https://github.com/oocx/tfplan2md/commit/9b95d18a18a449da6d0590e245ede65d87c376d8))
+* add issue analysis for missing icons in Azure resource ID rendering ([759355b](https://github.com/oocx/tfplan2md/commit/759355b5c2182a6131a817c6836e91422d9fad97))
+* add release manager coordination for issue 465 ([7578287](https://github.com/oocx/tfplan2md/commit/75782871a276ba7fec41145f7ab323f879b798a9))
+* add retrospective analysis for issue 465 bug fix workflow ([9526256](https://github.com/oocx/tfplan2md/commit/95262560154952f1a727fcb4357f4d0f8780357e))
+* approve bug fix after successful test corrections (issue 465) ([dce9ad7](https://github.com/oocx/tfplan2md/commit/dce9ad7d221de41be58aca4211ea9fe4f7d1c1db))
+* approve bug fix after successful test corrections (issue 465) ([73a7843](https://github.com/oocx/tfplan2md/commit/73a78435e170e891599e64cf00dcf2ea9648d03d))
+* update documentation for missing icons bug fix (issue 465) ([7d8e5b2](https://github.com/oocx/tfplan2md/commit/7d8e5b281b25bb3f8ebad8fe15c5d43c3a2b24f4))
+
 <a name="1.17.2"></a>
 ## [1.17.2](https://github.com/oocx/tfplan2md/compare/v1.17.1...v1.17.2) (2026-02-14)
 
