@@ -5,6 +5,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+<a name="1.18.1"></a>
+## [1.18.1](https://github.com/oocx/tfplan2md/compare/v1.18.0...v1.18.1) (2026-02-16)
+
+### 🐛 Bug Fixes
+
+* handle null inputs in TerraformPlanParser ([89451c1](https://github.com/oocx/tfplan2md/commit/89451c1016fe487c71eeb632dac94e6ebf903943))
+* move null check before GetName call in PrincipalMapper ([7a10ee5](https://github.com/oocx/tfplan2md/commit/7a10ee5399f32ab0803a56082c3d90ccbd0a257e))
+* preserve escaped backticks in plain text values in FormatChildValue ([200ba31](https://github.com/oocx/tfplan2md/commit/200ba31326bcadb51904982f2223f3afffefbd5b))
+* prevent silent overwrite on multiple positional arguments in CliParser ([581b332](https://github.com/oocx/tfplan2md/commit/581b332b4422cc6378726eafabbf50c0a85e4bca))
+* remove redundant ternary in BuildDeleteSummary ([78beeac](https://github.com/oocx/tfplan2md/commit/78beeacd1367a53f2c86327349e1d0ba0f8f13fc))
+
 <a name="1.18.0"></a>
 ## [1.18.0](https://github.com/oocx/tfplan2md/compare/v1.17.3...v1.18.0) (2026-02-15)
 
