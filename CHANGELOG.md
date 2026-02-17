@@ -5,6 +5,20 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+<a name="1.20.1"></a>
+## [1.20.1](https://github.com/oocx/tfplan2md/compare/v1.20.0...v1.20.1) (2026-02-17)
+
+### 🐛 Bug Fixes
+
+* keep release matrix builds running after single platform failure ([0706fe9](https://github.com/oocx/tfplan2md/commit/0706fe9e7ddb48d4e417031b476f5b55c66f3025))
+* prevent decimal numbers from being rendered with IP icon ([15256e4](https://github.com/oocx/tfplan2md/commit/15256e4de4201cbf14374df1d23cfb6d55489512))
+* prevent release workflow from overwriting release notes on re-run ([4ea1c87](https://github.com/oocx/tfplan2md/commit/4ea1c87d5d49c032b5c97a496d83b3c199db8727))
+* run release binary publish step with bash shell ([5dce4e7](https://github.com/oocx/tfplan2md/commit/5dce4e72abb53719cad0e9f9b464d98d1a7ad8c5))
+
+### 📚 Documentation
+
+* add issue analysis for decimal IP icon bug (issue 087) ([5c80527](https://github.com/oocx/tfplan2md/commit/5c80527eeb0c4d8cc93ecdb52b4911d2da6d2be7))
+
 <a name="1.20.0"></a>
 ## [1.20.0](https://github.com/oocx/tfplan2md/compare/v1.19.0...v1.20.0) (2026-02-17)
 
