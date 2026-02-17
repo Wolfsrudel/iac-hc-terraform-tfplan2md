@@ -5,6 +5,35 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+<a name="1.20.0"></a>
+## [1.20.0](https://github.com/oocx/tfplan2md/compare/v1.19.0...v1.20.0) (2026-02-17)
+
+### ✨ Features
+
+* add generation commands for all regenerable artifacts ([4c881b5](https://github.com/oocx/tfplan2md/commit/4c881b51f49309528e138214d1fdc6567f8e7f07))
+* delete 5 legacy UAT artifacts without source JSON ([aea39d8](https://github.com/oocx/tfplan2md/commit/aea39d8627bb61b6a6012966073926cd2eca31b2))
+* exclude old UAT artifacts from style guide compliance tests ([48f2893](https://github.com/oocx/tfplan2md/commit/48f2893523d3b5b4fee34e1184ec5e707cb7a75f))
+* expand demo artifact generation script ([37dcc48](https://github.com/oocx/tfplan2md/commit/37dcc481e6dbe2da55830e67e2a9d8dbd45f151a))
+* fix style guide compliance violations (issue 086) ([8030c71](https://github.com/oocx/tfplan2md/commit/8030c7133b8dca19ed3a9bf1934cbe90a3e22e13))
+
+### 🐛 Bug Fixes
+
+* add non-breaking space before wrench icon in firewall rule summaries ([0133a84](https://github.com/oocx/tfplan2md/commit/0133a84c9e47c758d277f2be98ec2b47dc4d5fcf))
+* correct H3 detection regex in style guide compliance test ([8ba04f0](https://github.com/oocx/tfplan2md/commit/8ba04f0ca1a0f5791b60065147b6f71a698a8d92))
+* restore deleted artifacts and only exclude docs/* from tests ([88079d2](https://github.com/oocx/tfplan2md/commit/88079d291248c381e364eb6755749b0b2336804e))
+* style guide compliance - fix 3 high/medium priority violations ([54e61a9](https://github.com/oocx/tfplan2md/commit/54e61a99d2b5b2c26aae5256cf2654c4efdc4ace))
+* use non-breaking space after emoji icons in templates ([e1006d6](https://github.com/oocx/tfplan2md/commit/e1006d69df42830cece6c5f9ff90190ad7f76d64))
+
+### 📚 Documentation
+
+* add issue analysis for style guide compliance violations (issue 086) ([05afe10](https://github.com/oocx/tfplan2md/commit/05afe1031bb99475788ca8b90f8f3cd36ca9a246))
+* add release notes for style guide compliance fixes ([639c9af](https://github.com/oocx/tfplan2md/commit/639c9af325056528c28adc2fbabaa8034e29058c))
+* add screenshots to release notes for style guide fixes ([e7c64c9](https://github.com/oocx/tfplan2md/commit/e7c64c911218312c69f9c439aa66cf3e0ac38c8c))
+* developer agent snapshot update work protocol entry ([32417ba](https://github.com/oocx/tfplan2md/commit/32417ba34b3d8c0e4e6362341cc56eefb73c3197))
+* update documentation for style guide compliance fixes (issue 086) ([3080880](https://github.com/oocx/tfplan2md/commit/3080880f634bfd5d38f92924ea51fccd7e943d76))
+* update work protocol with developer implementation summary ([b6468a6](https://github.com/oocx/tfplan2md/commit/b6468a66ecb4877d089fa128c9768b5efce33243))
+* update work protocol with final test fixes completion ([45718b6](https://github.com/oocx/tfplan2md/commit/45718b653f13e4b78d88dfcec75e5b2e7bc6a840))
+
 <a name="1.19.0"></a>
 ## [1.19.0](https://github.com/oocx/tfplan2md/compare/v1.18.1...v1.19.0) (2026-02-17)
 
