@@ -5,6 +5,20 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+<a name="1.21.1"></a>
+## [1.21.1](https://github.com/oocx/tfplan2md/compare/v1.21.0...v1.21.1) (2026-02-18)
+
+### 🐛 Bug Fixes
+
+* preserve no-op parents with child changes in Resource Changes section ([f395bd6](https://github.com/oocx/tfplan2md/commit/f395bd6f9aac56b685daec57123271685c5528f7))
+* refine no-op parent filter to check for child changes ([5860386](https://github.com/oocx/tfplan2md/commit/5860386120f2f6678ad526102de604e9b48b7210))
+
+### 📚 Documentation
+
+* add code review report for no-op parent bug fix (issue [#088](https://github.com/oocx/tfplan2md/issues/088)) ([5cee65e](https://github.com/oocx/tfplan2md/commit/5cee65e3db6ca0a80d5180b40fe490057cb5f1f0))
+* add issue analysis for no-op parent hiding child changes ([5ce1947](https://github.com/oocx/tfplan2md/commit/5ce1947f25ed62d7babd9fc0f35cb3a51d7cc052))
+* add release notes for no-op parent hiding child changes bug fix ([99eb58d](https://github.com/oocx/tfplan2md/commit/99eb58d224f3186652ed2dd1adf494bb04082c97))
+
 <a name="1.21.0"></a>
 ## [1.21.0](https://github.com/oocx/tfplan2md/compare/v1.20.1...v1.21.0) (2026-02-18)
 
