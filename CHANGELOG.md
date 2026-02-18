@@ -5,6 +5,34 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+<a name="1.21.0"></a>
+## [1.21.0](https://github.com/oocx/tfplan2md/compare/v1.20.1...v1.21.0) (2026-02-18)
+
+### ✨ Features
+
+* show 'No changes' for zero-change plans ([2529909](https://github.com/oocx/tfplan2md/commit/25299098b0e85dc8ceb4ec3fcd5d8d84ce5de477))
+* wrap debug section in collapsible details block ([03c6b40](https://github.com/oocx/tfplan2md/commit/03c6b40c6a06c0c699673d567029d5bfc66c1e93))
+
+### 🐛 Bug Fixes
+
+* correct template files with proper non-breaking spaces ([e65e64b](https://github.com/oocx/tfplan2md/commit/e65e64b3f05d68c60c50ac27a21d84725558f0b7))
+
+### 📚 Documentation
+
+* add architecture for output display enhancements ([0da8764](https://github.com/oocx/tfplan2md/commit/0da8764e33799bb4e3ed5480b66cded686c454da))
+* add Claude Sonnet 4.6 and GPT-5.3-Codex to model reference ([73b6b49](https://github.com/oocx/tfplan2md/commit/73b6b49c559bb080e719d4740ef33fb9c886c61b))
+* add feature specification for 086-output-display-enhancements ([c0a58cf](https://github.com/oocx/tfplan2md/commit/c0a58cf0095ed1a753a320e01da53c7037d835e0))
+* add release notes and screenshots for Feature 086 ([f9a54bd](https://github.com/oocx/tfplan2md/commit/f9a54bd9ba86e33ac6068b4d26959c3793732f0d))
+* add test plan and UAT test plan for feature 086 ([da6e5e7](https://github.com/oocx/tfplan2md/commit/da6e5e7506ac87ed71747a880889d051ca153099))
+* approve Feature 086 for UAT after blocker resolution ([4d27dda](https://github.com/oocx/tfplan2md/commit/4d27ddab35ef1c7df6d1d6360ee9c280adf10714))
+* complete code review for Feature 086 - changes requested ([3bebfc9](https://github.com/oocx/tfplan2md/commit/3bebfc9e081a034c9cb47f50be01cf6c4822de1e))
+* mark Task 7 as complete ([1931041](https://github.com/oocx/tfplan2md/commit/19310417169151a27e6d909ab06976cd47377c1f))
+* mark Tasks 1-3 as complete ([f3711ec](https://github.com/oocx/tfplan2md/commit/f3711ec488c309f6b12c0fc7762008d87818c269))
+* remove incorrect proxy benchmark scores ([1106230](https://github.com/oocx/tfplan2md/commit/1106230e9e55d0cc3cf3bce896d09c95b4d08166))
+* update documentation for Feature 086 (output display enhancements) ([a41ba37](https://github.com/oocx/tfplan2md/commit/a41ba37f3f6c29a8b3b72431c605c73c5fc8ec45))
+* update work protocol with blocker fix session ([18ed819](https://github.com/oocx/tfplan2md/commit/18ed8191cf05c7282fd1a6d427ceafe31208e81d))
+* update work protocol with implementation summary ([5bee287](https://github.com/oocx/tfplan2md/commit/5bee2872d77848761c4ffe60cd540385cf0efbcd))
+
 <a name="1.20.1"></a>
 ## [1.20.1](https://github.com/oocx/tfplan2md/compare/v1.20.0...v1.20.1) (2026-02-17)
 
