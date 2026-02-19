@@ -5,6 +5,45 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+<a name="1.22.0"></a>
+## [1.22.0](https://github.com/oocx/tfplan2md/compare/v1.21.1...v1.22.0) (2026-02-19)
+
+### ✨ Features
+
+* add Homebrew formula update job to release workflow ([843ab42](https://github.com/oocx/tfplan2md/commit/843ab422f7ad20fc22faec202118c5a56ef8d8b6))
+* add Homebrew formula update script ([0136c61](https://github.com/oocx/tfplan2md/commit/0136c61a21ee30ab8e2f3fb32bc74daa276f630d))
+
+### 🐛 Bug Fixes
+
+* add Xcode CLT for macOS builds and remove windows-arm64 ([7ebde9a](https://github.com/oocx/tfplan2md/commit/7ebde9a3f5598cb75fb239e975139a608584a679))
+* array diff rendering - skip markers when property didn't exist, add colored spans ([1b28aa0](https://github.com/oocx/tfplan2md/commit/1b28aa0a1f0b60f22d8c7186ceb40a6659512ca7))
+* array diff rendering for new elements and Azure DevOps coloring ([7a3cd8f](https://github.com/oocx/tfplan2md/commit/7a3cd8f5a648cdd80f2ba31563132b80d3a9767b))
+* filter array items to show only changed items in update mode ([2daf2aa](https://github.com/oocx/tfplan2md/commit/2daf2aab3b5a158652a9eb78e8f01a6547e8f64a))
+* improve array diff rendering for new/removed elements and Azure DevOps coloring ([d92a224](https://github.com/oocx/tfplan2md/commit/d92a22432cf5b1abd5e4391213b2c405dd8c3e71))
+* prevent empty metadata tables in AzAPI resource template ([c02df89](https://github.com/oocx/tfplan2md/commit/c02df89ee639fe1daf3d13ae47e7f2e8d84d030d))
+
+### 📚 Documentation
+
+* add architecture for Homebrew installation support ([817a1e2](https://github.com/oocx/tfplan2md/commit/817a1e2c7eac8fc895a9ca25b824428a6eac9356))
+* add code review approval for nested array fix (issue [#089](https://github.com/oocx/tfplan2md/issues/089)) ([98aed09](https://github.com/oocx/tfplan2md/commit/98aed09b78e78ba7ab3c0f7c8cfb2ad86678c3f3))
+* add code review report for Feature 089 (Homebrew installation) ([ad930d3](https://github.com/oocx/tfplan2md/commit/ad930d38da083cfd02e0659ef7ba9c296c117f68))
+* add Developer work log entry to work protocol ([4fb2bd4](https://github.com/oocx/tfplan2md/commit/4fb2bd45ea7806b5f9769c1bb2917770ca8b280d))
+* add feature specification for Homebrew installation support ([6e2b3e4](https://github.com/oocx/tfplan2md/commit/6e2b3e4b54cf0d6a0658cf1fe1a51049e6c4f77c))
+* add Homebrew installation documentation ([177e878](https://github.com/oocx/tfplan2md/commit/177e8785276d9581254cd2a2370408f596acda56))
+* add implementation summary for Feature 089 ([4e8aacf](https://github.com/oocx/tfplan2md/commit/4e8aacf915ee4d18091f763024b8f405725d4dea))
+* add implementation tasks for homebrew installation (089) ([95ed54a](https://github.com/oocx/tfplan2md/commit/95ed54ae663be14cbc5673fb1bda62f1a87a6117))
+* add issue analysis for nested array rendering showing all items instead of only changed items ([ab9f4fa](https://github.com/oocx/tfplan2md/commit/ab9f4faac17d608d3401860946f5751d08c15fc9))
+* add Release Manager work log and merge checklist for Feature 089 ([b83e8ca](https://github.com/oocx/tfplan2md/commit/b83e8ca15f68ffe8a4660927a44c64dccf42d62d))
+* add Release Manager work log to work protocol (issue [#089](https://github.com/oocx/tfplan2md/issues/089)) ([d7807d4](https://github.com/oocx/tfplan2md/commit/d7807d40c4be4df55ebd6405b62525fcd23d43a1))
+* add release notes and update feature docs for nested array fix ([ad4a962](https://github.com/oocx/tfplan2md/commit/ad4a9624ae5b1bb018d85031f558d5f679a1133b))
+* add retrospective analysis for Feature 089 (Homebrew installation) ([0dd32d6](https://github.com/oocx/tfplan2md/commit/0dd32d660206b0c9d967725e67af7ef3f8a9ddf9))
+* add test plan for homebrew installation support (089) ([364029d](https://github.com/oocx/tfplan2md/commit/364029d1d108685100d7a245498d0018434dbe11))
+* add UAT report documenting authentication blocker (issue [#089](https://github.com/oocx/tfplan2md/issues/089)) ([b2b2e78](https://github.com/oocx/tfplan2md/commit/b2b2e78367d7e38fadb089a5bba331222279fd2d))
+* improve UAT agent instructions and rename issue 089 to 090 ([a25656f](https://github.com/oocx/tfplan2md/commit/a25656fbff4e7d982936bd143db5824e1e4e374b))
+* mark TASK-001, 002, 003, 007, 008 as complete ([ac82c48](https://github.com/oocx/tfplan2md/commit/ac82c481119234279551b1dc723066b209c77035))
+* update release notes to include both array rendering fixes ([2cedb5d](https://github.com/oocx/tfplan2md/commit/2cedb5d7acd428e46b451e8860f077ccbbffc2a9))
+* update UAT report with successful PR creation (issue [#089](https://github.com/oocx/tfplan2md/issues/089)) ([6b4ed6a](https://github.com/oocx/tfplan2md/commit/6b4ed6a8b799b97d5adba910720a48e9050cdbe9))
+
 <a name="1.21.1"></a>
 ## [1.21.1](https://github.com/oocx/tfplan2md/compare/v1.21.0...v1.21.1) (2026-02-18)
 
