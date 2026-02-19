@@ -5,6 +5,28 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+<a name="1.23.0"></a>
+## [1.23.0](https://github.com/oocx/tfplan2md/compare/v1.22.1...v1.23.0) (2026-02-19)
+
+### ✨ Features
+
+* add --details CLI argument for resource details display control ([a14b8c1](https://github.com/oocx/tfplan2md/commit/a14b8c1a24ce1bce5f6e6e2ca38e653d14d2a2a3))
+
+### 🐛 Bug Fixes
+
+* resource-specific template support for --details mode ([3cab10e](https://github.com/oocx/tfplan2md/commit/3cab10ed501e629d020ae34cb7c94d38f2af0228))
+* update all provider-specific templates to use details_open_attr helper; add architecture and integration tests (SNAPSHOT_UPDATE_OK) ([54d1c29](https://github.com/oocx/tfplan2md/commit/54d1c29708b174fcd25f9edb66801c336cfdd959))
+
+### 📚 Documentation
+
+* add architecture for details display mode CLI feature ([3b321c7](https://github.com/oocx/tfplan2md/commit/3b321c73a66c54938db609aae68ee3b166e6f07e))
+* add comprehensive test plan for details display mode feature ([9e68ae3](https://github.com/oocx/tfplan2md/commit/9e68ae3771dd6f6083eba228aefc89e9de4cad85))
+* add documentation for --details CLI option ([9ff9a5f](https://github.com/oocx/tfplan2md/commit/9ff9a5f4ada0ca4d83d90aaa7c1a3dd77d1b53bd))
+* add feature specification for 092-details-display-mode ([03945d3](https://github.com/oocx/tfplan2md/commit/03945d3b69a0e8391b49140f3d52a7bd36f8544b))
+* add implementation tasks for 092-details-display-mode ([464b8d2](https://github.com/oocx/tfplan2md/commit/464b8d23ca4571ca013bf1f359c7776a225e67b7))
+* add retrospective analysis for feature 092 (--details CLI option) ([cda6ac7](https://github.com/oocx/tfplan2md/commit/cda6ac7d40fcb08a96330b9f389da178940fba6b))
+* update work protocol with Release Manager entry for feature 092 ([5db0a0b](https://github.com/oocx/tfplan2md/commit/5db0a0b10c3052007bdc70dddfddd1f0274b2b86))
+
 <a name="1.22.1"></a>
 ## [1.22.1](https://github.com/oocx/tfplan2md/compare/v1.22.0...v1.22.1) (2026-02-19)
 
