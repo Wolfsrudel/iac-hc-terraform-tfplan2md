@@ -5,6 +5,20 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+<a name="1.22.1"></a>
+## [1.22.1](https://github.com/oocx/tfplan2md/compare/v1.22.0...v1.22.1) (2026-02-19)
+
+### 🐛 Bug Fixes
+
+* homebrew formula update fails when formula file missing in tap repo ([a24dc4f](https://github.com/oocx/tfplan2md/commit/a24dc4fdbe8c17639b9d07215645ef367311b850))
+* resources only expanded by default when code analysis warnings exist ([71709bf](https://github.com/oocx/tfplan2md/commit/71709bfd73104fa6d782e41e1d0ea1fcbfa957ea))
+* **release:** fix linux-arm64 cross-compilation and macOS sha256sum failures ([f61e284](https://github.com/oocx/tfplan2md/commit/f61e284eb16f60e1d5600188fe4481ad95b7960d))
+
+### 📚 Documentation
+
+* add Release Manager entry to work protocol ([8588ca5](https://github.com/oocx/tfplan2md/commit/8588ca5a99acd3ba03e778ed9b898ec93d61ce92))
+* add release notes for issue 091 - AzAPI resources expansion fix ([ded25f3](https://github.com/oocx/tfplan2md/commit/ded25f39e1e82c9e0d6eee9f42a35267a3e6db5a))
+
 <a name="1.22.0"></a>
 ## [1.22.0](https://github.com/oocx/tfplan2md/compare/v1.21.1...v1.22.0) (2026-02-19)
 
