@@ -5,6 +5,39 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+<a name="1.24.0"></a>
+## [1.24.0](https://github.com/oocx/tfplan2md/compare/v1.23.1...v1.24.0) (2026-02-20)
+
+### ✨ Features
+
+* add semantic icons for boolean and name values in azuredevops_build_definition tables ([fd4685d](https://github.com/oocx/tfplan2md/commit/fd4685d3fa420ef208c0b574ad13ffe21dcb9aeb))
+* implement build definition view models, extractors, formatters, and template ([1899878](https://github.com/oocx/tfplan2md/commit/18998785a7eacfa5798f89d57b331e63f734133d))
+
+### 🐛 Bug Fixes
+
+* split build_definition.sbn into partial templates to pass line count test ([d89c818](https://github.com/oocx/tfplan2md/commit/d89c81835ae65196ce9285df163278bfa25c4766))
+* update test assertions to match formatter output with semantic icons ([b20821e](https://github.com/oocx/tfplan2md/commit/b20821ea0b2e13ceefa127070dc4833a88b942a3))
+
+### 📚 Documentation
+
+* add architecture for build definition tables ([f853963](https://github.com/oocx/tfplan2md/commit/f8539634eb48e79b7042a5063a6a19746bcd9a84))
+* add code review for feature 094 build definition tables ([27367c8](https://github.com/oocx/tfplan2md/commit/27367c80201a62d38823c6d1a8edec121e3da5c1))
+* add feature specification for build definition tables (094) ([a259d6b](https://github.com/oocx/tfplan2md/commit/a259d6b9b6b55dbf25b88355369d84a16914a2af))
+* Add past advisories section to SECURITY.md ([18643e2](https://github.com/oocx/tfplan2md/commit/18643e29ee79bcacb56a4ee88cf9ef2ce11ef545))
+* add release screenshot and update release notes for feature 094 ([e0eb9c6](https://github.com/oocx/tfplan2md/commit/e0eb9c62e0d3b6c9190dc124806e7a34d2c6354f))
+* add release screenshot and update release notes for feature 094 ([fd4e529](https://github.com/oocx/tfplan2md/commit/fd4e5297e0de62af2b10c7f1fc99437d5a961d96))
+* add retrospective for feature 094 build definition tables ([3e487ba](https://github.com/oocx/tfplan2md/commit/3e487bafea1e0ef8f541479a7181196d9c8d1f85))
+* add tasks for feature 094 build definition tables ([d04499d](https://github.com/oocx/tfplan2md/commit/d04499da7b35f5024d0c6d95a16b63f7193e8937))
+* add test plan and UAT test plan for feature 094 ([bc02ad6](https://github.com/oocx/tfplan2md/commit/bc02ad6bffe77782d89c0d3b021b0ff980556f67))
+* add UAT report for feature 094 - all validations passed ([5c7dbae](https://github.com/oocx/tfplan2md/commit/5c7dbae918263bc251fa263a4d38c1ac538db846))
+* Fix typo in 'Past Advisoties' section header ([dde0a04](https://github.com/oocx/tfplan2md/commit/dde0a0461c1073e46fd112186e9b0901d6d7e21c))
+* mark tasks 11-15 as complete ([793fff6](https://github.com/oocx/tfplan2md/commit/793fff6375963ddc44e8be156850de5242ee3972))
+* update documentation for build definition tables feature ([01f60dd](https://github.com/oocx/tfplan2md/commit/01f60dde75d607cdddb8ffd2a26900dbe6b132bf))
+* update release notes with correct commits and work protocol entry for release manager session 2 ([dbe031b](https://github.com/oocx/tfplan2md/commit/dbe031bb47fe9eaa558b4856b5ef5fffe185042d))
+* update UAT report with final PASS result for feature 094 ([317bc62](https://github.com/oocx/tfplan2md/commit/317bc62eb9a762fa9f426bd9ec776c985fe451e2))
+* update work protocol with Developer completion entry ([42ec806](https://github.com/oocx/tfplan2md/commit/42ec806283f285c3eb3f3d524d9213e2908a0d47))
+* **uat:** re-run UAT for feature 094 with regenerated artifacts ([1727a0d](https://github.com/oocx/tfplan2md/commit/1727a0da1cf8108d4c3f2af08c63b3013960d356))
+
 <a name="1.23.1"></a>
 ## [1.23.1](https://github.com/oocx/tfplan2md/compare/v1.23.0...v1.23.1) (2026-02-20)
 
