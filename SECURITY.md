@@ -93,6 +93,10 @@ We follow **coordinated disclosure**:
 - We'll credit you in the security advisory (if desired)
 - We ask that you don't publicly disclose until we've released a fix
 
+## Past Advisoties
+
+- [Sensitive Attribute Disclosure in Array/Nested Structures (fixed in v1.23.1, 8.5/10)](https://github.com/oocx/tfplan2md/security/advisories/GHSA-vrg5-jhph-q74p)
+
 ## Questions?
 
 If you have questions about this security policy, feel free to:
