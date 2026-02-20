@@ -5,6 +5,22 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+<a name="1.23.1"></a>
+## [1.23.1](https://github.com/oocx/tfplan2md/compare/v1.23.0...v1.23.1) (2026-02-20)
+
+### 🐛 Bug Fixes
+
+* prevent sensitive data disclosure for array/nested attributes ([7491896](https://github.com/oocx/tfplan2md/commit/749189657ef3a31dabf3560e668bfaa3fb9374d8))
+
+### 📚 Documentation
+
+* add code review for sensitive attribute disclosure security fix ([af106e7](https://github.com/oocx/tfplan2md/commit/af106e7b92a896c1f10817fa0c0922f912a25235))
+* add code review report for sensitive attribute disclosure fix ([97b0361](https://github.com/oocx/tfplan2md/commit/97b0361e63809ffc65759b7414037bfc57f06c2e))
+* add issue analysis for sensitive attribute disclosure vulnerability ([5530ae4](https://github.com/oocx/tfplan2md/commit/5530ae41a8672d640007d07a35d888a69d8e559a))
+* add release manager entry to work protocol for issue 093 ([59d1659](https://github.com/oocx/tfplan2md/commit/59d16596de4109b89c26eb0a0c0d425677cfae94))
+* add release notes for sensitive attribute disclosure fix (issue 093) ([6c30486](https://github.com/oocx/tfplan2md/commit/6c3048639542b06ab6a1440e09e49d399a47a674))
+* update work protocol for sensitive attribute fix ([a2222d8](https://github.com/oocx/tfplan2md/commit/a2222d83ba545fff189e3dfabe247ad14cc4c8ea))
+
 <a name="1.23.0"></a>
 ## [1.23.0](https://github.com/oocx/tfplan2md/compare/v1.22.1...v1.23.0) (2026-02-19)
 
