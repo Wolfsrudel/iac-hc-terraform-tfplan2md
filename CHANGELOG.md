@@ -5,6 +5,22 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+<a name="1.25.0"></a>
+## [1.25.0](https://github.com/oocx/tfplan2md/compare/v1.24.0...v1.25.0) (2026-02-20)
+
+### ✨ Features
+
+* implement azapi_update_resource template with attribute grouping ([5c1daf4](https://github.com/oocx/tfplan2md/commit/5c1daf49be18c7b454288b77ff63b89d6efa7c62))
+
+### 📚 Documentation
+
+* add code review report for Feature 095 ([22c4e0c](https://github.com/oocx/tfplan2md/commit/22c4e0c86dfefffe7fe70503311190aa4ec12731))
+* add code review report for Feature 095 ([aa270f4](https://github.com/oocx/tfplan2md/commit/aa270f4c37f869b4516199767020f9b0fe125c03))
+* add documentation for Feature 095 azapi_update_resource grouping ([745ec8a](https://github.com/oocx/tfplan2md/commit/745ec8a0cc6d53eb7c1b819232cef02780c2f0d7))
+* add feature 095 specification for azapi_update_resource grouping ([865b732](https://github.com/oocx/tfplan2md/commit/865b7324113157ff06b234858cc3b882ffd47e9b))
+* add screenshot to feature 095 release notes ([1523e15](https://github.com/oocx/tfplan2md/commit/1523e1544057701cbc57037c24e90807b72febd8))
+* update generate-release-screenshots skill with --details open instruction ([31a656b](https://github.com/oocx/tfplan2md/commit/31a656beaf2bcbdf96d112e7601d87d66899f74b))
+
 <a name="1.24.0"></a>
 ## [1.24.0](https://github.com/oocx/tfplan2md/compare/v1.23.1...v1.24.0) (2026-02-20)
 
