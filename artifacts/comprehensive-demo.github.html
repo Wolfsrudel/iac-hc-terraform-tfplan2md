@@ -1,26 +1,31 @@
 <!DOCTYPE html>
-<html lang="en" data-color-mode="light" data-light-theme="light">
+<html lang="en" data-color-mode="dark" data-dark-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>tfplan2md GitHub-style Rendering (Light)</title>
-    <!-- GitHub light theme markdown CSS with offline fallback -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.2.0/github-markdown.min.css" 
+    <title>tfplan2md GitHub-style Rendering</title>
+    <!-- GitHub dark theme markdown CSS with offline fallback -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.2.0/github-markdown-dark.min.css"
+          integrity="sha384-czfOLD4HOu5pkU94uefHIdKsTEkv/0J2Pqye6jqUKAN/5QGBMlnZ48lL2I84dsl4"
+          crossorigin="anonymous"
           onerror="this.onerror=null; this.disabled=true; document.getElementById('fallback-css').disabled=false;">
-    <!-- highlight.js light theme for code blocks -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css"
+    <!-- highlight.js dark theme for code blocks -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css"
+          integrity="sha384-wH75j6z1lH97ZOpMOInqhgKzFkAInZPPSPlZpYKYTOqsaizPvhQZmAtLcPKXpLyH"
+          crossorigin="anonymous"
           onerror="this.onerror=null; this.disabled=true;">
     <!-- Fallback CSS when CDN is unavailable -->
     <style id="fallback-css" disabled>
-        /* Minimal fallback styling based on github-markdown-css core features */
+        /* Minimal fallback styling based on github-markdown-css core features (dark theme) */
         .markdown-body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif;
             font-size: 16px;
             line-height: 1.5;
             word-wrap: break-word;
+            color: #e6edf3;
         }
         .markdown-body h1, .markdown-body h2 {
-            border-bottom: 1px solid #d0d7de;
+            border-bottom: 1px solid #3d444d;
             padding-bottom: 0.3em;
         }
         .markdown-body table {
@@ -35,18 +40,18 @@
             font-weight: 600;
         }
         .markdown-body table td, .markdown-body table th {
-            border: 1px solid #d0d7de;
+            border: 1px solid #3d444d;
             padding: 6px 13px;
         }
         .markdown-body table tr {
-            background-color: #ffffff;
-            border-top: 1px solid #d8dee4;
+            background-color: #0d1117;
+            border-top: 1px solid #30363d;
         }
         .markdown-body table tr:nth-child(2n) {
-            background-color: #f6f8fa;
+            background-color: #151b23;
         }
         .markdown-body code {
-            background-color: rgba(175, 184, 193, 0.2);
+            background-color: rgba(110, 118, 129, 0.4);
             border-radius: 6px;
             font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
             font-size: 85%;
@@ -54,7 +59,7 @@
             padding: 0.2em 0.4em;
         }
         .markdown-body pre {
-            background-color: #f6f8fa;
+            background-color: #151b23;
             border-radius: 6px;
             font-size: 85%;
             line-height: 1.45;
@@ -73,17 +78,17 @@
         }
     </style>
     <style>
-        /* GitHub light theme colors extracted from actual GitHub PR pages */
+        /* GitHub dark theme colors extracted from actual GitHub PR pages */
         :root {
-            color-scheme: light;
-            --bgColor-default: #ffffff;
-            --bgColor-muted: #f6f8fa;
-            --bgColor-emphasis: #656d76;
-            --borderColor-default: #d0d7de;
-            --borderColor-muted: #d8dee4;
-            --fgColor-default: #1f2328;
-            --fgColor-muted: #656d76;
-            --fgColor-accent: #0969da;
+            color-scheme: dark;
+            --bgColor-default: #0d1117;
+            --bgColor-muted: #151b23;
+            --bgColor-emphasis: #3d444d;
+            --borderColor-default: #3d444d;
+            --borderColor-muted: #30363d;
+            --fgColor-default: #e6edf3;
+            --fgColor-muted: #9198a1;
+            --fgColor-accent: #4493f8;
         }
 
         body {
@@ -181,22 +186,50 @@
         }
 
         .markdown-body code {
-            background: rgba(175, 184, 193, 0.2);
+            background: rgba(110, 118, 129, 0.4);
+            border-radius: 6px;
+            padding: 0.2em 0.4em;
         }
 
-        /* Make embedded <details> from tfplan2md look like cards */
-        .markdown-body details[style*="border:"] {
-            border: 1px solid var(--borderColor-default) !important;
-            background: var(--bgColor-muted) !important;
+        /* Inline code within pre should not have extra styling */
+        .markdown-body pre code {
+            background: transparent;
+            padding: 0;
+        }
+
+        /* Horizontal rule */
+        .markdown-body hr {
+            border-color: var(--borderColor-muted);
+        }
+
+        /* Blockquote */
+        .markdown-body blockquote {
+            border-left-color: var(--borderColor-default);
+            color: var(--fgColor-muted);
+        }
+
+        @media (max-width: 900px) {
+            body { padding: 16px 12px 40px; }
+            .page-container { max-width: 100%; }
+            .comment-surface { padding: 20px; }
         }
     </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js" 
+            integrity="sha384-F/bZzf7p3Joyp5psL90p/p89AZJsndkSoGwRpXcZhleCWhd8SnRuoYo4d0yirjJp"
+            crossorigin="anonymous"
+            onerror="console.warn('highlight.js failed to load from CDN, syntax highlighting disabled');"></script>
+    <script>
+        // Only run syntax highlighting if highlight.js loaded successfully
+        if (typeof hljs !== 'undefined') {
+            hljs.highlightAll();
+        }
+    </script>
 </head>
 <body>
     <div class="page-container">
-        <div class="comment-surface">
-            <article class="markdown-body">
-                <h1 dir="auto">Terraform Plan Report</h1>
-<p dir="auto">Generated by tfplan2md 1.19.0 (bbb6233) on 2026-02-17 17:46:46 UTC | Terraform 1.14.0</p>
+        <article class="markdown-body comment-surface">
+            <h1 dir="auto">Terraform Plan Report</h1>
+<p dir="auto">Generated by tfplan2md 1.25.0 (efa2118) on 2026-02-21 13:21:26 UTC | Terraform 1.14.0</p>
 <h2 dir="auto">Summary</h2>
 <markdown-accessiblity-table data-catalyst=""><table role="table" tabindex="0">
 <thead>
@@ -580,7 +613,7 @@
 <br/>
 <p dir="auto"><em>No attribute changes.</em></p>
 </details>
-<details open >
+<details>
 <summary>➕&nbsp;azapi_resource <b><code class="notranslate">container_app</code></b> — <code class="notranslate">🆔&nbsp;ca-tfplan2md-demo</code> <code class="notranslate">🌍&nbsp;eastus</code></summary>
 <br/>
 <p dir="auto"><strong>Type:</strong> <code class="notranslate">Microsoft.App/containerApps@2023-05-01</code></p>
@@ -678,7 +711,7 @@
 <td>[0]</td>
 <td><code class="notranslate">🆔&nbsp;app</code></td>
 <td><code class="notranslate">myregistry.azurecr.io/myapp:latest</code></td>
-<td><code class="notranslate">🌐&nbsp;0.5</code></td>
+<td><code class="notranslate">0.5</code></td>
 <td><code class="notranslate">1Gi</code></td>
 </tr>
 </tbody>
@@ -849,7 +882,7 @@ and as separate resources. This configuration will cause conflicts.</p>
 </tbody>
 </table></markdown-accessiblity-table>
 </details>
-<details open >
+<details>
 <summary>🔄&nbsp;azuredevops_variable_group <b><code class="notranslate">pipeline_vars</code></b> — <code class="notranslate">🆔&nbsp;deploy-pipeline-vars</code> | 5&nbsp;🔧&nbsp;secret_variable[0].value, variable[0].value, variable[1].value, +2 more</summary>
 <br/>
 <p dir="auto"><strong>Variable Group:</strong> <code class="notranslate">deploy-pipeline-vars</code></p>
@@ -1055,7 +1088,7 @@ and as separate resources. This configuration will cause conflicts.</p>
 </tbody>
 </table></markdown-accessiblity-table>
 </details>
-<details open >
+<details>
 <summary>➕&nbsp;azurerm_firewall_network_rule_collection <b><code class="notranslate">new_public</code></b> — <code class="notranslate">🆔&nbsp;public-egress</code> in <code class="notranslate">📁&nbsp;rg-tfplan2md-demo</code></summary>
 <br/>
 <p dir="auto"><strong>Collection:</strong> <code class="notranslate">public-egress</code> | <strong>Priority:</strong> <code class="notranslate">110</code> | <strong>Action:</strong> <code class="notranslate">✅&nbsp;Allow</code></p>
@@ -1111,7 +1144,7 @@ and as separate resources. This configuration will cause conflicts.</p>
 </tbody>
 </table></markdown-accessiblity-table>
 </details>
-<details open >
+<details>
 <summary>🔄&nbsp;azurerm_firewall_network_rule_collection <b><code class="notranslate">network_rules</code></b> — <code class="notranslate">🆔&nbsp;network-rules</code> in <code class="notranslate">📁&nbsp;rg-tfplan2md-demo</code> | 6&nbsp;🔧&nbsp;➕&nbsp;<code class="notranslate">🆔&nbsp;allow-web-secure</code>, ➕&nbsp;<code class="notranslate">🆔&nbsp;allow-log-ingest</code>, ➕&nbsp;<code class="notranslate">🆔&nbsp;allow-icmp-ping</code>, +3 more</summary>
 <br/>
 <p dir="auto"><strong>Collection:</strong> <code class="notranslate">network-rules</code> | <strong>Priority:</strong> <code class="notranslate">120</code> | <strong>Action:</strong> <code class="notranslate">✅&nbsp;Allow</code></p>
@@ -1195,7 +1228,7 @@ and as separate resources. This configuration will cause conflicts.</p>
 </tbody>
 </table></markdown-accessiblity-table>
 </details>
-<details open >
+<details>
 <summary>♻️&nbsp;azurerm_network_security_group <b><code class="notranslate">app</code></b> — <code class="notranslate">🆔&nbsp;nsg-app</code> in <code class="notranslate">📁&nbsp;rg-tfplan2md-demo</code> <code class="notranslate">🌍&nbsp;eastus</code> | ➕&nbsp;3 security rules | ❌&nbsp;1 security rules</summary>
 <br/>
 <h4 dir="auto">Security Rules</h4>
@@ -1301,7 +1334,7 @@ and as separate resources. This configuration will cause conflicts.</p>
 </tbody>
 </table></markdown-accessiblity-table>
 </details>
-<details open >
+<details>
 <summary>➕&nbsp;azurerm_firewall_application_rule_collection <b><code class="notranslate">web_access</code></b> — <code class="notranslate">🆔&nbsp;app-web-access</code> in <code class="notranslate">📁&nbsp;rg-tfplan2md-demo</code></summary>
 <br/>
 <p dir="auto"><strong>Collection:</strong> <code class="notranslate">app-web-access</code> | <strong>Priority:</strong> <code class="notranslate">200</code> | <strong>Action:</strong> <code class="notranslate">✅&nbsp;Allow</code></p>
@@ -1791,17 +1824,7 @@ line3: end
 </tbody>
 </table></markdown-accessiblity-table>
 
-            </article>
-        </div>
+        </article>
     </div>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js" 
-            onerror="console.warn('highlight.js failed to load from CDN, syntax highlighting disabled');"></script>
-    <script>
-        // Only run syntax highlighting if highlight.js loaded successfully
-        if (typeof hljs !== 'undefined') {
-            hljs.highlightAll();
-        }
-    </script>
 </body>
 </html>
