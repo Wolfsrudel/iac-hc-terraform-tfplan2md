@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Shared UAT helper functions (artifact validation, auth setup, freshness checks, etc.)
+# Shared UAT helper functions (artifact validation, auth setup, freshness checks, submodule init, etc.)
 # Intended to be sourced from scripts/uat-*.sh
 
 set -euo pipefail
