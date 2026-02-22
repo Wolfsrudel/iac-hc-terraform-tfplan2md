@@ -109,14 +109,10 @@ ensure_github_credential_helper() {
         return 1
     fi
 
-    # Check if already authenticated
-    if gh auth status >/dev/null 2>&1; then
-        log_info "✓ GitHub CLI already authenticated (coding agent mode)"
-        return 0
-    fi
-
-    # Authenticate with UAT token
-    log_info "Authenticating GitHub CLI with GH_UAT_TOKEN (coding agent mode)..."
+    # Always re-authenticate with the UAT token in coding agent environments.
+    # The default GITHUB_TOKEN (ghu_...) only has access to the main repo, not
+    # to oocx/tfplan2md-uat. We must ensure the UAT PAT is the active credential.
+    log_info "Configuring GitHub CLI with GH_UAT_TOKEN for UAT repo access (coding agent mode)..."
     if ! echo "${GH_UAT_TOKEN}" | gh auth login --with-token 2>&1; then
         log_error "Failed to authenticate GitHub CLI with GH_UAT_TOKEN."
         log_error ""
