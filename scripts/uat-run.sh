@@ -270,6 +270,9 @@ if [[ -n "$(git status --porcelain)" ]]; then
   exit 1
 fi
 
+# Ensure UAT git submodules are initialized (automatic, no manual step needed)
+ensure_git_submodules || exit 1
+
 # Comprehensive demo artifacts (always appended automatically as regression tests)
 regression_artifact_github="artifacts/comprehensive-demo-simple-diff.md"
 regression_artifact_azdo="artifacts/comprehensive-demo.md"

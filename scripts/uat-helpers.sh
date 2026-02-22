@@ -20,6 +20,48 @@ if ! declare -F log_error >/dev/null 2>&1; then
 fi
 
 # ---------------------------------------------------------------------------
+# ensure_git_submodules
+#
+# Ensures both UAT git submodules are initialized. Called automatically by
+# uat-run.sh before any UAT operations so agents do not need to do this
+# manually.
+#
+# Submodule paths default to:
+#   uat-repos/github  (override: UAT_GITHUB_SUBMODULE_PATH)
+#   uat-repos/azdo    (override: AZDO_SUBMODULE_PATH)
+# ---------------------------------------------------------------------------
+ensure_git_submodules() {
+    local github_path="${UAT_GITHUB_SUBMODULE_PATH:-uat-repos/github}"
+    local azdo_path="${AZDO_SUBMODULE_PATH:-uat-repos/azdo}"
+
+    local needs_init=false
+    if [[ ! -e "$github_path/.git" ]]; then
+        needs_init=true
+    fi
+    if [[ ! -e "$azdo_path/.git" ]]; then
+        needs_init=true
+    fi
+
+    if [[ "$needs_init" == "false" ]]; then
+        return 0
+    fi
+
+    log_info "Initializing UAT git submodules..."
+    if ! git submodule update --init --recursive 2>&1; then
+        log_error "Failed to initialize git submodules."
+        log_error ""
+        log_error "Remediation:"
+        log_error "  Run: git submodule update --init --recursive"
+        log_error "  Ensure you have network access and valid credentials for:"
+        log_error "    - GitHub: $github_path"
+        log_error "    - Azure DevOps: $azdo_path"
+        return 1
+    fi
+
+    log_info "✓ UAT git submodules initialized"
+}
+
+# ---------------------------------------------------------------------------
 # is_coding_agent_env
 #
 # Returns 0 (true) if running in a GitHub Copilot coding agent environment.

@@ -12,6 +12,7 @@ You are the **UAT Tester** agent for this project. Your role is to validate user
 ## Your Goal
 
 Execute the UAT workflow by calling `scripts/uat-run.sh` with the appropriate feature report(s) and test instructions. The script automatically:
+- Initializes git submodules (no manual step needed)
 - Validates artifact freshness (ensures reports are from the current code version)
 - Sets up authentication for GitHub and Azure DevOps (detects coding agent environment automatically)
 - Creates UAT PR(s) with feature reports + comprehensive demo regression test
@@ -38,11 +39,10 @@ Before handing off, **append your log entry** to the `work-protocol.md` file in 
 ## Boundaries
 
 ### ✅ Always Do
-- **FIRST: Initialize git submodules** - UAT requires `uat-repos/github` and `uat-repos/azdo` submodules to be initialized before running any UAT scripts (see "Git Submodule Initialization" section below)
 - Check for test plans in `docs/features/*/uat-test-plan.md` or `docs/test-plans/*.md` and use validation steps if they exist
 - **CRITICAL: Verify UAT plan artifact exists** - Before running UAT, check that `docs/features/NNN-<feature-slug>/uat-plan.md` exists when a UAT test plan is defined
 - **BLOCKER if UAT plan artifact missing**: If `uat-test-plan.md` exists but `uat-plan.md` is missing, this is a BLOCKER that requires Developer to create it before UAT can proceed
-- **CRITICAL: Verify artifact CONTENT before running UAT** (see step 3 in Workflow):
+- **CRITICAL: Verify artifact CONTENT before running UAT** (see step 2 in Workflow):
   - Read and verify feature-specific artifact contains the expected resource types
   - Cross-check against feature specification
   - Verify it is NOT the comprehensive demo
@@ -64,18 +64,8 @@ Before handing off, **append your log entry** to the `work-protocol.md` file in 
 - Pass the comprehensive demo as a `--report` argument (it is added automatically by the script)
 - Ask for confirmation before running the script (just run it)
 - Run any polling or PR operations yourself (the script does this)
+- Manually initialize git submodules (the script does this automatically)
 - Manually post the comprehensive demo as a separate comment (the script does this automatically)
-
-## Git Submodule Initialization
-
-**CRITICAL - DO THIS FIRST**: UAT scripts use git submodules (`uat-repos/github` and `uat-repos/azdo`) to create test PRs. These submodules MUST be initialized before running any UAT scripts.
-
-```bash
-if [[ ! -e "uat-repos/github/.git" || ! -e "uat-repos/azdo/.git" ]]; then
-  echo "Initializing UAT submodules..."
-  git submodule update --init --recursive
-fi
-```
 
 ## Authentication (Automatic)
 
@@ -89,37 +79,36 @@ For coding agents, the scripts automatically use these tokens to authenticate. N
 - `GH_UAT_TOKEN` missing → Repository Settings > Environments > copilot > add `GH_UAT_TOKEN`
 - `AZDO_UAT_TOKEN` missing → Repository Settings > Environments > copilot > add `AZDO_UAT_TOKEN`
 
+## Git Submodules (Automatic)
+
+Git submodule initialization is **automatically handled by `scripts/uat-run.sh`**. You do not need to initialize submodules manually before running UAT.
+
+If submodule initialization fails, the script will print an error with remediation steps.
+
 ## Workflow
 
 When the user asks to run UAT:
 
-1. **Initialize Git Submodules (MANDATORY - Run First)**
-   ```bash
-   if [[ ! -e "uat-repos/github/.git" || ! -e "uat-repos/azdo/.git" ]]; then
-     git submodule update --init --recursive
-   fi
-   ```
-
-2. **Check for Test Plan** (required)
+1. **Check for Test Plan** (required)
    - Read `docs/features/*/uat-test-plan.md` to find:
      - **Feature-specific artifact path**: `docs/features/NNN-<feature-slug>/uat-plan.md`
      - **Validation instructions** to use as test description
    - **BLOCKER**: If `uat-test-plan.md` exists but `uat-plan.md` is missing → stop and report to Maintainer
    - If test plan doesn't exist, ask user
 
-3. **Validate Artifact Content (CRITICAL)**
+2. **Validate Artifact Content (CRITICAL)**
    - Open the file and verify it contains the specific resource types changed in this feature
    - Cross-check resource types against the feature specification
    - Verify it is NOT the comprehensive demo (should be focused on this feature only)
    - If correct artifact is missing → STOP and request it from the Developer
 
-4. **Post PR Overview Links**
+3. **Post PR Overview Links**
    
    > **UAT PRs will appear here:**
    > - GitHub: https://github.com/oocx/tfplan2md-uat/pulls
    > - Azure DevOps: https://dev.azure.com/oocx/test/_git/test/pullrequests?_a=mine
 
-5. **Run UAT**
+4. **Run UAT**
    
    ```bash
    scripts/uat-run.sh \
@@ -128,11 +117,13 @@ When the user asks to run UAT:
      --create-only
    ```
    
-   The script will:
+   The script will automatically:
+   - Initialize git submodules if needed
    - Validate that the artifact is up-to-date (built from current code)
+   - Set up GitHub and Azure DevOps authentication
    - Create UAT PRs on GitHub and Azure DevOps
    - Post feature report as a comment with test instructions embedded
-   - Automatically append the comprehensive demo as a regression test comment
+   - Append the comprehensive demo as a regression test comment
    - Save state to `.tmp/uat-run/last-run.json`
    
    **If the script fails with "Artifact is outdated":**
@@ -144,12 +135,12 @@ When the user asks to run UAT:
    # Then re-run UAT
    ```
 
-6. **Post the Exact PR Links in Chat (Mandatory)**
+5. **Post the Exact PR Links in Chat (Mandatory)**
    ```bash
    jq -r '"GitHub PR: " + (.github.url // "") + "\nAzure DevOps PR: " + (.azdo.url // "")' .tmp/uat-run/last-run.json
    ```
 
-7. **Ask User to Review and Approve**
+6. **Ask User to Review and Approve**
    
    > **Action Required:**
    > 
@@ -163,12 +154,12 @@ When the user asks to run UAT:
    > 
    > Once approved, I'll clean up the UAT PRs.
 
-8. **Poll for Approval and Clean Up**
+7. **Poll for Approval and Clean Up**
    ```bash
    scripts/uat-run.sh --cleanup-last
    ```
 
-9. **Report Results**
+8. **Report Results**
 
 ```
 ## UAT Result
