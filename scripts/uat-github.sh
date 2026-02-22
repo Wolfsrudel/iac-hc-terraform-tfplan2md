@@ -86,7 +86,10 @@ cmd_create() {
                 ;;
         esac
     done
-    
+
+    # Ensure GitHub CLI is authenticated (handles coding agent auto-auth)
+    ensure_github_credential_helper || exit 1
+
     # Validate and potentially set default artifact (platform-aware)
     file="$(validate_artifact github "$file" "$force")"
     
@@ -201,9 +204,9 @@ EOF
     
     log_info "PR created: #$pr_number ($pr_url)"
     
-    # Add the markdown content as a comment
+    # Add the markdown content as a comment (with test instructions embedded)
     log_info "Adding initial UAT content as comment..."
-    cmd_comment "$pr_number" "$file"
+    cmd_comment "$pr_number" "$file" --instructions "$test_description"
     
     echo ""
     echo "========================================="
@@ -220,9 +223,24 @@ EOF
 cmd_comment() {
     local pr_number="${1:-}"
     local file="${2:-}"
-    
+    local instructions=""
+
+    shift 2 || true
+    while [[ $# -gt 0 ]]; do
+        case "$1" in
+            --instructions)
+                instructions="${2:-}"
+                shift 2
+                ;;
+            *)
+                log_error "Unknown argument: $1"
+                exit 1
+                ;;
+        esac
+    done
+
     if [[ -z "$pr_number" || -z "$file" || ! -f "$file" ]]; then
-        log_error "Usage: $0 comment <pr-number> <markdown-file>"
+        log_error "Usage: $0 comment <pr-number> <markdown-file> [--instructions <text>]"
         exit 1
     fi
     
@@ -234,8 +252,21 @@ cmd_comment() {
 "
     local content
     content=$(cat "$file")
+
+    local body
+    if [[ -n "$instructions" ]]; then
+        body="${prefix}## Test Instructions
+
+${instructions}
+
+## Report
+
+${content}"
+    else
+        body="${prefix}${content}"
+    fi
     
-    echo "${prefix}${content}" | PAGER=cat gh pr comment "$pr_number" --repo "$UAT_GITHUB_REPO" --body-file -
+    echo "$body" | PAGER=cat gh pr comment "$pr_number" --repo "$UAT_GITHUB_REPO" --body-file -
     log_info "Comment added to PR #$pr_number"
 }
 

@@ -35,11 +35,15 @@ jobs:
 
       - name: Ensure tests are executable
         if: steps.filter.outputs.changed == 'true'
-        run: chmod +x src/tests/shell/uat_validate_test.sh
+        run: |
+          chmod +x src/tests/shell/uat_validate_test.sh
+          chmod +x src/tests/shell/uat_freshness_test.sh
 
       - name: Run UAT validation tests
         if: steps.filter.outputs.changed == 'true'
-        run: ./src/tests/shell/uat_validate_test.sh
+        run: |
+          ./src/tests/shell/uat_validate_test.sh
+          ./src/tests/shell/uat_freshness_test.sh
       
       - name: Skip validation (no files changed)
         if: steps.filter.outputs.changed == 'false'

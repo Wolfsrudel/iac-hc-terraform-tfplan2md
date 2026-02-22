@@ -2,6 +2,45 @@
 # UAT Wrapper Script (GitHub + Azure DevOps)
 #
 # Purpose: Reduce Maintainer approval fatigue by batching UAT into one stable command.
+#
+# Usage:
+#   scripts/uat-run.sh \
+#     --report <feature-artifact.md> --instructions "<test-instructions>" \
+#     [--report <another.md>        --instructions "<instructions2>"] \
+#     [--platform both|github|azdo] \
+#     [--create-only]
+#
+#   scripts/uat-run.sh --cleanup-last [--state-file <path>]
+#
+# Required:
+#   --report <file>        Path to a feature-specific markdown artifact.
+#   --instructions <text>  Detailed, resource-specific validation instructions for the
+#                          preceding --report. Every --report must have one --instructions.
+#
+# Optional:
+#   --platform both|github|azdo  (default: both)
+#   --create-only                Create PRs but do not poll; save state for later cleanup.
+#   --cleanup-last               Clean up PRs and branches from the last --create-only run.
+#   --state-file <path>          Override default state file path.
+#
+# Behaviour:
+# - Creates a temporary, unique UAT branch in the UAT repos (not in this repo).
+# - Creates UAT PR(s) with all feature-specific reports posted as PR comments.
+#   Each comment includes test instructions and the report content.
+# - Automatically appends the comprehensive demo as a regression test comment.
+# - Validates that all provided artifacts are up-to-date before posting.
+# - Auto-configures GitHub/AzDO authentication for coding agent environments.
+# - Polls for approval, then cleans up PR(s) and branches.
+#
+# Examples:
+#   scripts/uat-run.sh \
+#     --report docs/features/072-parent-child/uat-plan.md \
+#     --instructions "In azurerm_virtual_network, verify subnets are grouped under their parent VNet"
+#
+#   scripts/uat-run.sh \
+#     --report artifacts/my-feature.md \
+#     --instructions "Verify role assignments show principal names instead of GUIDs" \
+#     --platform github
 
 set -euo pipefail
 
@@ -10,37 +49,6 @@ export GH_PAGER=cat
 export GH_FORCE_TTY=false
 export AZURE_CORE_PAGER=cat
 export PAGER=cat
-
-# Usage:
-#   scripts/uat-run.sh [artifact-path] <test-description> [--platform both|github|azdo]
-#
-# Arguments:
-#   artifact-path      - (Optional) Path to markdown artifact to test
-#   test-description   - (Required) Detailed, resource-specific validation instructions
-#
-# Examples:
-#   # Using default artifact
-#   scripts/uat-run.sh "In module.security.azurerm_key_vault_secret.audit_policy, verify key_vault_id displays as 'Key Vault \`kv-name\` in resource group \`rg-name\`' instead of full /subscriptions/ path"
-#
-#   # Using custom artifact
-#   scripts/uat-run.sh artifacts/custom.md "In azurerm_role_assignment.contributor, verify principal displays as 'John Doe (john.doe@example.com)' instead of GUID"
-#
-#   # GitHub only
-#   scripts/uat-run.sh "Verify firewall rules show before/after in clear table format" --platform github
-#
-# Defaults:
-# - If artifact-path is omitted, defaults are selected per platform:
-#   - GitHub: $UAT_ARTIFACT_GITHUB (fallback: artifacts/comprehensive-demo.md)
-#   - AzDO:   $UAT_ARTIFACT_AZDO   (fallback: artifacts/comprehensive-demo.md)
-#
-# Notes:
-# - Creates a temporary, unique UAT branch off the current branch.
-# - Creates UAT PR(s), polls for approval, then cleans up PR(s) and branches.
-
-set -euo pipefail
-
-# Prevent interactive pagers from blocking automation
-export PAGER="${PAGER:-cat}"
 
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
@@ -83,11 +91,17 @@ restore_submodule_head() {
 }
 
 die_usage() {
-  log_error "Usage: $0 [artifact-path] <test-description> [--platform both|github|azdo] [--create-only]"
+  log_error "Usage: $0 --report <file> --instructions <text> [--report <file2> --instructions <text2>] [--platform both|github|azdo] [--create-only]"
   log_error "       $0 --cleanup-last [--state-file <path>]"
-  log_error "Test description must be detailed and resource-specific:"
-  log_error "Example: $0 'In module.security.azurerm_key_vault_secret.audit_policy, verify key_vault_id displays as \"Key Vault \\\`kv-name\\\` in resource group \\\`rg-name\\\`\" instead of full /subscriptions/ path'"
-  log_error "Example: $0 artifacts/custom.md 'In azurerm_firewall_network_rule_collection.rules, verify attribute values use code blocks instead of bold'"
+  log_error ""
+  log_error "Required (at least one pair):"
+  log_error "  --report <file>         Feature-specific artifact to post as a PR comment"
+  log_error "  --instructions <text>   Validation instructions for the preceding --report"
+  log_error ""
+  log_error "Example:"
+  log_error "  $0 \\"
+  log_error "    --report docs/features/072-parent-child/uat-plan.md \\"
+  log_error "    --instructions 'In azurerm_virtual_network, verify subnets are grouped under their parent VNet'"
   exit 2
 }
 
@@ -156,9 +170,6 @@ cmd_cleanup_last() {
   log_info "Cleanup complete."
 }
 
-artifact_arg=""
-test_description=""
-
 create_only=false
 cleanup_last=false
 state_file="$state_file_default"
@@ -193,24 +204,21 @@ if [[ "$cleanup_last" == "true" ]]; then
   exit 0
 fi
 
-# Parse positional arguments
-if [[ "${1:-}" != "" && "${1:-}" != --* ]]; then
-  # Could be artifact or test description
-  if [[ "${2:-}" != "" && "${2:-}" != --* ]]; then
-    # Two positional args: artifact + description
-    artifact_arg="$1"
-    test_description="$2"
-    shift 2 || true
-  else
-    # One positional arg: treat as test description
-    test_description="$1"
-    shift || true
-  fi
-fi
-
+# Parse --report/--instructions pairs (and optional --platform/--create-only)
+declare -a report_files=()
+declare -a report_instructions=()
 platform="both"
+
 while [[ $# -gt 0 ]]; do
   case "$1" in
+    --report)
+      report_files+=("${2:?--report requires a file argument}")
+      shift 2
+      ;;
+    --instructions)
+      report_instructions+=("${2:?--instructions requires a text argument}")
+      shift 2
+      ;;
     --platform)
       platform="${2:-}"
       shift 2
@@ -230,45 +238,26 @@ if [[ "$platform" != "both" && "$platform" != "github" && "$platform" != "azdo" 
   die_usage
 fi
 
-# Validate required test description
-if [[ -z "$test_description" ]]; then
-  log_error "Test description is required"
+# Validate: at least one --report/--instructions pair is required
+if [[ ${#report_files[@]} -eq 0 ]]; then
+  log_error "At least one --report/--instructions pair is required."
   die_usage
 fi
 
-# Smart defaults: Let individual scripts determine platform-specific defaults
-# unless explicitly overridden
-artifact_github="${UAT_ARTIFACT_GITHUB:-}"
-artifact_azdo="${UAT_ARTIFACT_AZDO:-}"
-
-# Regression artifacts (always included for safety)
-regression_artifact_github="artifacts/comprehensive-demo-simple-diff.md"
-regression_artifact_azdo="artifacts/comprehensive-demo.md"
-
-if [[ -n "$artifact_arg" ]]; then
-  artifact_github="$artifact_arg"
-  artifact_azdo="$artifact_arg"
+# Validate: equal number of --report and --instructions
+if [[ ${#report_files[@]} -ne ${#report_instructions[@]} ]]; then
+  log_error "Each --report must have a corresponding --instructions (got ${#report_files[@]} reports, ${#report_instructions[@]} instructions)."
+  die_usage
 fi
 
-# Apply user-facing defaults for visibility, and summarize chosen artifacts before creating PRs
-if [[ -z "$artifact_github" ]]; then
-  artifact_github="artifacts/comprehensive-demo-simple-diff.md"
-fi
-if [[ -z "$artifact_azdo" ]]; then
-  artifact_azdo="artifacts/comprehensive-demo.md"
-fi
-log_info "Feature artifacts to be used: GitHub: $artifact_github, AzDO: $artifact_azdo"
-
-# Always include regression artifacts unless they are the same as feature artifacts
-if [[ "$artifact_github" != "$regression_artifact_github" ]]; then
-  log_info "Regression artifact (GitHub): $regression_artifact_github"
-fi
-if [[ "$artifact_azdo" != "$regression_artifact_azdo" ]]; then
-  log_info "Regression artifact (AzDO): $regression_artifact_azdo"
-fi
-
-# Note: Artifact existence checks moved to individual scripts
-# which will also apply smart defaults if artifact is empty
+# Validate all report files exist
+for i in "${!report_files[@]}"; do
+  if [[ ! -f "${report_files[$i]}" ]]; then
+    log_error "Report file not found: ${report_files[$i]}"
+    log_error "Ensure the artifact exists before running UAT."
+    exit 1
+  fi
+done
 
 original_branch="$(git branch --show-current)"
 if [[ "$original_branch" == "main" ]]; then
@@ -281,8 +270,37 @@ if [[ -n "$(git status --porcelain)" ]]; then
   exit 1
 fi
 
-# Artifact validation is now handled by individual scripts (uat-github.sh / uat-azdo.sh)
-# which will enforce simulation blocking and apply platform-specific smart defaults
+# Comprehensive demo artifacts (always appended automatically as regression tests)
+regression_artifact_github="artifacts/comprehensive-demo-simple-diff.md"
+regression_artifact_azdo="artifacts/comprehensive-demo.md"
+
+# Validate freshness of all provided feature reports
+log_info "Validating artifact freshness..."
+for i in "${!report_files[@]}"; do
+  check_artifact_freshness "${report_files[$i]}" || exit 1
+done
+
+# Validate freshness of comprehensive demo artifacts (used for regression)
+if [[ "$platform" == "both" || "$platform" == "github" ]]; then
+  if [[ -f "$regression_artifact_github" ]]; then
+    check_artifact_freshness "$regression_artifact_github" || exit 1
+  else
+    log_warn "Regression artifact not found: $regression_artifact_github (will be skipped)"
+  fi
+fi
+if [[ "$platform" == "both" || "$platform" == "azdo" ]]; then
+  if [[ -f "$regression_artifact_azdo" ]]; then
+    check_artifact_freshness "$regression_artifact_azdo" || exit 1
+  else
+    log_warn "Regression artifact not found: $regression_artifact_azdo (will be skipped)"
+  fi
+fi
+
+log_info "Feature reports: ${#report_files[@]}"
+for i in "${!report_files[@]}"; do
+  log_info "  Report $((i+1)): ${report_files[$i]}"
+done
+log_info "Regression artifacts: $regression_artifact_github (GitHub), $regression_artifact_azdo (AzDO)"
 
 timestamp="$(date -u +%Y%m%d%H%M%S)"
 # Create a unique, safe UAT branch name in the UAT repositories (not this repo).
@@ -314,7 +332,8 @@ uat_submodule_azdo_head_before="$(get_submodule_head "$uat_submodule_azdo")"
 
 if [[ "$platform" == "both" || "$platform" == "github" ]]; then
   log_info "Creating GitHub UAT PR..."
-  gh_out="$(scripts/uat-github.sh create "$artifact_github" "$test_description" --branch "$uat_branch" | cat)"
+  # Create PR using the first feature report and its instructions
+  gh_out="$(scripts/uat-github.sh create "${report_files[0]}" "${report_instructions[0]}" --branch "$uat_branch" | cat)"
   gh_pr="$(echo "$gh_out" | grep -oE 'PR created: #[0-9]+' | grep -oE '[0-9]+' | tail -n 1)"
   gh_url="$(echo "$gh_out" | grep -oE 'PR created: #[0-9]+ \((.*)\)' | sed -E 's/.*PR created: #[0-9]+ \((.*)\)/\1/' | tail -n 1)"
   if [[ -z "$gh_pr" ]]; then
@@ -322,10 +341,18 @@ if [[ "$platform" == "both" || "$platform" == "github" ]]; then
     exit 1
   fi
   log_info "GitHub PR: #$gh_pr ($gh_url)"
-  
-  # Add regression artifact if different from feature artifact
-  if [[ "$artifact_github" != "$regression_artifact_github" && -f "$regression_artifact_github" ]]; then
-    log_info "Adding regression artifact to GitHub PR..."
+
+  # Post additional feature reports (each with its own test instructions)
+  for i in "${!report_files[@]}"; do
+    if [[ $i -gt 0 ]]; then
+      log_info "Adding feature report $((i+1)) to GitHub PR..."
+      scripts/uat-github.sh comment "$gh_pr" "${report_files[$i]}" --instructions "${report_instructions[$i]}"
+    fi
+  done
+
+  # Always append the comprehensive demo as a regression test comment
+  if [[ -f "$regression_artifact_github" ]]; then
+    log_info "Adding comprehensive demo (regression test) to GitHub PR..."
     scripts/uat-github.sh comment "$gh_pr" "$regression_artifact_github"
   fi
 fi
@@ -335,7 +362,8 @@ if [[ "$platform" == "both" || "$platform" == "azdo" ]]; then
   scripts/uat-azdo.sh setup
 
   log_info "Creating Azure DevOps UAT PR..."
-  azdo_out="$(scripts/uat-azdo.sh create "$artifact_azdo" "$test_description" --branch "$uat_branch" | cat)"
+  # Create PR using the first feature report and its instructions
+  azdo_out="$(scripts/uat-azdo.sh create "${report_files[0]}" "${report_instructions[0]}" --branch "$uat_branch" | cat)"
   azdo_pr="$(echo "$azdo_out" | grep -oE 'PR created: #[0-9]+' | grep -oE '[0-9]+' | tail -n 1)"
   azdo_url="$(echo "$azdo_out" | grep -oE 'PR created: #[0-9]+ \((.*)\)' | sed -E 's/.*PR created: #[0-9]+ \((.*)\)/\1/' | tail -n 1)"
   if [[ -z "$azdo_pr" ]]; then
@@ -343,10 +371,18 @@ if [[ "$platform" == "both" || "$platform" == "azdo" ]]; then
     exit 1
   fi
   log_info "Azure DevOps PR: #$azdo_pr ($azdo_url)"
-  
-  # Add regression artifact if different from feature artifact
-  if [[ "$artifact_azdo" != "$regression_artifact_azdo" && -f "$regression_artifact_azdo" ]]; then
-    log_info "Adding regression artifact to Azure DevOps PR..."
+
+  # Post additional feature reports (each with its own test instructions)
+  for i in "${!report_files[@]}"; do
+    if [[ $i -gt 0 ]]; then
+      log_info "Adding feature report $((i+1)) to Azure DevOps PR..."
+      scripts/uat-azdo.sh comment "$azdo_pr" "${report_files[$i]}" --instructions "${report_instructions[$i]}"
+    fi
+  done
+
+  # Always append the comprehensive demo as a regression test comment
+  if [[ -f "$regression_artifact_azdo" ]]; then
+    log_info "Adding comprehensive demo (regression test) to Azure DevOps PR..."
     scripts/uat-azdo.sh comment "$azdo_pr" "$regression_artifact_azdo"
   fi
 fi
@@ -363,8 +399,6 @@ if [[ "$create_only" == "true" ]]; then
     --arg uat_submodule_github_head_before "$uat_submodule_github_head_before" \
     --arg uat_submodule_azdo "$uat_submodule_azdo" \
     --arg uat_submodule_azdo_head_before "$uat_submodule_azdo_head_before" \
-    --arg artifact_github "$artifact_github" \
-    --arg artifact_azdo "$artifact_azdo" \
     --arg gh_pr "$gh_pr" \
     --arg gh_url "${gh_url:-}" \
     --arg azdo_pr "$azdo_pr" \
@@ -377,7 +411,6 @@ if [[ "$create_only" == "true" ]]; then
         github: { path: $uat_submodule_github, head: $uat_submodule_github_head_before },
         azdo: { path: $uat_submodule_azdo, head: $uat_submodule_azdo_head_before }
       },
-      artifacts: { github: $artifact_github, azdo: $artifact_azdo },
       github: { pr: $gh_pr, url: $gh_url },
       azdo: { pr: $azdo_pr, url: $azdo_url }
     }' > "$state_file"

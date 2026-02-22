@@ -59,11 +59,23 @@ ensure_git_submodule() {
 
 
 cmd_setup() {
+    # Map AZDO_UAT_TOKEN → AZURE_DEVOPS_EXT_PAT for coding agent environments
+    if [[ -z "${AZURE_DEVOPS_EXT_PAT:-}" && -n "${AZDO_UAT_TOKEN:-}" ]]; then
+        export AZURE_DEVOPS_EXT_PAT="${AZDO_UAT_TOKEN}"
+        log_info "Using AZDO_UAT_TOKEN as AZURE_DEVOPS_EXT_PAT (coding agent mode)"
+    fi
+
     log_info "Checking Azure DevOps authentication..."
-    if [[ -z "$AZURE_DEVOPS_EXT_PAT" ]]; then
+    if [[ -z "${AZURE_DEVOPS_EXT_PAT:-}" ]]; then
         log_error "Azure DevOps PAT token not set."
-        log_error "For GitHub Copilot coding agents: Ensure AZDO_UAT_TOKEN is configured in Repository Settings > Environments > copilot"
-        log_error "For local development: Set AZURE_DEVOPS_EXT_PAT environment variable"
+        log_error ""
+        log_error "Remediation (coding agents):"
+        log_error "  1. Go to Repository Settings > Environments > copilot"
+        log_error "  2. Add secret: AZDO_UAT_TOKEN = <Azure DevOps PAT with 'Code (Read & Write)' scope>"
+        log_error "  3. Verify copilot-setup-steps.yml ran successfully in the Actions tab"
+        log_error ""
+        log_error "Remediation (local development):"
+        log_error "  Set AZURE_DEVOPS_EXT_PAT environment variable with a valid Azure DevOps PAT"
         exit 1
     fi
     
@@ -228,9 +240,9 @@ EOF
     
     log_info "PR created: #$pr_id ($pr_url)"
     
-    # Add the markdown content as a comment
+    # Add the markdown content as a comment (with test instructions embedded)
     log_info "Adding initial UAT content as comment..."
-    cmd_comment "$pr_id" "$file"
+    cmd_comment "$pr_id" "$file" --instructions "$test_description"
     
     echo ""
     echo "========================================="
@@ -247,9 +259,24 @@ EOF
 cmd_comment() {
     local pr_id="${1:-}"
     local file="${2:-}"
-    
+    local instructions=""
+
+    shift 2 || true
+    while [[ $# -gt 0 ]]; do
+        case "$1" in
+            --instructions)
+                instructions="${2:-}"
+                shift 2
+                ;;
+            *)
+                log_error "Unknown argument: $1"
+                exit 1
+                ;;
+        esac
+    done
+
     if [[ -z "$pr_id" || -z "$file" || ! -f "$file" ]]; then
-        log_error "Usage: $0 comment <pr-id> <markdown-file>"
+        log_error "Usage: $0 comment <pr-id> <markdown-file> [--instructions <text>]"
         exit 1
     fi
     
@@ -261,7 +288,19 @@ cmd_comment() {
 "
     local raw_content
     raw_content=$(cat "$file")
-    local content="${prefix}${raw_content}"
+
+    local content
+    if [[ -n "$instructions" ]]; then
+        content="${prefix}## Test Instructions
+
+${instructions}
+
+## Report
+
+${raw_content}"
+    else
+        content="${prefix}${raw_content}"
+    fi
     
     # Create a new thread with the comment
     local payload
