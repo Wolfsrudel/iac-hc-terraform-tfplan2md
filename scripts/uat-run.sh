@@ -134,6 +134,7 @@ cmd_cleanup_last() {
 
   log_info "Cleaning up UAT PRs from state: $state_file"
   if [[ -n "$gh_pr" && "$gh_pr" != "null" ]]; then
+    ensure_github_credential_helper || true
     scripts/uat-github.sh cleanup "$gh_pr" || true
   fi
   if [[ -n "$azdo_pr" && "$azdo_pr" != "null" ]]; then

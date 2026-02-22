@@ -428,6 +428,8 @@ cmd_cleanup() {
         log_error "Usage: $0 cleanup <pr-number>"
         exit 1
     fi
+
+    ensure_github_credential_helper || exit 1
     
     log_info "Closing PR #$pr_number in $UAT_GITHUB_REPO..."
     # Note: Do NOT use --delete-branch here. Branch deletion can switch the UAT repo
