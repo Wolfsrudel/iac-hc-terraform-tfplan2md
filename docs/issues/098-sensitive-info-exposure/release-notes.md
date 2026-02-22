@@ -24,11 +24,11 @@ The `--show-sensitive` flag continues to work across all paths: passing it revea
 
 ### AzApi create: `administratorLoginPassword` masked
 
-![AzApi create body with sensitive masking](https://raw.githubusercontent.com/oocx/tfplan2md/v1.27.0/docs/issues/098-sensitive-info-exposure/098-azapi-create.png)
+![AzApi create body with sensitive masking](https://raw.githubusercontent.com/oocx/tfplan2md/v1.26.1/docs/issues/098-sensitive-info-exposure/098-azapi-create.png)
 
 ### Variable Group: secret-to-public transition masked
 
-![Variable Group sensitive/hidden masking](https://raw.githubusercontent.com/oocx/tfplan2md/v1.27.0/docs/issues/098-sensitive-info-exposure/098-vargroup.png)
+![Variable Group sensitive/hidden masking](https://raw.githubusercontent.com/oocx/tfplan2md/v1.26.1/docs/issues/098-sensitive-info-exposure/098-vargroup.png)
 
 ## 🔗 Commits
 
