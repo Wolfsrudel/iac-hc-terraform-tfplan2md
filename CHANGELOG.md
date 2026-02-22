@@ -5,6 +5,48 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+<a name="1.26.1"></a>
+## [1.26.1](https://github.com/oocx/tfplan2md/compare/v1.26.0...v1.26.1) (2026-02-22)
+
+### 🐛 Bug Fixes
+
+* add Subresource Integrity (SRI) to HTML templates ([8836217](https://github.com/oocx/tfplan2md/commit/8836217694158257f4c489780e95adc392285023))
+* add UAT plan artifacts for issue 098 sensitive info exposure ([2af4c79](https://github.com/oocx/tfplan2md/commit/2af4c79b3023ef648275785764db62a970f7c205))
+* deduplicate GetHierarchicalPaths for multi-level indexed keys ([e4fea50](https://github.com/oocx/tfplan2md/commit/e4fea50a0280e7ab786939123aa19714aeaa3a0c))
+* handle root boolean and top-level array parent sensitivity ([5c94218](https://github.com/oocx/tfplan2md/commit/5c942183b3dfc8faae1908857c3c2632a466e000))
+* handle ScriptArray per-element sensitivity in MaskSensitiveLeaves ([27634a3](https://github.com/oocx/tfplan2md/commit/27634a364645542bc1145563b92864feb800bb74))
+* mask before_json/after_json at mapper level + fix AzApi comparison ([a422c87](https://github.com/oocx/tfplan2md/commit/a422c87e94bc21ac7af93734c9a38f20df6396db))
+* mask sensitive values in AzApi create/delete/replace body rendering ([02aa2fb](https://github.com/oocx/tfplan2md/commit/02aa2fb16f30ecdc5266077f9ca4efe5be006135))
+* mask sensitive values in AzApi update body rendering ([bec087f](https://github.com/oocx/tfplan2md/commit/bec087ff49beae399cc76140dad94944afcf3e3f))
+* mask Variable Group values when either side is secret ([9c2f4d6](https://github.com/oocx/tfplan2md/commit/9c2f4d65f4e23e65da281f279af4741ac951ca67))
+* remove unused SecretValue property from BuildDefinitionVariableValues ([0b1c424](https://github.com/oocx/tfplan2md/commit/0b1c424b9271da54f2255738a6a8883a39fc01c5))
+* update generation timestamp in comprehensive-demo.md and change ADR-009 status to accepted ([156c2af](https://github.com/oocx/tfplan2md/commit/156c2affca27a50f72578e16599245ae39bd3920))
+
+### 📚 Documentation
+
+* add ADR for template JSON masking ([4f9c423](https://github.com/oocx/tfplan2md/commit/4f9c42360b5d9a883e2140a99294ada4a044e7a9))
+* add code review for 098-sensitive-info-exposure ([76a444b](https://github.com/oocx/tfplan2md/commit/76a444b3515a425d0fd976461fa5914543ecfaf3))
+* add code review report for SRI security fix ([673bbac](https://github.com/oocx/tfplan2md/commit/673bbac6be2c2fb81a5e7293c33befd601d480d9))
+* add code review round 2 for 098-sensitive-info-exposure ([fe8c64f](https://github.com/oocx/tfplan2md/commit/fe8c64ff9d6f761fa327449138e18c346946b02f))
+* add Developer work protocol entry for issue 098 ([fa07cee](https://github.com/oocx/tfplan2md/commit/fa07cee58512efe6a99db0a24684c3fe4c782ba8))
+* add internal release notes stub for 097-security-analysis ([b1f9805](https://github.com/oocx/tfplan2md/commit/b1f98050742dab6246b67ea1f5df68c3684cd692))
+* add Release Manager work log entry for 098-sensitive-info-exposure ([cae6562](https://github.com/oocx/tfplan2md/commit/cae65629010cdae24ba2f3b2fada1e4314a83c9f))
+* add release notes and work protocol for SRI security fix (issue 096) ([1cfdfee](https://github.com/oocx/tfplan2md/commit/1cfdfeea7dab768dc8e636c8a031c1c4f5cdb419))
+* add release notes for fix/098-sensitive-info-exposure SNAPSHOT_UPDATE_OK ([7dd39ff](https://github.com/oocx/tfplan2md/commit/7dd39ff06f78563c551591d90138d4567e372dde))
+* add release screenshots for 098-sensitive-info-exposure ([4b3288e](https://github.com/oocx/tfplan2md/commit/4b3288e8e82d6e4f35eb3d874d0ce11ff3d1da49))
+* add tasks for 098-sensitive-info-exposure ([bb8d343](https://github.com/oocx/tfplan2md/commit/bb8d34355d80e684e87b31f38d83b2e351975f8a))
+* add test plan and UAT test plan for 098-sensitive-info-exposure ([0c103a8](https://github.com/oocx/tfplan2md/commit/0c103a8920c88063fa0348687421399b5c523c9b))
+* add UAT report for 098-sensitive-info-exposure ([f113020](https://github.com/oocx/tfplan2md/commit/f1130206d302f9176a3d9bccc999ee420d255f69))
+* analyze sensitive information exposure ([5e7d153](https://github.com/oocx/tfplan2md/commit/5e7d1531d79d5e772a92f09054ddbb6664d6a315))
+* approve code review round 2 for 098-sensitive-info-exposure ([258e24e](https://github.com/oocx/tfplan2md/commit/258e24e2b48f177930f029211fd7c1268b84ba9f))
+* mark Task 8 as complete ([3387d5a](https://github.com/oocx/tfplan2md/commit/3387d5a3af1ec4aff75aa41814fedb97ad3beef9))
+* mark Task 9 as complete ([f71ea0d](https://github.com/oocx/tfplan2md/commit/f71ea0d7fe519285fd641385314ad107e665532e))
+* mark tasks 1-6 as complete ([f5a814f](https://github.com/oocx/tfplan2md/commit/f5a814fa1104ade3e4a1261fd20f8ae3d70f27f0))
+* mark Tasks 9, 10, 11 as complete ([fafdbc4](https://github.com/oocx/tfplan2md/commit/fafdbc47ccf7385553703a0563babccb604cfc79))
+* regenerate demo artifacts with sensitive value masking ([4616732](https://github.com/oocx/tfplan2md/commit/4616732856d159bb45bf4da264bbdbbf8ec8729d))
+* update features.md with sensitive value masking coverage ([e1ad015](https://github.com/oocx/tfplan2md/commit/e1ad01512a259c6837086ffdf9855def2f794440))
+* update work protocol with Developer rework log entry ([6f54227](https://github.com/oocx/tfplan2md/commit/6f54227a6d57776653573a9f707c7201e2d3af55))
+
 <a name="1.26.0"></a>
 ## [1.26.0](https://github.com/oocx/tfplan2md/compare/v1.25.0...v1.26.0) (2026-02-21)
 
