@@ -5,6 +5,27 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+<a name="1.26.2"></a>
+## [1.26.2](https://github.com/oocx/tfplan2md/compare/v1.26.1...v1.26.2) (2026-02-22)
+
+### 🐛 Bug Fixes
+
+* address issue 099 code review findings ([92afb4f](https://github.com/oocx/tfplan2md/commit/92afb4fc617d968d35b5d86a1642bfbc4e30cad4))
+* close issue 099 remaining security findings ([6af028c](https://github.com/oocx/tfplan2md/commit/6af028c66cb770a9fbee0f4370a8249fe824a426))
+* resolve remaining security findings and enhance report accuracy ([6c8ee7f](https://github.com/oocx/tfplan2md/commit/6c8ee7fe13840011bfc0cbc14d5026a4c5c82a24))
+* update documentation for new action types and error handling in security findings ([75f4fc4](https://github.com/oocx/tfplan2md/commit/75f4fc424dcc5b10a61c094c40f6be7ea926d620))
+* update generated report version and format links for security findings ([4785064](https://github.com/oocx/tfplan2md/commit/4785064b523017764eefa86fd0a25c9e7072e660))
+
+### 📚 Documentation
+
+* add code review for fix/099-remaining-security-findings ([1c5a17b](https://github.com/oocx/tfplan2md/commit/1c5a17b73e6bcd13b57db90cd602102c6a61d088))
+* add issue analysis for remaining security findings ([d6a100f](https://github.com/oocx/tfplan2md/commit/d6a100f3b008f67d6aa4f00703dd61968b63ec63))
+* add release notes and restore work protocol for issue 099 ([21de94d](https://github.com/oocx/tfplan2md/commit/21de94dbf589a23effe21df6586e9808878f5b5a))
+* add UAT report for issue-099 remaining security findings ([ddc9d61](https://github.com/oocx/tfplan2md/commit/ddc9d6199f23a9596e2b6e9b80b7934484fb3bc1))
+* fix screenshot URLs in release notes (v1.27.0 -> v1.26.1) ([399b4a4](https://github.com/oocx/tfplan2md/commit/399b4a4c30b404395fdd6053e8dd4249a186fd45))
+* update code review — approved after rework (round 2) ([b2a3157](https://github.com/oocx/tfplan2md/commit/b2a3157cef48811827545027fb6c930de4635348))
+* update code review with Docker build result ([345f184](https://github.com/oocx/tfplan2md/commit/345f1840a55ff1173468105503754f5663fdf1cd))
+
 <a name="1.26.1"></a>
 ## [1.26.1](https://github.com/oocx/tfplan2md/compare/v1.26.0...v1.26.1) (2026-02-22)
 
