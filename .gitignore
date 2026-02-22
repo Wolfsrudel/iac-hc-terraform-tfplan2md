@@ -61,3 +61,5 @@ node_modules/
 .aider*
 artifacts/*.github.html
 artifacts/*.azdo.html
+artifacts/uat-minimal.md
+artifacts/uat-simulation-*.md
