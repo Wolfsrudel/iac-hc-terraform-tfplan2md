@@ -333,6 +333,15 @@ uat_submodule_azdo="${AZDO_SUBMODULE_PATH:-$uat_submodule_azdo_default}"
 uat_submodule_github_head_before="$(get_submodule_head "$uat_submodule_github")"
 uat_submodule_azdo_head_before="$(get_submodule_head "$uat_submodule_azdo")"
 
+# Set up credentials in this process so env var changes (GH_TOKEN, AZURE_DEVOPS_EXT_PAT)
+# propagate to all subsequent subprocess calls (uat-github.sh, uat-azdo.sh).
+if [[ "$platform" == "both" || "$platform" == "github" ]]; then
+  ensure_github_credential_helper || exit 1
+fi
+if [[ "$platform" == "both" || "$platform" == "azdo" ]]; then
+  ensure_azdo_credential_helper "$uat_submodule_azdo" || exit 1
+fi
+
 if [[ "$platform" == "both" || "$platform" == "github" ]]; then
   log_info "Creating GitHub UAT PR..."
   # Create PR using the first feature report and its instructions
