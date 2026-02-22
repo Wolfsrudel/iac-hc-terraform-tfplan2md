@@ -138,6 +138,13 @@ ensure_github_credential_helper() {
         log_info "✓ UAT submodule credential helper configured (bypasses GITHUB_TOKEN)"
     fi
 
+    # Export GH_TOKEN (preferred over GITHUB_TOKEN by gh CLI) and unset GITHUB_TOKEN
+    # so all subsequent gh operations in the calling script use the UAT PAT.
+    # This is required because GITHUB_TOKEN is set to the default Actions integration
+    # token, which does not have access to oocx/tfplan2md-uat.
+    export GH_TOKEN="${GH_UAT_TOKEN}"
+    unset GITHUB_TOKEN
+
     log_info "✓ GitHub CLI authenticated and git credential helper configured (coding agent mode)"
     return 0
 }
