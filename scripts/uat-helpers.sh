@@ -125,9 +125,19 @@ ensure_github_credential_helper() {
         return 1
     fi
 
-    # Configure git to use gh as credential helper for git push.
-    # Use env -u GITHUB_TOKEN so gh uses the PAT (not the Actions token) for git ops.
-    env -u GITHUB_TOKEN gh auth setup-git
+    # Configure the UAT submodule's local git credential helper to bypass GITHUB_TOKEN.
+    # When GITHUB_TOKEN env var is set, gh auth git-credential uses it (the default
+    # Actions token with no UAT repo access) rather than the stored PAT. Using
+    # env -u GITHUB_TOKEN ensures gh uses the stored PAT instead.
+    local github_submodule="${UAT_GITHUB_SUBMODULE_PATH:-uat-repos/github}"
+    if [[ -e "$github_submodule/.git" ]]; then
+        git -C "$github_submodule" config --local --unset-all "credential.https://github.com.helper" 2>/dev/null || true
+        git -C "$github_submodule" config --local "credential.https://github.com.helper" ""
+        git -C "$github_submodule" config --local --add "credential.https://github.com.helper" \
+            '!env -u GITHUB_TOKEN /usr/bin/gh auth git-credential'
+        log_info "✓ UAT submodule credential helper configured (bypasses GITHUB_TOKEN)"
+    fi
+
     log_info "✓ GitHub CLI authenticated and git credential helper configured (coding agent mode)"
     return 0
 }
