@@ -5,6 +5,22 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+<a name="1.28.0"></a>
+## [1.28.0](https://github.com/oocx/tfplan2md/compare/v1.27.0...v1.28.0) (2026-02-23)
+
+### ✨ Features
+
+* add support for 'open' action and ['create', 'forget'] replace variant ([a67a4e7](https://github.com/oocx/tfplan2md/commit/a67a4e7cf20ac3b7c9ceff364a78be2f917d108c))
+
+### 📚 Documentation
+
+* add code review report for open action support ([07e3392](https://github.com/oocx/tfplan2md/commit/07e3392e4fc73a9605c9ae0c91b9c0a2e439cd88))
+* add issue analysis for OpenTofu open action support ([030a2f7](https://github.com/oocx/tfplan2md/commit/030a2f78d50049c04fc337509381f65f301055e2))
+* add release notes for ephemeral resource 'open' action support ([41353b5](https://github.com/oocx/tfplan2md/commit/41353b5388f9826f4bc2e8a32125074cff4495d2))
+* add retrospective analysis for issue [#573](https://github.com/oocx/tfplan2md/issues/573) (open action support) ([6cd7087](https://github.com/oocx/tfplan2md/commit/6cd7087a341dd27a8f080c82c488004c7ef1eb54))
+* complete work protocol with all required agent entries ([d0077a0](https://github.com/oocx/tfplan2md/commit/d0077a0857223860541883f57a911509b07fe279))
+* update release notes with commit hash and add Release Manager verification ([4d9b515](https://github.com/oocx/tfplan2md/commit/4d9b515617dc193f18a60cc391ad2ce3c60b8311))
+
 <a name="1.27.0"></a>
 ## [1.27.0](https://github.com/oocx/tfplan2md/compare/v1.26.2...v1.27.0) (2026-02-23)
 
