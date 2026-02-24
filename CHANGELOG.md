@@ -5,6 +5,25 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+<a name="1.29.0"></a>
+## [1.29.0](https://github.com/oocx/tfplan2md/compare/v1.28.0...v1.29.0) (2026-02-24)
+
+### ✨ Features
+
+* show subscription name without key icon in role assignment summary when mapped ([b5043ae](https://github.com/oocx/tfplan2md/commit/b5043ae377ad5f63ce713cefd1061f2eb063c086))
+
+### 🐛 Bug Fixes
+
+* address code review issues for GetSubscriptionName ([61a188e](https://github.com/oocx/tfplan2md/commit/61a188eb2523187e4a7844fa1c4e44b8c7933922))
+* include key icon with subscription name in role assignment summary ([b9327f8](https://github.com/oocx/tfplan2md/commit/b9327f8b6890eb7de0b612b272c6348420175c09))
+
+### 📚 Documentation
+
+* add code review for issue 574 subscription name in role assignment summary ([867f0fa](https://github.com/oocx/tfplan2md/commit/867f0fac65536f95f929ca9faba67926e1ade48f))
+* add issue analysis for subscription name in role assignment summary ([561baa3](https://github.com/oocx/tfplan2md/commit/561baa35f743d2c077514ce94c7bc7360793020f))
+* add release notes for subscription name in role assignment summary fix ([998faf9](https://github.com/oocx/tfplan2md/commit/998faf90d67c5675c5755338024dc5e706fa4622))
+* fix expected output in analysis.md to include 🔑 icon before subscription name ([6e0890a](https://github.com/oocx/tfplan2md/commit/6e0890afb99cb88a193f1449581556748f09cc36))
+
 <a name="1.28.0"></a>
 ## [1.28.0](https://github.com/oocx/tfplan2md/compare/v1.27.0...v1.28.0) (2026-02-23)
 
