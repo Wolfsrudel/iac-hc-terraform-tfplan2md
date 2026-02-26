@@ -5,6 +5,43 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+<a name="1.31.0"></a>
+## [1.31.0](https://github.com/oocx/tfplan2md/compare/v1.30.0...v1.31.0) (2026-02-26)
+
+### ✨ Features
+
+* add --ignore-case-changes flag to suppress Azure resource ID casing noise ([6233032](https://github.com/oocx/tfplan2md/commit/623303290682a2d52f12bc35f5741386958fb7fa))
+* add filtering note to report when resources are suppressed by --ignore-case-changes ([c12465a](https://github.com/oocx/tfplan2md/commit/c12465a4c9f89d5bfe75d82202f1a1447f54b328))
+* rename --ignore-case-changes to --ignore-azure-id-case-changes, default true ([348951b](https://github.com/oocx/tfplan2md/commit/348951bb92a03af74724c97dd6035bf1895ad48b))
+* rename --ignore-case-changes to --ignore-azure-id-case-changes, default true ([c3b13bf](https://github.com/oocx/tfplan2md/commit/c3b13bfd305d3cd5d9bfb1205bdb57234796b09d))
+
+### 🐛 Bug Fixes
+
+* pass raw values (not display values) to AttributeChangeFilterContext ([a4c73b6](https://github.com/oocx/tfplan2md/commit/a4c73b68b6870f174593c240d25e2981017803a7))
+* resolve screenshot generation failures in headless environments ([ff28f04](https://github.com/oocx/tfplan2md/commit/ff28f049146f400f25fcee100dcc6f7f009581cc))
+* suppress update resources with no remaining changes after attribute filtering ([e8524e8](https://github.com/oocx/tfplan2md/commit/e8524e852e3f702aea26c97acc1d0e8b06f37521))
+* **review:** fix RoleAssignmentViewModelFactory filter bypass for update/replace actions ([345273f](https://github.com/oocx/tfplan2md/commit/345273fc0f1e8ba8ae929eb9df025e949eeea8a7))
+
+### 📚 Documentation
+
+* add architecture for case-insensitive attribute change filter (feature 103) ([94edd2b](https://github.com/oocx/tfplan2md/commit/94edd2b095a896746589772b091bd49124a05e8a))
+* add code review for issue 575 test assertion improvements ([96e609a](https://github.com/oocx/tfplan2md/commit/96e609a48411ba653795be5fb09993e983304f52))
+* add feature 103 (--ignore-case-changes) to features.md and README features list ([80be88a](https://github.com/oocx/tfplan2md/commit/80be88a7f3c80d6ae37c361d2948f302ea338550))
+* add feature specification for 103-azure-id-case-insensitive-filter ([5aeb287](https://github.com/oocx/tfplan2md/commit/5aeb287449c536a619a2001e3778e1f816447670))
+* add release manager entry to work protocol for feature 103 ([70852c2](https://github.com/oocx/tfplan2md/commit/70852c2407d10709e81713bb13f0f212b0277ab9))
+* add release notes for feature 103 (--ignore-case-changes flag) ([ba7b0fc](https://github.com/oocx/tfplan2md/commit/ba7b0fc125394ef55d6908301eab9187c0aeea67))
+* add release notes for issue 575 test assertion improvements ([3b26c28](https://github.com/oocx/tfplan2md/commit/3b26c281eae50b009fa416f70516235b0c600799))
+* add tasks for feature 103 — azure-id-case-insensitive-filter ([4dcbc73](https://github.com/oocx/tfplan2md/commit/4dcbc739dd372153ede5a08e08b60dc9f09165b1))
+* add test plan for feature 103 - azure ID case-insensitive filter ([4cfc618](https://github.com/oocx/tfplan2md/commit/4cfc61825f9d72a4a1cdb9ff89d9559448859dc0))
+* mark all tasks complete for feature 103 ([28d2fff](https://github.com/oocx/tfplan2md/commit/28d2fff677e0a61404c96fdbff595b093e08958b))
+* regenerate demo artifacts for feature 103 release ([9e3069c](https://github.com/oocx/tfplan2md/commit/9e3069c81110082f2376d9f6480a6654997bb754))
+* revise architecture for feature 103 to scope filter to Azure resource IDs only ([e011474](https://github.com/oocx/tfplan2md/commit/e0114743c9a27a42d3f6004e43a72c1c7be463a6))
+* revise tasks for feature 103 to reflect IAttributeChangeFilter extension point ([54c2d20](https://github.com/oocx/tfplan2md/commit/54c2d202e75a604d9385cb662cce68f8963cd2b6))
+* revise test plan for feature 103 to align with updated architecture ([4943f7a](https://github.com/oocx/tfplan2md/commit/4943f7af1e0947b0f4e63719b78df2a08a5932c5))
+* update release notes to reflect --ignore-azure-id-case-changes is on by default ([2e1d695](https://github.com/oocx/tfplan2md/commit/2e1d695fb6c3281ae1a6123497ab7ca09815b5a3))
+* update specification, test-plan, and README to reflect --ignore-azure-id-case-changes default of true ([740fb99](https://github.com/oocx/tfplan2md/commit/740fb99d42b92b0351385ea334d43d23e9a46cab))
+* update work protocol with developer log for feature 103 ([1f775a1](https://github.com/oocx/tfplan2md/commit/1f775a109e0968530032fd81a005ebdf25956d5a))
+
 <a name="1.30.0"></a>
 ## [1.30.0](https://github.com/oocx/tfplan2md/compare/v1.29.0...v1.30.0) (2026-02-26)
 
