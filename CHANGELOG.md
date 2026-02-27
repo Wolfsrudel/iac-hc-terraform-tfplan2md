@@ -5,6 +5,29 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+<a name="1.31.1"></a>
+## [1.31.1](https://github.com/oocx/tfplan2md/compare/v1.31.0...v1.31.1) (2026-02-27)
+
+### 🐛 Bug Fixes
+
+* address code review findings — remove redundant HashSet copy and fix CSS style consistency ([650124c](https://github.com/oocx/tfplan2md/commit/650124c119e3a350762c7866b0e28a2eeb256ea4))
+
+### 🚀 Performance
+
+* add LCS matrix size guard to prevent O(m×n) blowup with large values ([8dd0148](https://github.com/oocx/tfplan2md/commit/8dd01488ac4828307dc8bd943bb9a680c02f2912))
+* implement findings 2-9 performance optimizations ([b5af1bb](https://github.com/oocx/tfplan2md/commit/b5af1bb5ad9bad3d93d663638cc23136855bfaa0))
+
+### 📚 Documentation
+
+* add code review report for performance investigation [#105](https://github.com/oocx/tfplan2md/issues/105) ([c2a0eff](https://github.com/oocx/tfplan2md/commit/c2a0eff3c57b57ee60b1c5ba9fcef2e37ff7c7fb))
+* add per-finding fix proposals with user-facing impact descriptions ([3168b61](https://github.com/oocx/tfplan2md/commit/3168b61f8a38a00e3a23d1455128d6c63688c0ba))
+* add performance investigation analysis for potential O(n²) patterns ([4e5e152](https://github.com/oocx/tfplan2md/commit/4e5e15260a3c87fdf9c8bd9ed9c1d01b9f2f429b))
+* add release notes for performance investigation [#105](https://github.com/oocx/tfplan2md/issues/105) ([ee36484](https://github.com/oocx/tfplan2md/commit/ee36484bf5ce0a905300ab9f7b14113f9f321e36))
+* clarify ThreadStatic rationale in BuildLineDiff cache documentation ([e795afb](https://github.com/oocx/tfplan2md/commit/e795afbe4e18ef88bce18db3a414ae88f2601c2d))
+* rewrite release notes to frame as edge-case performance improvements ([81f3eb8](https://github.com/oocx/tfplan2md/commit/81f3eb8ad9a748c510a68dc06989ba973c293316))
+* update findings 2, 8, 9 per maintainer feedback — caching, 50-char cutoff, JSON/XML heuristics ([8adeee6](https://github.com/oocx/tfplan2md/commit/8adeee68ca4cf4b6cd3cddfff1089d0181ba7858))
+* update performance investigation documentation with implementation status ([71feda5](https://github.com/oocx/tfplan2md/commit/71feda575c0f50d3a8f7cd25df8f3a1798938b8f))
+
 <a name="1.31.0"></a>
 ## [1.31.0](https://github.com/oocx/tfplan2md/compare/v1.30.0...v1.31.0) (2026-02-26)
 
