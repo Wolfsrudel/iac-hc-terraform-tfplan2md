@@ -32,3 +32,13 @@
 - `docs/issues/108-azapi-body-casing-filter/analysis.md` — Full root cause analysis with file references and proposed fix
 
 **Problems Encountered:** None. Root cause was clear from the code.
+
+### Technical Writer — 2026-03-02
+
+**Summary:** Updated documentation to reflect that the `--ignore-azure-id-case-changes` filter now also applies to `azapi` body properties. Two documentation files contained explicit statements that the filter was `azurerm`-only; both have been updated to reflect the expanded scope of the bug fix.
+
+**Artifacts Produced:**
+- `README.md` (line 337): Updated scope note — filter now covers `azurerm` resources and body properties of `azapi_resource` / `azapi_update_resource`
+- `docs/features.md` (Feature 103 section, line 3024): Same scope note update
+
+**Problems Encountered:** None. Changes were minimal and targeted.
