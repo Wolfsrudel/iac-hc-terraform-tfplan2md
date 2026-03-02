@@ -26,6 +26,12 @@ public static partial class ScribanHelpers
     /// <param name="showUnchanged">Whether to show unchanged properties (for update mode).</param>
     /// <param name="largeValueFormat">Format for rendering large values ("inline-diff" or "simple-diff").</param>
     /// <param name="showSensitive">Whether to reveal sensitive values instead of masking them.</param>
+    /// <param name="ignoreAzureIdCaseChanges">
+    /// When <c>true</c>, body properties whose before/after values are Azure resource IDs
+    /// differing only in casing are treated as unchanged and not shown in the output.
+    /// Corresponds to the <c>--ignore-azure-id-case-changes</c> CLI flag.
+    /// Related feature: docs/features/103-azure-id-case-insensitive-filter/specification.md.
+    /// </param>
     /// <returns>Formatted markdown string for the body section.</returns>
     /// <remarks>
     /// This helper consolidates body rendering logic to keep the template concise.
@@ -48,7 +54,8 @@ public static partial class ScribanHelpers
         object? afterSensitive = null,
         bool showUnchanged = false,
         string largeValueFormat = "inline-diff",
-        bool showSensitive = false)
+        bool showSensitive = false,
+        bool ignoreAzureIdCaseChanges = false)
     {
         if (bodyJson is null)
         {
@@ -69,7 +76,8 @@ public static partial class ScribanHelpers
                 afterSensitive,
                 showUnchanged,
                 largeValueFormat,
-                showSensitive);
+                showSensitive,
+                ignoreAzureIdCaseChanges);
 
             RenderUpdateBody(sb, updateInput);
         }

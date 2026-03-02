@@ -1025,4 +1025,162 @@ public class ScribanHelpersAzApiTests
     }
 
     #endregion
+
+    #region CompareJsonProperties – Azure ID case-insensitive filter (feature: filter-out-casing-changes)
+
+    /// <summary>
+    /// TC-AzApiCase-01: When ignoreAzureIdCaseChanges=true and the only difference between
+    /// before/after is the casing of an Azure resource ID, the property is treated as unchanged.
+    /// Related feature: docs/issues/filter-out-casing-changes.
+    /// </summary>
+    [Test]
+    public async Task CompareJsonProperties_AzureIdCasingOnly_WithIgnoreCaseTrue_TreatedAsUnchanged()
+    {
+        // Arrange: body property whose only change is Azure resource ID capitalisation
+        var before = JsonDocument.Parse("""
+            {
+                "properties": {
+                    "parentId": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/APP-RG-GWC"
+                }
+            }
+            """).RootElement;
+
+        var after = JsonDocument.Parse("""
+            {
+                "properties": {
+                    "parentId": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/app-rg-gwc"
+                }
+            }
+            """).RootElement;
+
+        // Act – with ignore flag on, casing-only change should not appear as changed
+        var result = AzApiHelpers.CompareJsonProperties(
+            before, after, null, null,
+            showUnchanged: false, showSensitive: false,
+            ignoreAzureIdCaseChanges: true);
+
+        // Assert: no changed properties returned (filter suppressed the casing-only diff)
+        result.Should().BeEmpty("a casing-only Azure resource ID change should be filtered when ignoreAzureIdCaseChanges=true");
+
+        await Task.CompletedTask;
+    }
+
+    /// <summary>
+    /// TC-AzApiCase-02: When ignoreAzureIdCaseChanges=false, a casing-only Azure resource ID
+    /// change is still reported as a change (default/legacy behaviour).
+    /// Related feature: docs/issues/filter-out-casing-changes.
+    /// </summary>
+    [Test]
+    public async Task CompareJsonProperties_AzureIdCasingOnly_WithIgnoreCaseFalse_ReportedAsChanged()
+    {
+        // Arrange: same before/after casing difference
+        var before = JsonDocument.Parse("""
+            {
+                "properties": {
+                    "parentId": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/APP-RG-GWC"
+                }
+            }
+            """).RootElement;
+
+        var after = JsonDocument.Parse("""
+            {
+                "properties": {
+                    "parentId": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/app-rg-gwc"
+                }
+            }
+            """).RootElement;
+
+        // Act – without flag (default), casing change should still be shown
+        var result = AzApiHelpers.CompareJsonProperties(
+            before, after, null, null,
+            showUnchanged: false, showSensitive: false,
+            ignoreAzureIdCaseChanges: false);
+
+        // Assert: property appears as changed
+        result.Should().HaveCount(1, "casing-only Azure ID change should be reported when ignoreAzureIdCaseChanges=false");
+        var changed = result[0] as ScriptObject;
+        changed?["is_changed"].Should().Be(true);
+
+        await Task.CompletedTask;
+    }
+
+    /// <summary>
+    /// TC-AzApiCase-03: A genuine content change (not casing-only) is always reported,
+    /// even when ignoreAzureIdCaseChanges=true.
+    /// Related feature: docs/issues/filter-out-casing-changes.
+    /// </summary>
+    [Test]
+    public async Task CompareJsonProperties_AzureIdGenuineContentChange_WithIgnoreCaseTrue_ReportedAsChanged()
+    {
+        // Arrange: resource group actually changed, not just casing
+        var before = JsonDocument.Parse("""
+            {
+                "properties": {
+                    "parentId": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/OLD-RG"
+                }
+            }
+            """).RootElement;
+
+        var after = JsonDocument.Parse("""
+            {
+                "properties": {
+                    "parentId": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/new-rg"
+                }
+            }
+            """).RootElement;
+
+        // Act
+        var result = AzApiHelpers.CompareJsonProperties(
+            before, after, null, null,
+            showUnchanged: false, showSensitive: false,
+            ignoreAzureIdCaseChanges: true);
+
+        // Assert: genuine content change must still be reported
+        result.Should().HaveCount(1, "a genuine content change should always be reported");
+        var changed = result[0] as ScriptObject;
+        changed?["is_changed"].Should().Be(true);
+
+        await Task.CompletedTask;
+    }
+
+    /// <summary>
+    /// TC-AzApiCase-04: Non-Azure-ID strings are compared case-sensitively even when
+    /// ignoreAzureIdCaseChanges=true (the filter only applies to Azure IDs).
+    /// Related feature: docs/issues/filter-out-casing-changes.
+    /// </summary>
+    [Test]
+    public async Task CompareJsonProperties_NonAzureIdCasingChange_WithIgnoreCaseTrue_ReportedAsChanged()
+    {
+        // Arrange: a regular string value (not an Azure ID) that differs only in casing
+        var before = JsonDocument.Parse("""
+            {
+                "properties": {
+                    "displayName": "MyApp"
+                }
+            }
+            """).RootElement;
+
+        var after = JsonDocument.Parse("""
+            {
+                "properties": {
+                    "displayName": "myapp"
+                }
+            }
+            """).RootElement;
+
+        // Act
+        var result = AzApiHelpers.CompareJsonProperties(
+            before, after, null, null,
+            showUnchanged: false, showSensitive: false,
+            ignoreAzureIdCaseChanges: true);
+
+        // Assert: non-Azure-ID casing change must still be reported
+        result.Should().HaveCount(1, "non-Azure-ID casing changes should always be reported");
+        var changed = result[0] as ScriptObject;
+        changed?["is_changed"].Should().Be(true);
+
+        await Task.CompletedTask;
+    }
+
+    #endregion
 }

@@ -90,4 +90,22 @@ internal sealed class AzApiModule : IProviderModule
         var resourceName = "Oocx.TfPlan2Md.Providers.Shared.Icons.azure-common-icons.json";
         registry.Register(new MatchPattern("(^azapi$|.*/azapi$)", null, null, null), new FileBasedIconProvider(resourceName));
     }
+
+    /// <summary>
+    /// Registers the AzApi attribute change filter that suppresses Azure resource ID
+    /// casing-only differences in top-level resource attributes.
+    /// </summary>
+    /// <param name="registry">The attribute change filter registry to register with.</param>
+    /// <remarks>
+    /// The <see cref="AzApiResourceIdCaseChangeFilter"/> handles attribute-level Azure ID casing
+    /// noise for azapi resources. Body-level casing filtering is handled separately by
+    /// <see cref="ScribanHelpers.CompareJsonProperties"/> when the
+    /// <c>ignore_azure_id_case_changes</c> template variable is enabled.
+    /// Related feature: docs/features/103-azure-id-case-insensitive-filter/specification.md.
+    /// Related issue: docs/issues/filter-out-casing-changes.
+    /// </remarks>
+    public void RegisterAttributeChangeFilters(AttributeChangeFilterRegistry registry)
+    {
+        registry.Register(new AzApiResourceIdCaseChangeFilter());
+    }
 }

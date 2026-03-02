@@ -40,6 +40,11 @@ public static partial class ScribanHelpers
     /// <param name="ShowUnchanged">Whether to include unchanged properties.</param>
     /// <param name="LargeValueFormat">Format for rendering large values.</param>
     /// <param name="ShowSensitive">Whether to reveal sensitive values instead of masking them.</param>
+    /// <param name="IgnoreAzureIdCaseChanges">
+    /// When <c>true</c>, body properties whose before/after values are Azure resource IDs that
+    /// differ only in casing are suppressed from the change output.
+    /// Related feature: docs/features/103-azure-id-case-insensitive-filter/specification.md.
+    /// </param>
     private sealed record UpdateBodyRenderInput(
         object BodyJson,
         object BeforeJson,
@@ -47,7 +52,8 @@ public static partial class ScribanHelpers
         object? AfterSensitive,
         bool ShowUnchanged,
         string LargeValueFormat,
-        bool ShowSensitive);
+        bool ShowSensitive,
+        bool IgnoreAzureIdCaseChanges);
 
     /// <summary>
     /// Renders update-mode content by comparing before/after and grouping property changes.
@@ -64,7 +70,8 @@ public static partial class ScribanHelpers
             input.BeforeSensitive,
             input.AfterSensitive,
             showUnchanged: true,
-            showSensitive: input.ShowSensitive);
+            showSensitive: input.ShowSensitive,
+            ignoreAzureIdCaseChanges: input.IgnoreAzureIdCaseChanges);
 
         var changedComparisons = CompareJsonProperties(
             input.BeforeJson,
@@ -72,7 +79,8 @@ public static partial class ScribanHelpers
             input.BeforeSensitive,
             input.AfterSensitive,
             showUnchanged: input.ShowUnchanged,
-            showSensitive: input.ShowSensitive);
+            showSensitive: input.ShowSensitive,
+            ignoreAzureIdCaseChanges: input.IgnoreAzureIdCaseChanges);
 
         var (smallAll, _) = SplitBySize(allComparisons);
         var (smallChanged, largeChanged) = SplitBySize(changedComparisons);

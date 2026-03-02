@@ -331,4 +331,95 @@ public class ScribanHelpersAzApiUpdateRenderingTests
         using var document = JsonDocument.Parse(sb.ToString());
         return document.RootElement.Clone();
     }
+
+    // -------------------------------------------------------------------------
+    // Azure ID case-insensitive filter (feature: filter-out-casing-changes)
+    // -------------------------------------------------------------------------
+
+    /// <summary>
+    /// TC-AzApiRender-01: When ignoreAzureIdCaseChanges=true and body only differs by Azure ID
+    /// casing, the rendered markdown shows "No body changes detected".
+    /// Related feature: docs/issues/filter-out-casing-changes.
+    /// </summary>
+    [Test]
+    public void RenderAzapiBody_UpdateMode_AzureIdCasingOnlyChange_WithIgnoreCase_ShowsNoChanges()
+    {
+        // Arrange: before/after bodies that differ only in Azure resource ID casing
+        var before = JsonDocument.Parse("""
+            {
+                "properties": {
+                    "parentId": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/APP-RG-GWC"
+                }
+            }
+            """).RootElement;
+
+        var after = JsonDocument.Parse("""
+            {
+                "properties": {
+                    "parentId": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/app-rg-gwc"
+                }
+            }
+            """).RootElement;
+
+        // Act: render with ignoreAzureIdCaseChanges=true
+        var markdown = AzApiHelpers.RenderAzapiBody(
+            bodyJson: after,
+            heading: "Body Changes",
+            mode: "update",
+            beforeJson: before,
+            beforeSensitive: null,
+            afterSensitive: null,
+            showUnchanged: false,
+            largeValueFormat: "inline-diff",
+            showSensitive: false,
+            ignoreAzureIdCaseChanges: true);
+
+        // Assert: casing-only change is filtered out, showing no-changes message
+        markdown.Should().Contain("*No body changes detected*",
+            "a casing-only Azure resource ID change should be filtered when ignoreAzureIdCaseChanges=true");
+        markdown.Should().NotContain("| Property | Before | After |");
+    }
+
+    /// <summary>
+    /// TC-AzApiRender-02: When ignoreAzureIdCaseChanges=false (default), a casing-only Azure ID
+    /// body change is still rendered as a change.
+    /// Related feature: docs/issues/filter-out-casing-changes.
+    /// </summary>
+    [Test]
+    public void RenderAzapiBody_UpdateMode_AzureIdCasingOnlyChange_WithoutIgnoreCase_ShowsChange()
+    {
+        // Arrange
+        var before = JsonDocument.Parse("""
+            {
+                "properties": {
+                    "parentId": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/APP-RG-GWC"
+                }
+            }
+            """).RootElement;
+
+        var after = JsonDocument.Parse("""
+            {
+                "properties": {
+                    "parentId": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/app-rg-gwc"
+                }
+            }
+            """).RootElement;
+
+        // Act: render without ignoreAzureIdCaseChanges (default false)
+        var markdown = AzApiHelpers.RenderAzapiBody(
+            bodyJson: after,
+            heading: "Body Changes",
+            mode: "update",
+            beforeJson: before,
+            beforeSensitive: null,
+            afterSensitive: null,
+            showUnchanged: false,
+            largeValueFormat: "inline-diff",
+            showSensitive: false,
+            ignoreAzureIdCaseChanges: false);
+
+        // Assert: the change is rendered as a table row
+        markdown.Should().Contain("| Property | Before | After |",
+            "when ignoreAzureIdCaseChanges=false the change should be shown");
+    }
 }

@@ -1,4 +1,5 @@
 using System.Text.Json;
+using Oocx.TfPlan2Md.Platforms.Azure;
 using Scriban.Runtime;
 using static Oocx.TfPlan2Md.MarkdownGeneration.ScribanHelpers;
 
@@ -24,6 +25,13 @@ public static partial class ScribanHelpers
     /// <param name="afterSensitive">The after_sensitive structure indicating sensitive properties.</param>
     /// <param name="showUnchanged">When true, returns all properties; when false, returns only changed properties.</param>
     /// <param name="showSensitive">Reserved for future use (sensitive value masking handled by template).</param>
+    /// <param name="ignoreAzureIdCaseChanges">
+    /// When <c>true</c>, properties whose before and after values are Azure resource IDs that differ
+    /// only in casing are treated as unchanged and excluded from the result (unless
+    /// <paramref name="showUnchanged"/> is also <c>true</c>).
+    /// Corresponds to the <c>--ignore-azure-id-case-changes</c> CLI flag.
+    /// Related feature: docs/features/103-azure-id-case-insensitive-filter/specification.md.
+    /// </param>
     /// <returns>
     /// List of property comparison objects with properties: path, before, after, is_large, is_sensitive, is_changed.
     /// </returns>
@@ -43,7 +51,8 @@ public static partial class ScribanHelpers
         object? beforeSensitive,
         object? afterSensitive,
         bool showUnchanged,
-        bool showSensitive)
+        bool showSensitive,
+        bool ignoreAzureIdCaseChanges = false)
     {
         var result = new ScriptArray();
 
@@ -69,7 +78,7 @@ public static partial class ScribanHelpers
             // Determine if value changed. When showSensitive is false, sensitive fields
             // have been pre-masked to "(sensitive)" — we cannot compare through the mask,
             // so treat them as changed if both before and after exist (safe over-approximation).
-            var isChanged = !ValuesEqual(beforeValue, afterValue);
+            var isChanged = !ValuesEqual(beforeValue, afterValue, ignoreAzureIdCaseChanges);
             if (!isChanged && isSensitive && !showSensitive && beforeValue is not null && afterValue is not null)
             {
                 isChanged = true;
@@ -275,8 +284,14 @@ public static partial class ScribanHelpers
     /// </summary>
     /// <param name="before">The before value.</param>
     /// <param name="after">The after value.</param>
+    /// <param name="ignoreAzureIdCaseChanges">
+    /// When <c>true</c>, string values that are Azure resource IDs are compared
+    /// case-insensitively; only the non-casing portion of the ID must differ to be
+    /// considered a genuine change.
+    /// Related feature: docs/features/103-azure-id-case-insensitive-filter/specification.md.
+    /// </param>
     /// <returns>True if values are equal, false otherwise.</returns>
-    private static bool ValuesEqual(object? before, object? after)
+    private static bool ValuesEqual(object? before, object? after, bool ignoreAzureIdCaseChanges = false)
     {
         if (before is null && after is null)
         {
@@ -292,6 +307,19 @@ public static partial class ScribanHelpers
         if (IsNumeric(before) && IsNumeric(after))
         {
             return Convert.ToDouble(before) == Convert.ToDouble(after);
+        }
+
+        // When the flag is active and both values are strings, treat casing-only differences
+        // in Azure resource IDs as equal. We short-circuit by checking case-insensitive equality
+        // first (cheap string compare) before invoking the regex-backed IsAzureResourceId check.
+        // This avoids the regex cost when the values genuinely differ in content.
+        if (ignoreAzureIdCaseChanges
+            && before is string beforeStr
+            && after is string afterStr
+            && string.Equals(beforeStr, afterStr, StringComparison.OrdinalIgnoreCase)
+            && (AzureScopeParser.IsAzureResourceId(beforeStr) || AzureScopeParser.IsAzureResourceId(afterStr)))
+        {
+            return true;
         }
 
         // Default: use Equals

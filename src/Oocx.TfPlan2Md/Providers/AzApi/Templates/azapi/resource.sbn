@@ -60,7 +60,7 @@
 {{~ body_heading = change.action == "replace" ? "Body (replacing existing resource)" : "Body" ~}}
 {{~ if change.after_json && change.after_json.body ~}}
 {{~ after_sensitive_body = change.after_sensitive ? change.after_sensitive.body : null ~}}
-{{ render_azapi_body change.after_json.body body_heading "create" null null after_sensitive_body false "inline-diff" show_sensitive }}
+{{ render_azapi_body change.after_json.body body_heading "create" null null after_sensitive_body false "inline-diff" show_sensitive ignore_azure_id_case_changes }}
 {{~ else ~}}
 
 *Body: (empty)*
@@ -69,7 +69,7 @@
 {{~ if change.before_json && change.before_json.body && change.after_json && change.after_json.body ~}}
 {{~ before_sensitive_body = change.before_sensitive ? change.before_sensitive.body : null ~}}
 {{~ after_sensitive_body = change.after_sensitive ? change.after_sensitive.body : null ~}}
-{{ render_azapi_body change.after_json.body "Body Changes" "update" change.before_json.body before_sensitive_body after_sensitive_body false "inline-diff" show_sensitive }}
+{{ render_azapi_body change.after_json.body "Body Changes" "update" change.before_json.body before_sensitive_body after_sensitive_body false "inline-diff" show_sensitive ignore_azure_id_case_changes }}
 {{~ else ~}}
 
 *Body: (no changes or missing data)*
@@ -77,7 +77,7 @@
 {{~ else if change.action == "delete" ~}}
 {{~ if change.before_json && change.before_json.body ~}}
 {{~ before_sensitive_body = change.before_sensitive ? change.before_sensitive.body : null ~}}
-{{ render_azapi_body change.before_json.body "Body (being deleted)" "delete" null before_sensitive_body null false "inline-diff" show_sensitive }}
+{{ render_azapi_body change.before_json.body "Body (being deleted)" "delete" null before_sensitive_body null false "inline-diff" show_sensitive ignore_azure_id_case_changes }}
 {{~ else ~}}
 
 *Body: (empty)*
