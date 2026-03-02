@@ -6,10 +6,25 @@
 **Created:** 2026-03-02
 
 ## Agent Work Log
+### Developer — 2026-03-02
 
-<!-- Each agent appends their entry below when they complete their work. -->
+**Summary:** Implemented the fix for casing-only Azure ID change suppression in azapi body comparison. The fix threads the existing `--ignore-azure-id-case-changes` CLI flag through to the body comparison helper (`ValuesEqual`) and registers a new attribute-level filter for azapi.
 
-### Issue Analyst — 2026-03-02
+**Artifacts Produced:**
+- `src/Oocx.TfPlan2Md/Providers/AzApi/AzApiResourceIdCaseChangeFilter.cs` — New attribute-level filter for azapi provider
+- Modified `AzApi.Data.cs` — `ignoreAzureIdCaseChanges` parameter in `CompareJsonProperties` and `ValuesEqual`
+- Modified `AzApi.Rendering.cs` — `ignoreAzureIdCaseChanges` parameter in `RenderAzapiBody`
+- Modified `AzApi.Rendering.Update.cs` — `IgnoreAzureIdCaseChanges` field in `UpdateBodyRenderInput`
+- Modified `AzApi.Registration.cs` — Updated Scriban function imports
+- Modified `resource.sbn`, `update_resource.sbn`, `_output_values.sbn` — Pass `ignore_azure_id_case_changes` to `render_azapi_body`
+- Modified `AzApiModule.cs` — Override `RegisterAttributeChangeFilters` with new filter
+- New tests: `AzApiResourceIdCaseChangeFilterTests.cs` (9 unit tests), 4 new `CompareJsonProperties` tests, 2 new `RenderAzapiBody` tests
+- All 1333 tests pass with 0 failures, 0 skips
+
+**Problems Encountered:**
+- Initial `ValuesEqual` implementation used nested `if` which triggered SonarSource S1066 rule. Fixed by merging conditions into a single `if` with short-circuit evaluation.
+- Code review suggested optimizing to check case-insensitive equality before the regex `IsAzureResourceId` check — applied the optimization.
+
 
 **Summary:** Investigated the azapi casing-only change bug. Identified two distinct rendering pipelines where the fix must be applied, with the primary pipeline being the AzAPI body comparison helper (`CompareJsonProperties`/`ValuesEqual`). Documented root cause, affected files with line numbers, proposed fix approach, and edge cases.
 
