@@ -5,6 +5,48 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+<a name="1.33.0"></a>
+## [1.33.0](https://github.com/oocx/tfplan2md/compare/v1.32.0...v1.33.0) (2026-03-04)
+
+### ✨ Features
+
+* add build step for source generators in PR validation workflow ([b814bf9](https://github.com/oocx/tfplan2md/commit/b814bf959c1f3d1e68f3368ab7d96f2fe1e760a9))
+* finalize reflection-free embedded json generator integration ([03412b3](https://github.com/oocx/tfplan2md/commit/03412b3508bb43126cffc5ed1acc9a001af10579))
+* implement azapi-specific C# rendering pipeline for fix [#1](https://github.com/oocx/tfplan2md/issues/1) ([9e42b3a](https://github.com/oocx/tfplan2md/commit/9e42b3a7a32654e93fb57b6091cba3b45e6267de))
+
+### 🐛 Bug Fixes
+
+* drop System.Xml.Linq to reduce NativeAOT size ([6c209a5](https://github.com/oocx/tfplan2md/commit/6c209a5c01610797780b39c023f323a70c2f3089))
+* finalize azapi output values snapshot parity ([6281e40](https://github.com/oocx/tfplan2md/commit/6281e40a0eed17d36aeb883cc0ab674398fe100c))
+* implement snapshot parity fixes 11 6 7 8 ([694c2e9](https://github.com/oocx/tfplan2md/commit/694c2e9b030bab7ddb33ec510f2cb6695654ba60))
+* implement snapshot parity fixes 12, 4, and 5 ([e78690a](https://github.com/oocx/tfplan2md/commit/e78690ab3576d14947266c525cbcbe768f0f849f))
+* revert snapshots to main ([10f2c13](https://github.com/oocx/tfplan2md/commit/10f2c134c4a1e0bb4634df8f2be3ed4768d527c6))
+
+### ♻️ Refactoring
+
+* enhance Dockerfile by adding lld to toolchain and specifying LinkerFlavor for publishing ([764fd93](https://github.com/oocx/tfplan2md/commit/764fd93aef08cd639d9634bb02dcb50475fdeec6))
+* optimize Dockerfile and csproj for reduced image size ([3e74e12](https://github.com/oocx/tfplan2md/commit/3e74e1236cc0ec0e139b377a1541666d2243ad75))
+* optimize Dockerfile by removing unnecessary library installations and clarifying comments ([133014c](https://github.com/oocx/tfplan2md/commit/133014cdc5b6abb80fbe0744ff7f97b5a7bc796f))
+* remove Scriban and migrate to pure C# rendering ([47980b8](https://github.com/oocx/tfplan2md/commit/47980b8cf917edd455e51563ae318adcaa294069))
+* remove summary separator mode flag ([3a5b947](https://github.com/oocx/tfplan2md/commit/3a5b94725dc9c0dbba09a3e28ffd5811a0488702))
+* remove unnecessary tfplan2md.xml from publish output ([ca97c7b](https://github.com/oocx/tfplan2md/commit/ca97c7b693f2c6a83d69ead82c6d7ce1ffbaaefd))
+* streamline Dockerfile by enhancing publish command and removing unnecessary base stage ([514b7dc](https://github.com/oocx/tfplan2md/commit/514b7dc658582ea5835d0a7040d1f9c31feaf1ad))
+* update README and integration tests to reflect removal of comprehensive demo files from Docker image ([980436a](https://github.com/oocx/tfplan2md/commit/980436a461fe35a39ecfdcca11aa2aa42427b8b5))
+
+### 📚 Documentation
+
+* add code review for 107-remove-scriban ([ee357fe](https://github.com/oocx/tfplan2md/commit/ee357fe5cc53e8ed428621fb08a51abc40ac4c64))
+* add code review round 3 for feature 107 ([fe780f7](https://github.com/oocx/tfplan2md/commit/fe780f7cda9370aae5fbf2e93a66331ab895745f))
+* add feature 107 architecture baseline ([be8c97c](https://github.com/oocx/tfplan2md/commit/be8c97cb005a32194483a11080fcdfc0431d6678))
+* add feature specification for 107-remove-scriban ([ee361bb](https://github.com/oocx/tfplan2md/commit/ee361bbc608e7d12010506db690c86ada0b6ce11))
+* add release notes for feature 107 - remove Scriban ([1617fdc](https://github.com/oocx/tfplan2md/commit/1617fdc56e81a9987e299f58e00b0e70b0e03a00))
+* add snapshot analysis report and detailed fix plan for feature/107-remove-scriban ([8016527](https://github.com/oocx/tfplan2md/commit/8016527f00fec684db41ed10b8e04a5ef636918a))
+* document reflection removal plan ([a73b089](https://github.com/oocx/tfplan2md/commit/a73b089c6fdcdfc27cfcba35ea9e4f4fbffc414b))
+* fix stale Scriban references in architecture.md, features.md, and Providers/README.md ([e041177](https://github.com/oocx/tfplan2md/commit/e04117741363220a90d1fe2caddec7309b0d6717))
+* remove Scriban guidance from agent instructions ([1929bb7](https://github.com/oocx/tfplan2md/commit/1929bb7111a60ac035bfa5845f89d53309235291))
+* update code review for feature 107 (round 2) - changes requested ([f836c26](https://github.com/oocx/tfplan2md/commit/f836c264d442a8126ca91d3e02e891203e972704))
+* **107:** add QE test plan with 100% branch coverage for new rendering types ([d30158d](https://github.com/oocx/tfplan2md/commit/d30158db9f6b18dfaadba9a6fc920c182df22436))
+
 <a name="1.32.0"></a>
 ## [1.32.0](https://github.com/oocx/tfplan2md/compare/v1.31.2...v1.32.0) (2026-03-01)
 
