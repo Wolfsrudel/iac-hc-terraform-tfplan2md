@@ -5,6 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+<a name="1.33.1"></a>
+## [1.33.1](https://github.com/oocx/tfplan2md/compare/v1.33.0...v1.33.1) (2026-03-04)
+
+### 🐛 Bug Fixes
+
+* isolate AOT publish from JsonEmbedGenerator build ([6630ba5](https://github.com/oocx/tfplan2md/commit/6630ba59742196537e16c913c4fe158743704eb5))
+
+### 📚 Documentation
+
+* add issue analysis for binary build failure ([4bfe5a7](https://github.com/oocx/tfplan2md/commit/4bfe5a7cbcf561c4d523f8dda5e7ac0c7a8d508f))
+* add release notes for fix/108-binary-builds-failed ([6452fc2](https://github.com/oocx/tfplan2md/commit/6452fc2fcceb4043041e9c3382752a07cf58ba5a))
+
 <a name="1.33.0"></a>
 ## [1.33.0](https://github.com/oocx/tfplan2md/compare/v1.32.0...v1.33.0) (2026-03-04)
 
