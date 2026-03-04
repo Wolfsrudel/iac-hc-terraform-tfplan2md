@@ -8,7 +8,7 @@ namespace Oocx.TfPlan2Md.Tests.Providers.AzApi;
 /// <summary>
 /// Unit tests for <see cref="AzApiResourceIdCaseChangeFilter"/>.
 /// Related feature: docs/features/103-azure-id-case-insensitive-filter/specification.md.
-/// Related issue: docs/issues/filter-out-casing-changes.
+/// Related issue: docs/issues/108-azapi-body-casing-filter/analysis.md.
 /// </summary>
 [Category("Unit")]
 public class AzApiResourceIdCaseChangeFilterTests

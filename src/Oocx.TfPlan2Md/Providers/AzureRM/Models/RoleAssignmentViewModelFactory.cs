@@ -7,8 +7,7 @@ using Oocx.TfPlan2Md.MarkdownGeneration;
 using Oocx.TfPlan2Md.MarkdownGeneration.Models;
 using Oocx.TfPlan2Md.Parsing;
 using Oocx.TfPlan2Md.Platforms.Azure;
-using Scriban.Runtime;
-using static Oocx.TfPlan2Md.MarkdownGeneration.ScribanHelpers;
+using static Oocx.TfPlan2Md.MarkdownGeneration.MarkdownHelpers;
 
 namespace Oocx.TfPlan2Md.Providers.AzureRM.Models;
 
@@ -157,6 +156,11 @@ internal static class RoleAssignmentViewModelFactory
                 afterPrincipal,
                 scopeFormatter,
                 change.Address);
+
+            if (string.IsNullOrWhiteSpace(beforeValue) && string.IsNullOrWhiteSpace(afterValue))
+            {
+                continue;
+            }
 
             var attrViewModel = new RoleAssignmentAttributeViewModel
             {

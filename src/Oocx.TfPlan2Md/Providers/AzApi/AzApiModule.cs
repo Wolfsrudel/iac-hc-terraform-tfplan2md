@@ -1,8 +1,8 @@
 using Oocx.TfPlan2Md.MarkdownGeneration.Models;
+using Oocx.TfPlan2Md.MarkdownGeneration.Rendering;
 using Oocx.TfPlan2Md.MarkdownGeneration.Services;
 using Oocx.TfPlan2Md.Platforms.Azure;
-using Scriban.Runtime;
-using static Oocx.TfPlan2Md.MarkdownGeneration.ScribanHelpers;
+using Oocx.TfPlan2Md.Providers.AzApi.Renderers;
 
 namespace Oocx.TfPlan2Md.Providers.AzApi;
 
@@ -44,15 +44,6 @@ internal sealed class AzApiModule : IProviderModule
     public string TemplateResourcePrefix => "Oocx.TfPlan2Md.Providers.AzApi.Templates.";
 
     /// <summary>
-    /// Registers AzApi-specific Scriban helper functions.
-    /// </summary>
-    /// <param name="scriptObject">The Scriban script object to register helpers with.</param>
-    public void RegisterHelpers(ScriptObject scriptObject)
-    {
-        Oocx.TfPlan2Md.Providers.AzApi.ScribanHelpers.RegisterAzApiHelpers(scriptObject);
-    }
-
-    /// <summary>
     /// Registers AzApi-specific resource view model factories.
     /// </summary>
     /// <param name="registry">The factory registry to register with.</param>
@@ -92,18 +83,20 @@ internal sealed class AzApiModule : IProviderModule
     }
 
     /// <summary>
-    /// Registers the AzApi attribute change filter that suppresses Azure resource ID
-    /// casing-only differences in top-level resource attributes.
+    /// Registers AzApi-specific C# resource renderers.
+    /// </summary>
+    /// <param name="registry">The resource renderer registry to register with.</param>
+    public void RegisterResourceRenderers(ResourceRendererRegistry registry)
+    {
+        registry.Register(new AzApiResourceRenderer());
+        registry.Register(new AzApiUpdateResourceRenderer());
+        registry.Register(new AzApiOutputValuesRenderer());
+    }
+
+    /// <summary>
+    /// Registers AzApi-specific attribute change filters.
     /// </summary>
     /// <param name="registry">The attribute change filter registry to register with.</param>
-    /// <remarks>
-    /// The <see cref="AzApiResourceIdCaseChangeFilter"/> handles attribute-level Azure ID casing
-    /// noise for azapi resources. Body-level casing filtering is handled separately by
-    /// <see cref="ScribanHelpers.CompareJsonProperties"/> when the
-    /// <c>ignore_azure_id_case_changes</c> template variable is enabled.
-    /// Related feature: docs/features/103-azure-id-case-insensitive-filter/specification.md.
-    /// Related issue: docs/issues/filter-out-casing-changes.
-    /// </remarks>
     public void RegisterAttributeChangeFilters(AttributeChangeFilterRegistry registry)
     {
         registry.Register(new AzApiResourceIdCaseChangeFilter());

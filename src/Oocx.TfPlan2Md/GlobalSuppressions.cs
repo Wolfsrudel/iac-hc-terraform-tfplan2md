@@ -63,13 +63,6 @@ using System.Diagnostics.CodeAnalysis;
     "CA1506:Avoid excessive class coupling",
     Justification = "Baseline for docs/features/046-code-quality-metrics-enforcement/.",
     Scope = "type",
-    Target = "~T:Oocx.TfPlan2Md.MarkdownGeneration.AotScriptObjectMapper")]
-
-[assembly: SuppressMessage(
-    "Maintainability",
-    "CA1506:Avoid excessive class coupling",
-    Justification = "Baseline for docs/features/046-code-quality-metrics-enforcement/.",
-    Scope = "type",
     Target = "~T:Oocx.TfPlan2Md.Providers.AzureRM.Models.FirewallNetworkRuleCollectionViewModelFactory")]
 
 [assembly: SuppressMessage(
@@ -78,16 +71,6 @@ using System.Diagnostics.CodeAnalysis;
     Justification = "Baseline for docs/features/046-code-quality-metrics-enforcement/.",
     Scope = "type",
     Target = "~T:Oocx.TfPlan2Md.MarkdownGeneration.MarkdownRenderer")]
-
-[assembly: SuppressMessage(
-    "Maintainability",
-    "CA1506:Avoid excessive class coupling",
-    Justification = "Baseline for docs/features/046-code-quality-metrics-enforcement/.",
-    Scope = "member",
-    Target = "~M:Oocx.TfPlan2Md.MarkdownGeneration.MarkdownRenderer.RenderResourceWithTemplate(" +
-             "Oocx.TfPlan2Md.MarkdownGeneration.ResourceChangeModel," +
-             "Oocx.TfPlan2Md.MarkdownGeneration.MarkdownRenderer+TemplateSource," +
-             "Oocx.TfPlan2Md.MarkdownGeneration.LargeValueFormat)")]
 
 [assembly: SuppressMessage(
     "Maintainability",
@@ -132,16 +115,16 @@ using System.Diagnostics.CodeAnalysis;
     "CA1506:Avoid excessive class coupling",
     Justification = "Baseline for docs/features/046-code-quality-metrics-enforcement/.",
     Scope = "type",
-    Target = "~T:Oocx.TfPlan2Md.MarkdownGeneration.ScribanHelpers")]
+    Target = "~T:Oocx.TfPlan2Md.MarkdownGeneration.MarkdownHelpers")]
 
 [assembly: SuppressMessage(
     "Maintainability",
     "CA1502:Avoid excessive complexity",
     Justification = "Baseline for docs/features/046-code-quality-metrics-enforcement/.",
     Scope = "member",
-    Target = "~M:Oocx.TfPlan2Md.MarkdownGeneration.ScribanHelpers.FormatAttributeValue(" +
+    Target = "~M:Oocx.TfPlan2Md.MarkdownGeneration.MarkdownHelpers.FormatAttributeValue(" +
              "System.String,System.String,System.String," +
-             "Oocx.TfPlan2Md.MarkdownGeneration.ScribanHelpers+ValueFormatContext)")]
+             "Oocx.TfPlan2Md.MarkdownGeneration.MarkdownHelpers+ValueFormatContext)")]
 
 [assembly: SuppressMessage(
     "Maintainability",
@@ -157,10 +140,3 @@ using System.Diagnostics.CodeAnalysis;
     Justification = "Baseline for docs/features/046-code-quality-metrics-enforcement/.",
     Scope = "type",
     Target = "~T:Oocx.TfPlan2Md.Parsing.TfPlanJsonContext")]
-
-[assembly: SuppressMessage(
-    "Maintainability",
-    "CA1506:Avoid excessive class coupling",
-    Justification = "JSON source generation context required for AOT compilation; high coupling is inherent to infrastructure code.",
-    Scope = "type",
-    Target = "~T:Oocx.TfPlan2Md.Azure.AzureRoleDefinitionsJsonContext")]

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text.Encodings.Web;
-using static Oocx.TfPlan2Md.MarkdownGeneration.ScribanHelpers;
+using static Oocx.TfPlan2Md.MarkdownGeneration.MarkdownHelpers;
 
 namespace Oocx.TfPlan2Md.MarkdownGeneration.Helpers;
 
@@ -242,7 +242,7 @@ internal static class ResourceSummaryHtmlBuilder
         }
 
         var badges = tags.Select(tag => FormatCodeTable($"{tag.Key}: {tag.Value}"));
-        return $"**🏷️{NonBreakingSpace}Tags:** {string.Join(' ', badges)}";
+        return $"**🏷️{NonBreakingSpace}Tags:**\n{string.Join('\n', badges.Select(badge => $" {badge}"))}";
     }
 
     /// <summary>

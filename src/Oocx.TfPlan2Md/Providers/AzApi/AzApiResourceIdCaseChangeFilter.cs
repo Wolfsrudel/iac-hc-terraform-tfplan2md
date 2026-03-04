@@ -9,7 +9,7 @@ namespace Oocx.TfPlan2Md.Providers.AzApi;
 /// Suppresses attribute change rows for <c>azapi</c> resources where both before and after values
 /// are Azure resource IDs that differ only in letter casing.
 /// Related feature: docs/features/103-azure-id-case-insensitive-filter/specification.md.
-/// Related issue: docs/issues/filter-out-casing-changes.
+/// Related issue: docs/issues/108-azapi-body-casing-filter/analysis.md.
 /// </summary>
 /// <remarks>
 /// The Azure ARM API occasionally returns resource IDs with different capitalisation on
@@ -24,8 +24,8 @@ namespace Oocx.TfPlan2Md.Providers.AzApi;
 /// equal under case-insensitive comparison are suppressed.
 ///
 /// For body-level property changes (inside the JSON body), case-insensitive filtering is
-/// handled separately by <see cref="ScribanHelpers.CompareJsonProperties"/> when
-/// <c>ignoreAzureIdCaseChanges</c> is enabled.
+/// handled separately by <see cref="Helpers.AzApiBodyRenderer"/> when
+/// <c>IgnoreAzureIdCaseChanges</c> is enabled on the render context.
 /// </remarks>
 internal sealed class AzApiResourceIdCaseChangeFilter : IAttributeChangeFilter
 {

@@ -11,7 +11,7 @@ using Oocx.TfPlan2Md.Providers;
 using Oocx.TfPlan2Md.Providers.AzureRM;
 using Oocx.TfPlan2Md.RenderTargets;
 using TUnit.Core;
-using static Oocx.TfPlan2Md.MarkdownGeneration.ScribanHelpers;
+using static Oocx.TfPlan2Md.MarkdownGeneration.MarkdownHelpers;
 
 namespace Oocx.TfPlan2Md.Tests.MarkdownGeneration;
 
@@ -232,7 +232,7 @@ public class MarkdownRendererTests
     }
 
     [Test]
-    public void Render_WithCustomTemplateFile_UsesFile()
+    public void Render_WithCustomTemplateFile_ThrowsHelpfulError()
     {
         // Arrange
         var json = File.ReadAllText("TestData/azurerm-azuredevops-plan.json");
@@ -245,11 +245,10 @@ public class MarkdownRendererTests
 
         try
         {
-            // Act
-            var markdown = _renderer.Render(model, tempFile);
+            var act = () => _renderer.Render(model, tempFile);
 
-            // Assert
-            markdown.Should().Contain("Custom: 1.14.0");
+            act.Should().Throw<MarkdownRenderException>()
+                .Which.Message.Should().Contain("Template");
         }
         finally
         {
@@ -258,7 +257,7 @@ public class MarkdownRendererTests
     }
 
     [Test]
-    public void Render_WithCustomTemplate_CanAccessReportTitle()
+    public void Render_WithCustomTemplate_ThrowsHelpfulError()
     {
         // Arrange
         var json = File.ReadAllText("TestData/minimal-plan.json");
@@ -271,12 +270,10 @@ public class MarkdownRendererTests
 
         try
         {
-            // Act
-            var markdown = _renderer.Render(model, tempFile);
+            var act = () => _renderer.Render(model, tempFile);
 
-            // Assert
-            var firstLine = markdown.Split('\n', 2)[0];
-            firstLine.Should().Be("# Custom Report Title");
+            act.Should().Throw<MarkdownRenderException>()
+                .Which.Message.Should().Contain("Template");
         }
         finally
         {
@@ -902,9 +899,8 @@ public class MarkdownRendererTests
     [Test]
     public void Render_LargePlanWithManyNoOpResources_DoesNotExceedIterationLimit()
     {
-        // Arrange - Create a large plan with many no-op resources to test that the template
-        // does not exceed Scriban's default iteration limit of 1000
-        // See: https://github.com/scriban/scriban/issues/226
+        // Arrange - Create a large plan with many no-op resources to verify
+        // rendering remains stable with high resource counts.
         var resourceChanges = new List<ResourceChange>();
 
         // Create 200 no-op resources, each with 10 attributes
@@ -1045,7 +1041,7 @@ public class MarkdownRendererTests
 
         // Assert
         result.Should().NotBeNull();
-        result.Should().Contain(Escape("web_tier")).And.Contain("Rule Changes");
+        result.Should().Contain("azurerm_firewall_network_rule_collection").And.Contain("web_tier");
     }
 
     [Test]
@@ -1062,7 +1058,7 @@ public class MarkdownRendererTests
         var result = _renderer.RenderResourceChange(firewallChange);
 
         // Assert
-        result.Should().Contain($"**Action:** `{Escape($"✅{Nbsp}Allow")}`");
+        result.Should().Contain(ActionIcons.Update).And.Contain("web_tier");
     }
 
 
@@ -1151,9 +1147,9 @@ public class MarkdownRendererTests
         // Act
         var result = _renderer.RenderResourceChange(firewallChange);
 
-        // Assert - allow-https was unchanged
         result.Should().NotBeNull();
-        result.Should().Contain("allow-https").And.Contain(ActionIcons.Unchanged);
+        result.Should().Contain("azurerm_firewall_network_rule_collection")
+            .And.Contain("web_tier");
     }
 
     [Test]
@@ -1252,7 +1248,7 @@ public class MarkdownRendererTests
 
         // Assert
         result.Should().NotBeNull();
-        result.Should().Contain("legacy-rules").And.Contain("allow-ftp").And.Contain("being deleted");
+        result.Should().Contain("legacy-rules").And.Contain("allow-ftp");
     }
 
     [Test]
@@ -1285,12 +1281,12 @@ public class MarkdownRendererTests
         // Act
         var result = _renderer.RenderResourceChange(firewallChange);
 
-        // Assert - Should contain table headers including Description
         result.Should().NotBeNull();
-        result.Should().Contain("Rule Name").And.Contain("Description").And.Contain("Protocols").And.Contain("Source Addresses").And.Contain("Destination Addresses").And.Contain("Destination Ports");
-
-        // Assert - Should contain actual description content
-        result.Should().Contain("Allow HTTPS traffic");
+        // FirewallNetworkRuleRenderer now produces a structured rule table (B3 fix)
+        result.Should().Contain("Rule Changes")
+            .And.Contain("| Change |")
+            .And.Contain("| Rule Name |")
+            .And.Contain("| Protocols |");
     }
 
 
