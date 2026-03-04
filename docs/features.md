@@ -832,7 +832,6 @@ Masking is applied comprehensively across all rendering paths:
 - **Attribute tables** — individual attributes marked sensitive by Terraform are shown as `(sensitive)`
 - **AzApi body tables** — flattened JSON body properties (create, update, delete, replace) are masked when the corresponding `before_sensitive` / `after_sensitive` metadata marks them as sensitive
 - **Azure DevOps Variable Group diffs** — a variable cell is masked as `(sensitive / hidden)` when either the before or after state has `is_secret: true` (including transitions where a variable gains or loses secret status)
-- **Scriban template JSON context** — `before_json` and `after_json` objects supplied to templates are masked before template rendering; any leaf whose path matches a sensitivity entry in `before_sensitive` / `after_sensitive` is replaced with `(sensitive)`
 
 **Hierarchical sensitivity detection** handles all Terraform sensitivity encodings:
 
@@ -953,26 +952,9 @@ Resource changes in the report are now grouped by Terraform module. Each module 
 - **Module header**: Each module is shown as an H3 heading ("### 📦 Module: <module_address>"), where `module_address` is the full module path from the Terraform plan (e.g., `module.network.module.subnet`). The root module is shown as `root`. The 📦 icon is followed by a non-breaking space (U+00A0) to prevent wrapping.
 - **Resource headings**: Resources within a module are shown as H4 headings ("#### <action_symbol> <address>") to preserve a proper document hierarchy.
 - **Ordering**: Modules are listed so that the root module appears first, followed by other modules in lexicographic order. Nested modules are presented in a flat list but the sort order ensures child modules follow their parent modules.
-- **Template variable**: Templates have access to a top-level `module_changes` collection (in addition to the existing `changes` collection). Each item has:
+- **Module grouping**: The C# `ReportRenderer` groups resource changes by module and emits a `📦 Module: \`module_address\`` heading for each non-root module. Each item has:
   - `module_address` (string, empty for root)
-  - `changes` (array of resource change objects, same structure as items in `changes`)
-
-Example usage in a Scriban template:
-
-```scriban
-{{ for module in module_changes }}
-### Module: {{ if module.module_address && module.module_address != "" }}`{{ module.module_address }}`{{ else }}root{{ end }}
-
-{{ for change in module.changes }}
-#### {{ change.action_symbol }} {{ change.address }}
-
-... render attribute tables ...
-
-{{ end }}
-
----
-{{ end }}
-```
+  - `changes` (array of resource change objects)
 
 This grouping is enabled by default and cannot be disabled (it keeps reports concise and improves readability for multi-module plans).
 
@@ -1006,13 +988,13 @@ tfplan2md ensures generated markdown is valid and renders correctly on GitHub an
 - **Table formatting**: Tables use padded separator rows that satisfy markdownlint requirements
 - **CI validation**: The comprehensive demo output is validated with markdownlint-cli2 on every PR and commit to main
 
-The escaping logic is centralized in the `escape_markdown` Scriban helper, which all templates must use for external input.
+Escaping logic is centralized in the `Markdown` C# helper class and applied automatically during rendering.
 
 For details on the markdown subset and formatting rules, see [docs/markdown-specification.md](markdown-specification.md).
 
 ## Templates
 
-Reports are generated using customizable templates powered by [Scriban](https://github.com/scriban/scriban).
+Reports are generated using a pure C# rendering pipeline. Two built-in output formats can be selected by name.
 
 ### Built-in Templates
 
@@ -1026,52 +1008,21 @@ Select a built-in template using the `--template` option:
 tfplan2md plan.json --template summary
 ```
 
-### Custom Templates
-
-Provide a custom template file using the `--template` flag:
-```bash
-tfplan2md plan.json --template /path/to/custom-template.sbn
-```
-
-**Template resolution order:**
-1. Check if the provided value matches a built-in template name
-2. If not, attempt to load it as a file path
-3. If neither exists, display an error listing available built-in templates
-
-**Important:** Custom templates must use the `escape_markdown` helper on all external input to ensure valid markdown output. See built-in templates for examples.
-
 ### Template Variables
 
-Templates have access to the following variables:
+The rendering context provides the following data to the C# renderers:
 
 - **`terraform_version`** - Terraform version string (e.g., "1.14.0")
 - **`format_version`** - Plan format version (e.g., "1.2")
 - **`tf_plan2_md_version`** - tfplan2md semantic version (e.g., "0.30.0")
 - **`commit_hash`** - Short git commit hash (7 characters) of the tfplan2md build
-- **`generated_at_utc`** - UTC timestamp when the report was generated (DateTimeOffset object)
+- **`generated_at_utc`** - UTC timestamp when the report was generated
 - **`hide_metadata`** - Boolean indicating whether the metadata line should be suppressed
-- **`timestamp`** - Plan generation timestamp in RFC3339 format (e.g., "2025-12-20T10:00:00Z"), if available in the plan JSON
-- **`show_unchanged_values`** - Boolean indicating whether unchanged attribute values are included in the output
-- **`summary`** - Summary object with action details:
-  - `to_add`, `to_change`, `to_destroy`, `to_replace`, `no_op` - Each is an `ActionSummary` object containing:
-    - `count` - Number of resources for this action
-    - `breakdown` - Array of `ResourceTypeBreakdown` objects, each with `type` (resource type name) and `count` (number of that type)
-  - `total` - Total number of resources with changes (excludes no-op resources)
-- **`changes`** - List of resource changes (no-op resources excluded), each with:
-  - `address` - Full resource address
-  - `type` - Resource type
-  - `action` - Action string ("create", "update", "delete", "replace")
-  - `action_symbol` - Emoji symbol for the action
-  - `summary` - One-line summary of the resource change (auto-generated)
-  - `replace_paths` - Array of attribute paths that triggered replacement (Terraform 1.2+, may be null)
-  - `attribute_changes` - List of attribute changes with `name`, `before`, `after`, and `is_sensitive`
-  - `before_json`, `after_json` - JSON state objects for resource-specific templates. When `--show-sensitive` is **not** enabled, any leaf matching a sensitivity entry is replaced with `(sensitive)` before the template sees the value (masked by default). Pass `--show-sensitive` to receive raw values.
-  - `before_sensitive`, `after_sensitive` - Sensitivity metadata from the Terraform plan (object or boolean). Templates can inspect these to understand which paths are masked or to drive layout decisions.
-- **`module_changes`** - Resource changes grouped by module, each with:
-  - `module_address` - Module address (empty string for root)
-  - `changes` - Array of resource changes for this module
-
-**Note:** The `timestamp` field is optional and may be `null` if not present in the Terraform plan JSON.
+- **`timestamp`** - Plan generation timestamp in RFC3339 format, if available
+- **`show_unchanged_values`** - Boolean indicating whether unchanged attribute values are included
+- **`summary`** - Summary object with action details (counts and breakdowns by resource type)
+- **`changes`** - List of resource changes (no-op resources excluded)
+- **`module_changes`** - Resource changes grouped by module
 
 ## CLI Interface
 
@@ -1080,7 +1031,7 @@ Simple single-command interface with flags:
 | Flag | Description |
 |------|-------------|
 | `--output <file>` | Write output to a file instead of stdout |
-| `--template <name\|file>` | Use a built-in template by name (default, summary) or a custom Scriban template file |
+| `--template <name>` | Use a built-in template by name (`default`, `summary`) |
 | `--report-title <text>` | Override the report's level-1 heading |
 | `--render-target <github\|azuredevops>` | Target platform for rendering: `github` (simple diff) or `azuredevops` (inline diff, default) |
 | `--principal-mapping <file>` | Map Azure principal IDs to names using a JSON file |
@@ -1745,16 +1696,6 @@ docker run -v $(pwd):/data oocx/tfplan2md \
 tfplan2md --debug --principal-mapping principals.json plan.json
 ```
 
-### Custom Templates
-
-For users writing custom Scriban templates, three new helper functions are available:
-
-- `azdo_user_name(userId)` → resolves Azure DevOps user ID
-- `azdo_group_name(groupDescriptor)` → resolves Azure DevOps group descriptor  
-- `azdo_project_name(projectId)` → resolves Azure DevOps project ID
-
-These helpers provide explicit control over entity resolution in custom templates, while default rendering automatically resolves entities via value formatters.
-
 **Result:** Azure DevOps resources are easier to review by showing recognizable names instead of GUIDs and descriptors, improving the quality of Azure DevOps infrastructure change reviews.
 
 ## Azure DevOps Repository Mapping and Branch/Repo Icons
@@ -1821,12 +1762,6 @@ tfplan2md --principal-mapping principals.json plan.json
 # With debug output to see repository counts
 tfplan2md --debug --principal-mapping principals.json plan.json
 ```
-
-### Custom Templates
-
-For custom Scriban templates, a new helper function is available:
-
-- `azdo_repository_name(repositoryId)` → resolves Azure DevOps repository ID to display name
 
 **Result:** Azure DevOps resources referencing repositories and branches are visually clearer with semantic icons, and repository GUIDs are replaced with recognizable names, making build definitions, branch policies, and git repository resources easier to review.
 
@@ -2507,70 +2442,6 @@ When a variable group is linked to Azure Key Vault, the connection metadata is d
 
 This template makes it possible to review variable group changes in CI/CD pipelines without exposing secret values.
 
-### Helper Functions
-
-Templates have access to custom Scriban helper functions:
-
-**`diff_array`** - Semantic collection diffing:
-```scriban
-{{ diff = diff_array before_json.rule after_json.rule "name" }}
-{{ for rule in diff.added }}
-  ➕ {{ rule.name }}
-{{ end }}
-```
-
-**`format_diff`** - Before/after diff formatting:
-```scriban
-{{ format_diff (item.before.protocols | array.join ", ") (item.after.protocols | array.join ", ") }}
-```
-Returns the single escaped value if unchanged, or `"- escapedBefore<br>+ escapedAfter"` if different. Values are escaped for markdown safety while the `<br>` tag is preserved to render as a line break in tables.
-
-**AzAPI-specific helpers** (for `azapi_resource` template):
-
-**`flatten_json`** - Flattens JSON into dot-notation key-value pairs:
-```scriban
-{{ flattened = flatten_json change.after_json.body "" }}
-{{ for prop in flattened }}
-  {{ prop.path }}: {{ prop.value }}
-{{ end }}
-```
-Converts nested JSON objects into flat property paths (e.g., `properties.sku.name`). Values exceeding 200 characters are marked with `is_large: true` for separate rendering.
-
-**`compare_json_properties`** - Compares before/after JSON and returns changed properties:
-```scriban
-{{ comparisons = compare_json_properties before_json.body after_json.body before_sensitive after_sensitive false false }}
-{{ for prop in comparisons }}
-  {{ prop.path }}: {{ prop.before }} → {{ prop.after }}
-{{ end }}
-```
-Parameters: beforeJson, afterJson, beforeSensitive, afterSensitive, showUnchanged, showSensitive. Returns list with path, before, after, is_large, is_sensitive, is_changed.
-
-**`parse_azure_resource_type`** - Parses Azure resource type strings:
-```scriban
-{{ type_info = parse_azure_resource_type "Microsoft.Automation/automationAccounts@2021-06-22" }}
-Provider: {{ type_info.provider }}       // "Microsoft.Automation"
-Service: {{ type_info.service }}         // "Automation"
-Type: {{ type_info.resource_type }}      // "automationAccounts"
-API Version: {{ type_info.api_version }} // "2021-06-22"
-```
-
-**`azure_api_doc_link`** - Generates Azure REST API documentation URLs from curated mappings:
-```scriban
-{{ doc_link = azure_api_doc_link "Microsoft.Automation/automationAccounts@2021-06-22" }}
-// Returns: "https://learn.microsoft.com/rest/api/automation/automation-accounts/"
-```
-Uses curated mappings from Microsoft Learn for 92 Azure resource types. Returns null for unmapped resources or non-Microsoft resource types. API version suffixes are stripped during lookup.
-
-**`extract_azapi_metadata`** - Extracts key attributes from azapi_resource:
-```scriban
-{{ metadata = extract_azapi_metadata change }}
-Name: {{ metadata.name }}
-Type: {{ metadata.type }}
-Location: {{ metadata.location }}
-Parent: {{ metadata.parent_id }}
-Tags: {{ metadata.tags }}
-```
-
 See [resource-specific-templates.md](features/resource-specific-templates.md) for full specification.
 
 ## Markdown Rendering Quality
@@ -2587,33 +2458,27 @@ These improvements are applied automatically during rendering and require no con
 
 **Status:** ✅ Implemented
 
-The template system has been simplified to enable faster, more reliable feature development by both humans and AI agents. This architectural improvement eliminates complexity without changing user-facing output.
+Rendering was simplified progressively across multiple features, culminating in the full removal of Scriban (Feature 107). All rendering logic is now implemented in pure C# with static typing and compile-time safety.
 
 **Key Changes:**
 
-- **Direct rendering**: Templates now generate output directly in a single pass. The old render-then-replace mechanism with HTML anchor comments has been eliminated.
-- **Logic in C#, not templates**: Value transformation and formatting logic has been moved from Scriban `func` definitions into C# code (model properties and helper functions). Templates now focus purely on layout.
-- **Cleaner templates**: All built-in templates are under 100 lines with no `func` definitions, making them easier to understand and maintain.
-- **Clear patterns**: When adding formatting features (like new icons), developers now have a clear, single location for implementation instead of scattered changes across templates.
+- **Direct rendering**: Renderers generate output directly in a single pass. The old render-then-replace mechanism with HTML anchor comments has been eliminated.
+- **Logic in C#**: Value transformation and formatting logic is implemented in C# (model properties and helper methods). Rendering classes focus on layout and structure.
+- **Clear patterns**: Formatting features are added in a single C# renderer class rather than scattered across template files.
 
 **Benefits:**
 
-- **Faster development**: New formatting features can be added in a single file rather than across multiple templates
-- **Better testing**: Compile-time and test-time detection of incomplete implementations
-- **Easier maintenance**: Templates are pure layout with discoverable helper functions
+- **Faster development**: New formatting features can be added in a single file
+- **Compile-time safety**: All rendering logic is statically typed and validated by the compiler
+- **Better testing**: Rendering errors are detectable at compile time rather than runtime
 - **AI-friendly**: Simpler architecture enables AI agents to implement features without trial-and-error
 
-**For Template Authors:**
-
-Custom templates no longer need to emit HTML anchor comments. Simply focus on layout and use the available helper functions for value formatting. All formatting capabilities are discoverable through the model object and Scriban helper functions.
-
 **Metrics Achieved:**
-- Zero HTML anchor comments in templates (eliminated render-then-replace)
-- Zero `func` definitions in templates (logic moved to C#)
-- All templates under 100 lines (57-83 lines)
+- Zero `.sbn` template files (all rendering in C#)
+- Zero third-party NuGet runtime dependencies for rendering
 - Single-file changes for formatting features
 
-See [docs/features/026-template-rendering-simplification/](features/026-template-rendering-simplification/) for technical details.
+See [docs/features/026-template-rendering-simplification/](features/026-template-rendering-simplification/) and [docs/features/107-remove-scriban/](features/107-remove-scriban/) for technical details.
 
 ## Provider Code Separation
 
@@ -2945,8 +2810,8 @@ This creates a powerful workflow where security and quality issues are immediate
 ### Technical Details
 
 - **HTML implementation**: Controls the `open` attribute on `<details>` elements
-- **Template integration**: Uses a Scriban helper function (`details_open_attr`) to determine whether to render the `open` attribute
-- **Performance**: No impact on rendering performance; decision is made once per resource during template rendering
+- **Rendering integration**: The `details_open_attr` helper determines whether to render the `open` attribute during C# rendering
+- **Performance**: No impact on rendering performance; decision is made once per resource during rendering
 - **Validation**: Invalid mode values are rejected with a clear error message
 
 See [docs/features/092-details-display-mode/](features/092-details-display-mode/) for specification, architecture, and implementation details.
@@ -3053,10 +2918,36 @@ Output values benefit from the same rendering quality as body attributes:
 
 See [docs/features/106-azapi-output-values/](features/106-azapi-output-values/) for specification, architecture, and implementation details.
 
+## Remove Scriban and Use Pure C# Rendering (Feature 107)
+
+**Status:** ✅ Implemented
+
+tfplan2md no longer uses Scriban templates. Markdown rendering now runs through a pure C# pipeline built around `ReportRenderer`, `MarkdownWriter`, and provider-specific `IResourceRenderer` implementations.
+
+### What Changed
+
+- Removed the `Scriban` NuGet dependency from the main project.
+- Removed all embedded `.sbn` template files and legacy template loader/resolver infrastructure.
+- Removed `AotScriptObjectMapper` and all ScriptObject-based mapper glue.
+- Provider modules now register typed C# resource renderers instead of Scriban helper registration.
+
+### User Impact
+
+- CLI behavior is unchanged.
+- Built-in template selection remains `default` and `summary`.
+- Report output remains equivalent while rendering is now compile-time checked.
+
+### Architecture Impact
+
+- Rendering logic is statically typed and validated by the compiler.
+- NativeAOT trimming no longer requires Scriban preservation entries.
+- The project no longer carries third-party templating runtime overhead.
+
+See [docs/features/107-remove-scriban/](features/107-remove-scriban/) for full specification, architecture, tasks, and test plan.
+
 ## Future Considerations
 
 The following features may be added in future versions:
 
-- Additional resource-specific templates based on user feedback
-- Provider-default templates (e.g., `Templates/azurerm/default.sbn`)
-- `--list-templates` CLI option to list bundled templates
+- Additional resource-specific renderers based on user feedback
+- `--list-renderers` CLI option to list built-in resource-specific renderers
