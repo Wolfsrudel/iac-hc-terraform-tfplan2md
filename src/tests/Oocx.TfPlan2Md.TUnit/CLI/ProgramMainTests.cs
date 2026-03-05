@@ -232,6 +232,51 @@ public class ProgramMainTests
     }
 
     /// <summary>
+    /// Verifies that the Azure DevOps pipeline variable is emitted as true when the plan has changes.
+    /// </summary>
+    [Test]
+    public async Task Main_WithAzureDevOpsRenderTarget_WithChanges_EmitsHasChangesTrueVariable()
+    {
+        var inputPath = GetTestDataPath("azapi-create-plan.json");
+        var outputPath = GetTempPath("azdo-has-changes-true-output.md");
+
+        var result = await RunMainAsync([inputPath, "--output", outputPath]);
+
+        result.ExitCode.Should().Be(0);
+        result.StdOut.Should().Contain("##vso[task.setvariable variable=tfplan2md_haschanges]true");
+    }
+
+    /// <summary>
+    /// Verifies that the Azure DevOps pipeline variable is emitted as false when the plan has no changes.
+    /// </summary>
+    [Test]
+    public async Task Main_WithAzureDevOpsRenderTarget_WithNoChanges_EmitsHasChangesFalseVariable()
+    {
+        var inputPath = GetTestDataPath("no-op-plan.json");
+        var outputPath = GetTempPath("azdo-has-changes-false-output.md");
+
+        var result = await RunMainAsync([inputPath, "--output", outputPath]);
+
+        result.ExitCode.Should().Be(0);
+        result.StdOut.Should().Contain("##vso[task.setvariable variable=tfplan2md_haschanges]false");
+    }
+
+    /// <summary>
+    /// Verifies that the Azure DevOps pipeline variable is NOT emitted when the render target is GitHub.
+    /// </summary>
+    [Test]
+    public async Task Main_WithGitHubRenderTarget_DoesNotEmitHasChangesVariable()
+    {
+        var inputPath = GetTestDataPath("azapi-create-plan.json");
+        var outputPath = GetTempPath("github-no-azdo-variable-output.md");
+
+        var result = await RunMainAsync([inputPath, "--output", outputPath, "--render-target", "github"]);
+
+        result.ExitCode.Should().Be(0);
+        result.StdOut.Should().NotContain("##vso[task.setvariable variable=tfplan2md_haschanges]");
+    }
+
+    /// <summary>
     /// Invokes the program entry point while capturing stdout/stderr.
     /// </summary>
     /// <param name="args">Command-line arguments.</param>

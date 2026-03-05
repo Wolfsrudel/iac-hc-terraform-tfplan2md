@@ -6,6 +6,7 @@ using Oocx.TfPlan2Md.CLI;
 using Oocx.TfPlan2Md.CodeAnalysis;
 using Oocx.TfPlan2Md.MarkdownGeneration;
 using Oocx.TfPlan2Md.Parsing;
+using Oocx.TfPlan2Md.RenderTargets;
 
 namespace Oocx.TfPlan2Md;
 
@@ -138,6 +139,13 @@ internal static class ProgramEntry
         else
         {
             Console.WriteLine(markdown);
+        }
+
+        // Emit Azure DevOps pipeline variable for downstream steps
+        if (options.RenderTarget == RenderTarget.AzureDevOps)
+        {
+            var hasChanges = model.Summary.Total - model.FilteredResourceCount > 0;
+            Console.WriteLine($"##vso[task.setvariable variable=tfplan2md_haschanges]{(hasChanges ? "true" : "false")}");
         }
 
         // Handle code analysis failure threshold
