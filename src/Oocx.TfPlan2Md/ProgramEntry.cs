@@ -141,11 +141,11 @@ internal static class ProgramEntry
             Console.WriteLine(markdown);
         }
 
-        // Emit Azure DevOps pipeline variable for downstream steps
-        if (options.RenderTarget == RenderTarget.AzureDevOps)
+        // Emit Azure DevOps pipeline variable for downstream steps (only when writing to file)
+        if (options.OutputFile is not null && options.RenderTarget == RenderTarget.AzureDevOps)
         {
-            var hasChanges = model.Summary.Total - model.FilteredResourceCount > 0;
-            Console.WriteLine($"##vso[task.setvariable variable=tfplan2md_haschanges]{(hasChanges ? "true" : "false")}");
+            var hasChangesValue = model.Summary.Total - model.FilteredResourceCount > 0 ? "true" : "false";
+            Console.WriteLine($"##vso[task.setvariable variable=tfplan2md_haschanges]{hasChangesValue}");
         }
 
         // Handle code analysis failure threshold

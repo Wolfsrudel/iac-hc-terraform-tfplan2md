@@ -277,6 +277,20 @@ public class ProgramMainTests
     }
 
     /// <summary>
+    /// Verifies that the Azure DevOps pipeline variable is NOT emitted when no output file is specified (stdout mode).
+    /// </summary>
+    [Test]
+    public async Task Main_WithAzureDevOpsRenderTarget_WithoutOutputFile_DoesNotEmitHasChangesVariable()
+    {
+        var inputPath = GetTestDataPath("azapi-create-plan.json");
+
+        var result = await RunMainAsync([inputPath]);
+
+        result.ExitCode.Should().Be(0);
+        result.StdOut.Should().NotContain("##vso[task.setvariable variable=tfplan2md_haschanges]");
+    }
+
+    /// <summary>
     /// Invokes the program entry point while capturing stdout/stderr.
     /// </summary>
     /// <param name="args">Command-line arguments.</param>
