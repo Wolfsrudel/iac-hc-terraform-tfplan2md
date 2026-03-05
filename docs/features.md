@@ -2945,6 +2945,64 @@ tfplan2md no longer uses Scriban templates. Markdown rendering now runs through 
 
 See [docs/features/107-remove-scriban/](features/107-remove-scriban/) for full specification, architecture, tasks, and test plan.
 
+## Azure DevOps Pipeline Variable: `tfplan2md_haschanges` (Feature 109)
+
+**Status:** ✅ Implemented
+
+When using the Azure DevOps render target (the default) and writing output to a file with `--output`, tfplan2md emits an Azure DevOps logging command that sets a pipeline variable named `tfplan2md_haschanges` to `true` or `false`. This lets downstream pipeline steps conditionally run only when there are actual Terraform changes to apply.
+
+### What the Variable Indicates
+
+- **`true`** — the plan contains at least one resource change after all active filters (such as `--ignore-azure-id-case-changes`) have been applied.
+- **`false`** — the plan has no changes, or every detected change was suppressed by a filter.
+
+### Logging Command Format
+
+The logging command written to standard output follows the standard Azure DevOps format:
+
+```
+##vso[task.setvariable variable=tfplan2md_haschanges]true
+```
+
+or
+
+```
+##vso[task.setvariable variable=tfplan2md_haschanges]false
+```
+
+Azure DevOps picks this up automatically and makes `tfplan2md_haschanges` available to all subsequent steps in the same job.
+
+### Requirements
+
+- The logging command is **only emitted when `--output` (or `-o`) is specified**. When tfplan2md writes the report to standard output, no logging command is produced.
+- The render target must be `azuredevops` (the default). If you have explicitly set `--render-target` to a different value the logging command will not be emitted.
+- No extra CLI flag is required; the Azure DevOps render target is the default.
+
+### Usage Example
+
+```yaml
+# azure-pipelines.yml
+steps:
+  - script: |
+      tfplan2md plan.json --output plan.md
+    displayName: Generate Terraform plan report
+
+  # The tfplan2md_haschanges variable is now set by the logging command above.
+  # Use it to gate the apply step.
+  - script: |
+      terraform apply -auto-approve plan.tfplan
+    displayName: Apply Terraform plan
+    condition: eq(variables['tfplan2md_haschanges'], 'true')
+```
+
+### Technical Details
+
+- The variable is set **before** the step completes, so it is available to all subsequent steps in the same job.
+- The value reflects changes **after filtering** — for example, if `--ignore-azure-id-case-changes` suppresses all detected changes, `tfplan2md_haschanges` is set to `false`.
+- Plan summary counts (resources to add, change, destroy) displayed in the report are **not** affected by this variable.
+
+See [docs/features/109-azdo-has-changes-variable/](features/109-azdo-has-changes-variable/) for specification, architecture, and implementation details.
+
 ## Future Considerations
 
 The following features may be added in future versions:

@@ -39,3 +39,20 @@
   - **Major M3:** `HelpTextProvider.cs` does not document the `tfplan2md_haschanges` variable.
   - **Minor m1–m3:** Missing default-render-target test, missing feature spec ref in comment,
     ternary embedded in string interpolation instead of intermediate variable.
+
+### Technical Writer
+- **Date:** 2026-06-17
+- **Summary:** Documented the Azure DevOps `tfplan2md_haschanges` pipeline variable feature
+  in `docs/features.md`. Added a new section "Azure DevOps Pipeline Variable:
+  `tfplan2md_haschanges` (Feature 109)" with description, variable semantics, logging command
+  format, requirements (output-only, default render target), Azure DevOps YAML usage example,
+  and technical details. Placed the section before the existing "Future Considerations"
+  section to match the ordering of other recently-implemented features.
+- **Artifacts Produced:**
+  - `docs/features.md` (new section added)
+  - `docs/features/109-azdo-has-changes-variable/work-protocol.md` (this entry)
+- **Problems Encountered:**
+  - No `specification.md` or `tasks.md` present in the feature folder; relied on the
+    analysis.md, code-review.md, and the task description provided by the Maintainer.
+  - Code Reviewer noted M3 (HelpTextProvider.cs not updated) — that is a source-code change
+    outside the Technical Writer scope; flagged for Developer to address.
