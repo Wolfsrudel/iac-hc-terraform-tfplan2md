@@ -291,6 +291,48 @@ public class ProgramMainTests
     }
 
     /// <summary>
+    /// Verifies that the Azure DevOps pipeline variable is emitted as false when all changes are
+    /// suppressed by the --ignore-azure-id-case-changes filter.
+    /// </summary>
+    [Test]
+    public async Task Main_WithIgnoreAzureIdCaseChanges_AllFilteredOut_EmitsHasChangesFalseVariable()
+    {
+        var inputPath = GetTempPath("casing-only-plan.json");
+        var outputPath = GetTempPath("azdo-all-filtered-output.md");
+
+        await File.WriteAllTextAsync(inputPath, """
+            {
+              "format_version": "1.2",
+              "terraform_version": "1.9.0",
+              "resource_changes": [
+                {
+                  "address": "azurerm_role_assignment.casing_only",
+                  "module_address": null,
+                  "mode": "managed",
+                  "type": "azurerm_role_assignment",
+                  "name": "casing_only",
+                  "provider_name": "registry.terraform.io/hashicorp/azurerm",
+                  "change": {
+                    "actions": ["update"],
+                    "before": { "scope": "/subscriptions/ABC123/resourceGroups/my-rg" },
+                    "after": { "scope": "/subscriptions/abc123/resourceGroups/my-rg" },
+                    "after_unknown": {},
+                    "before_sensitive": false,
+                    "after_sensitive": false
+                  }
+                }
+              ],
+              "configuration": { "root_module": {} }
+            }
+            """);
+
+        var result = await RunMainAsync([inputPath, "--output", outputPath, "--ignore-azure-id-case-changes"]);
+
+        result.ExitCode.Should().Be(0);
+        result.StdOut.Should().Contain("##vso[task.setvariable variable=tfplan2md_haschanges]false");
+    }
+
+    /// <summary>
     /// Invokes the program entry point while capturing stdout/stderr.
     /// </summary>
     /// <param name="args">Command-line arguments.</param>

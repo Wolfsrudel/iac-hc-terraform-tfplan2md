@@ -141,7 +141,8 @@ internal static class ProgramEntry
             Console.WriteLine(markdown);
         }
 
-        // Emit Azure DevOps pipeline variable for downstream steps (only when writing to file)
+        // Emit Azure DevOps pipeline variable for downstream steps (only when writing to file).
+        // Related feature: docs/features/109-azdo-has-changes-variable/specification.md.
         if (options.OutputFile is not null && options.RenderTarget == RenderTarget.AzureDevOps)
         {
             var hasChangesValue = model.Summary.Total - model.FilteredResourceCount > 0 ? "true" : "false";
