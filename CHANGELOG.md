@@ -5,6 +5,20 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+<a name="1.34.1"></a>
+## [1.34.1](https://github.com/oocx/tfplan2md/compare/v1.34.0...v1.34.1) (2026-03-06)
+
+### 🐛 Bug Fixes
+
+* remove 5 code review findings (dead code, visibility, cache leak) ([e190e92](https://github.com/oocx/tfplan2md/commit/e190e928ed5e9c7bafdd3151a0da8caf0d3dd643))
+* remove model: from coding agent files to fix 400 error on GitHub.com ([eea23ce](https://github.com/oocx/tfplan2md/commit/eea23cea0ea334050323c1b9a0dee1f2d088e541))
+* remove snapshot-compatibility heuristics and dead code from rendering pipeline ([82e4e7d](https://github.com/oocx/tfplan2md/commit/82e4e7de5daba1ebe8d3f40806990003939aee35))
+
+### 📚 Documentation
+
+* add issue analysis for code review top 5 findings (issue 109) ([b91b0f5](https://github.com/oocx/tfplan2md/commit/b91b0f5f582bab2f38438d71dfeae593f6dd7ff4))
+* add release notes and release manager log for issue 109 ([b6732c3](https://github.com/oocx/tfplan2md/commit/b6732c3984c8b0b774576c57687c4ed43a051fed))
+
 <a name="1.34.0"></a>
 ## [1.34.0](https://github.com/oocx/tfplan2md/compare/v1.33.1...v1.34.0) (2026-03-04)
 
