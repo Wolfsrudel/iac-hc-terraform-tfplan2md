@@ -6,6 +6,7 @@ using Oocx.TfPlan2Md.CLI;
 using Oocx.TfPlan2Md.CodeAnalysis;
 using Oocx.TfPlan2Md.MarkdownGeneration;
 using Oocx.TfPlan2Md.Parsing;
+using Oocx.TfPlan2Md.RenderTargets;
 
 namespace Oocx.TfPlan2Md;
 
@@ -138,6 +139,14 @@ internal static class ProgramEntry
         else
         {
             Console.WriteLine(markdown);
+        }
+
+        // Emit Azure DevOps pipeline variable for downstream steps (only when writing to file).
+        // Related feature: docs/features/109-azdo-has-changes-variable/analysis.md.
+        if (options.OutputFile is not null && options.RenderTarget == RenderTarget.AzureDevOps)
+        {
+            var hasChangesValue = model.Summary.Total - model.FilteredResourceCount > 0 ? "true" : "false";
+            Console.WriteLine($"##vso[task.setvariable variable=tfplan2md_haschanges]{hasChangesValue}");
         }
 
         // Handle code analysis failure threshold

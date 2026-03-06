@@ -232,6 +232,107 @@ public class ProgramMainTests
     }
 
     /// <summary>
+    /// Verifies that the Azure DevOps pipeline variable is emitted as true when the plan has changes.
+    /// </summary>
+    [Test]
+    public async Task Main_WithAzureDevOpsRenderTarget_WithChanges_EmitsHasChangesTrueVariable()
+    {
+        var inputPath = GetTestDataPath("azapi-create-plan.json");
+        var outputPath = GetTempPath("azdo-has-changes-true-output.md");
+
+        var result = await RunMainAsync([inputPath, "--output", outputPath]);
+
+        result.ExitCode.Should().Be(0);
+        result.StdOut.Should().Contain("##vso[task.setvariable variable=tfplan2md_haschanges]true");
+    }
+
+    /// <summary>
+    /// Verifies that the Azure DevOps pipeline variable is emitted as false when the plan has no changes.
+    /// </summary>
+    [Test]
+    public async Task Main_WithAzureDevOpsRenderTarget_WithNoChanges_EmitsHasChangesFalseVariable()
+    {
+        var inputPath = GetTestDataPath("no-op-plan.json");
+        var outputPath = GetTempPath("azdo-has-changes-false-output.md");
+
+        var result = await RunMainAsync([inputPath, "--output", outputPath]);
+
+        result.ExitCode.Should().Be(0);
+        result.StdOut.Should().Contain("##vso[task.setvariable variable=tfplan2md_haschanges]false");
+    }
+
+    /// <summary>
+    /// Verifies that the Azure DevOps pipeline variable is NOT emitted when the render target is GitHub.
+    /// </summary>
+    [Test]
+    public async Task Main_WithGitHubRenderTarget_DoesNotEmitHasChangesVariable()
+    {
+        var inputPath = GetTestDataPath("azapi-create-plan.json");
+        var outputPath = GetTempPath("github-no-azdo-variable-output.md");
+
+        var result = await RunMainAsync([inputPath, "--output", outputPath, "--render-target", "github"]);
+
+        result.ExitCode.Should().Be(0);
+        result.StdOut.Should().NotContain("##vso[task.setvariable variable=tfplan2md_haschanges]");
+    }
+
+    /// <summary>
+    /// Verifies that the Azure DevOps pipeline variable is NOT emitted when no output file is specified (stdout mode).
+    /// </summary>
+    [Test]
+    public async Task Main_WithAzureDevOpsRenderTarget_WithoutOutputFile_DoesNotEmitHasChangesVariable()
+    {
+        var inputPath = GetTestDataPath("azapi-create-plan.json");
+
+        var result = await RunMainAsync([inputPath]);
+
+        result.ExitCode.Should().Be(0);
+        result.StdOut.Should().NotContain("##vso[task.setvariable variable=tfplan2md_haschanges]");
+    }
+
+    /// <summary>
+    /// Verifies that the Azure DevOps pipeline variable is emitted as false when all changes are
+    /// suppressed by the --ignore-azure-id-case-changes filter.
+    /// </summary>
+    [Test]
+    public async Task Main_WithIgnoreAzureIdCaseChanges_AllFilteredOut_EmitsHasChangesFalseVariable()
+    {
+        var inputPath = GetTempPath("casing-only-plan.json");
+        var outputPath = GetTempPath("azdo-all-filtered-output.md");
+
+        await File.WriteAllTextAsync(inputPath, """
+            {
+              "format_version": "1.2",
+              "terraform_version": "1.9.0",
+              "resource_changes": [
+                {
+                  "address": "azurerm_role_assignment.casing_only",
+                  "module_address": null,
+                  "mode": "managed",
+                  "type": "azurerm_role_assignment",
+                  "name": "casing_only",
+                  "provider_name": "registry.terraform.io/hashicorp/azurerm",
+                  "change": {
+                    "actions": ["update"],
+                    "before": { "scope": "/subscriptions/ABC123/resourceGroups/my-rg" },
+                    "after": { "scope": "/subscriptions/abc123/resourceGroups/my-rg" },
+                    "after_unknown": {},
+                    "before_sensitive": false,
+                    "after_sensitive": false
+                  }
+                }
+              ],
+              "configuration": { "root_module": {} }
+            }
+            """);
+
+        var result = await RunMainAsync([inputPath, "--output", outputPath, "--ignore-azure-id-case-changes"]);
+
+        result.ExitCode.Should().Be(0);
+        result.StdOut.Should().Contain("##vso[task.setvariable variable=tfplan2md_haschanges]false");
+    }
+
+    /// <summary>
     /// Invokes the program entry point while capturing stdout/stderr.
     /// </summary>
     /// <param name="args">Command-line arguments.</param>
