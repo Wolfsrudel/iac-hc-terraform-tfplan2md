@@ -69,3 +69,31 @@
   - `docs/features/109-azdo-has-changes-variable/code-review.md` (updated)
   - `docs/features/109-azdo-has-changes-variable/work-protocol.md` (this entry)
 - **Problems Encountered:** None beyond the issues documented in the review report.
+
+### Developer
+- **Date:** 2026-06-17
+- **Summary:** Implemented the Azure DevOps `tfplan2md_haschanges` pipeline variable feature.
+  Added a 7-line block in `ProgramEntry.cs` that emits `##vso[task.setvariable variable=tfplan2md_haschanges]true/false`
+  to stdout when `--render-target azuredevops` (default) and `--output` are both active.
+  Used `model.Summary.Total - model.FilteredResourceCount > 0` to determine whether the plan
+  has real changes after filtering. Added 5 integration tests covering: changes present,
+  no-op plan, GitHub render target exclusion, all-filtered casing scenario, and default
+  render-target implicit test. Fixed code-quality issues from code review: extracted
+  intermediate `hasChangesValue` variable, corrected feature reference comment to `analysis.md`.
+  Updated `HelpTextProvider.cs` `--render-target` description to document the new variable.
+- **Artifacts Produced:**
+  - `src/Oocx.TfPlan2Md/ProgramEntry.cs` (ADO logging command block)
+  - `src/Oocx.TfPlan2Md/CLI/HelpTextProvider.cs` (help text update)
+  - `src/tests/Oocx.TfPlan2Md.TUnit/CLI/ProgramMainTests.cs` (5 new tests)
+- **Problems Encountered:**
+  - Feature was implemented directly from analysis document without a formal specification.
+    Accepted as pragmatic deviation for a small, well-scoped change.
+
+### Release Manager
+- **Date:** 2026-06-17
+- **Summary:** Verified work protocol completeness, generated user-facing release notes,
+  and executed the PR merge and release pipeline for feature 109.
+- **Artifacts Produced:**
+  - `docs/features/109-azdo-has-changes-variable/release-notes.md`
+  - `docs/features/109-azdo-has-changes-variable/work-protocol.md` (this entry)
+- **Problems Encountered:** None
