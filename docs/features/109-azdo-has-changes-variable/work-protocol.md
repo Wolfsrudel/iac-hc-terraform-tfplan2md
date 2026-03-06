@@ -96,4 +96,7 @@
 - **Artifacts Produced:**
   - `docs/features/109-azdo-has-changes-variable/release-notes.md`
   - `docs/features/109-azdo-has-changes-variable/work-protocol.md` (this entry)
-- **Problems Encountered:** None
+- **Problems Encountered:**
+  - Branch requires force-push to resolve GitHub "Rebase and merge" conflict caused by
+    commit `d26e4f4` (pre-merge sync of `artifacts/comprehensive-demo.md`). Maintainer
+    must run: `git fetch origin && git rebase origin/main && git push --force-with-lease origin copilot/add-azure-devops-logging-commands`
