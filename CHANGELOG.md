@@ -5,6 +5,27 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+<a name="1.35.0"></a>
+## [1.35.0](https://github.com/oocx/tfplan2md/compare/v1.34.1...v1.35.0) (2026-03-06)
+
+### ✨ Features
+
+* add casing-filter test, feature comment, and help text update ([12df0e3](https://github.com/oocx/tfplan2md/commit/12df0e354b5912e6dff825057d32ef0a0c4c49c4))
+* emit Azure DevOps pipeline variable tfplan2md_haschanges ([c991e28](https://github.com/oocx/tfplan2md/commit/c991e2839fc927b6a9802102df0924f79ea1b5a9))
+* suppress haschanges variable when no output file specified ([93c8ec7](https://github.com/oocx/tfplan2md/commit/93c8ec7bb50e2bdd48d8185780a9912a31f3e5ae))
+
+### 🐛 Bug Fixes
+
+* correct feature reference comment in ProgramEntry.cs ([0c2c509](https://github.com/oocx/tfplan2md/commit/0c2c5093de6ed767609d5ac545e0389edaec24c0))
+* correct feature reference comment in ProgramEntry.cs ([ade71ae](https://github.com/oocx/tfplan2md/commit/ade71ae9d86f71078f2c4fb411d18ed466c23916))
+
+### 📚 Documentation
+
+* add feature analysis for Azure DevOps has-changes variable ([c319247](https://github.com/oocx/tfplan2md/commit/c319247a1f31b3ddbfd6e4876493e6377aaf53ff))
+* add release notes and complete work protocol for feature 109 ([7500ef9](https://github.com/oocx/tfplan2md/commit/7500ef9c01b8bb13f164a9d6d3766b21b2bd4d33))
+* document Azure DevOps haschanges pipeline variable feature ([96d439a](https://github.com/oocx/tfplan2md/commit/96d439a7e2bf5e1cb317b095aa88ffead893eb35))
+* note rebase conflict root cause and resolution steps in work-protocol ([7c2d6b5](https://github.com/oocx/tfplan2md/commit/7c2d6b599384deb1ac8322237cd614061d5a8b80))
+
 <a name="1.34.1"></a>
 ## [1.34.1](https://github.com/oocx/tfplan2md/compare/v1.34.0...v1.34.1) (2026-03-06)
 
