@@ -5,6 +5,25 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+<a name="1.36.0"></a>
+## [1.36.0](https://github.com/oocx/tfplan2md/compare/v1.35.0...v1.36.0) (2026-03-07)
+
+### ✨ Features
+
+* complete feature 110 refactoring work ([69ed445](https://github.com/oocx/tfplan2md/commit/69ed445c81a9b45ca547bd272fe3a2c342f532e9))
+
+### ♻️ Refactoring
+
+* complete feature 110 review rework for tasks 7-9 ([b21b74c](https://github.com/oocx/tfplan2md/commit/b21b74c68362bd4f9d1a110ce0e32ec090f2ab56))
+
+### 📚 Documentation
+
+* add code review 3 for feature 110 — changes requested (uncommitted Tasks 7-9) ([b4e9334](https://github.com/oocx/tfplan2md/commit/b4e9334e6adc461928903193cfcf9d81b9f60483))
+* add code review 4 for feature 110 — approved ([74de6b8](https://github.com/oocx/tfplan2md/commit/74de6b88200817c4cccb7131076bc5959a13a14a))
+* add release manager entry to work protocol for feature 110 ([ab542db](https://github.com/oocx/tfplan2md/commit/ab542db18f726468535d44fba877017a79c92793))
+* add release notes for feature 110 ([f49991a](https://github.com/oocx/tfplan2md/commit/f49991a3b653ed5777d171a5d62a16c70b7f0422))
+* extend test plan with Tasks 6-9 coverage (TC-30 through TC-48) ([fcb9daf](https://github.com/oocx/tfplan2md/commit/fcb9daff0b60efa2e3ba25bc4dd53f34f4da8148))
+
 <a name="1.35.0"></a>
 ## [1.35.0](https://github.com/oocx/tfplan2md/compare/v1.34.1...v1.35.0) (2026-03-06)
 
