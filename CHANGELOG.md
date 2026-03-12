@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+<a name="1.37.1"></a>
+## [1.37.1](https://github.com/oocx/tfplan2md/compare/v1.37.0...v1.37.1) (2026-03-12)
+
+### 🐛 Bug Fixes
+
+* nsg rule rendering ([7e09012](https://github.com/oocx/tfplan2md/commit/7e09012e703d7f0994c10cf525b857ebd2cd565f))
+
 <a name="1.37.0"></a>
 ## [1.37.0](https://github.com/oocx/tfplan2md/compare/v1.36.0...v1.37.0) (2026-03-11)
 
