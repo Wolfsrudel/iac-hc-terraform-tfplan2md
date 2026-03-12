@@ -5,6 +5,32 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+<a name="1.37.2"></a>
+## [1.37.2](https://github.com/oocx/tfplan2md/compare/v1.37.1...v1.37.2) (2026-03-12)
+
+### 🐛 Bug Fixes
+
+* add permissions: contents: read to uat-validate and copilot-setup-steps workflows ([1786076](https://github.com/oocx/tfplan2md/commit/1786076db12bcd2302f0b5816be85b6fd1b36b7a))
+* apply all CodeQL security fixes from GitHub Security tab ([093de62](https://github.com/oocx/tfplan2md/commit/093de6221329e9781a9fef48c3e7261ecc80fa28))
+* correct codeql workflow - add dotnet restore, update action versions ([a82a8c4](https://github.com/oocx/tfplan2md/commit/a82a8c43d0fa8f3da176fc3cbb83a53e69ac89d5))
+* patch embedded highlight.js regex - fix A-z range and html tag filter (CodeQL A/C) ([771f0ee](https://github.com/oocx/tfplan2md/commit/771f0ee5522676cb63b5b58c4d3578a787cbeb6c))
+* remove duplicate codeql.yml - GitHub already runs managed CodeQL scanning ([dc02a63](https://github.com/oocx/tfplan2md/commit/dc02a63923b6518a10f4f997b5554479f1ab299b))
+* remove re-tracked artifact html files and inline CDN deps in example (remaining alerts) ([a485bec](https://github.com/oocx/tfplan2md/commit/a485bec0967aedf82cff9cb6e6d69c50be05c997))
+* untrack artifact html files that were committed before .gitignore entries were added ([8d709bc](https://github.com/oocx/tfplan2md/commit/8d709bc59bc34a65c0a83090d8009083b3721be6))
+* update docker actions versions, hardcode dockerhub username, add codeql workflow ([db49de8](https://github.com/oocx/tfplan2md/commit/db49de8908b28c3cd30ce215b8fab4766f5e6d73))
+* use urlparse hostname check to prevent URL substring sanitization bypass ([402ca73](https://github.com/oocx/tfplan2md/commit/402ca73fe96340e1a4200d5fafe083eebfd165a2))
+
+### 📚 Documentation
+
+* add code review for security fixes ([80c27af](https://github.com/oocx/tfplan2md/commit/80c27af86186105c0e7dc735f1d2413664a9a2d1))
+* add developer work log entry to work protocol ([92eba68](https://github.com/oocx/tfplan2md/commit/92eba682abe31d8eaef80a690da0309e0ee448b7))
+* add github security tab analysis ([b147cf2](https://github.com/oocx/tfplan2md/commit/b147cf20b3961aa00040451f17afb25e4558e176))
+* add release-notes.md for fix-security-issues to pass PR validation ([0da5adb](https://github.com/oocx/tfplan2md/commit/0da5adb70d0df1d1345b5b2163f9ed022e9dc891))
+* add security issue analysis for fix-security-issues ([07c54f9](https://github.com/oocx/tfplan2md/commit/07c54f9e10872ca89cdbcbf6e27392cb9b0213a1))
+* detailed analysis of all 30 codeql security issues ([64d7aa9](https://github.com/oocx/tfplan2md/commit/64d7aa9cbbd908624d47e0638fdc6f3ae47f8447))
+* technical writer review - add CodeQL workflow to CI/CD tables ([f58b9bd](https://github.com/oocx/tfplan2md/commit/f58b9bd28686582eca2770e591eaf2c607854ae6))
+* update code review - codeql.yml technical fixes approved, process blockers remain ([417ba4c](https://github.com/oocx/tfplan2md/commit/417ba4c771aa3ccdd7c3390a00511f7061d97d66))
+
 <a name="1.37.1"></a>
 ## [1.37.1](https://github.com/oocx/tfplan2md/compare/v1.37.0...v1.37.1) (2026-03-12)
 
