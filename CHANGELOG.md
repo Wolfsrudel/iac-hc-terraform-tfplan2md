@@ -5,6 +5,21 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+<a name="1.37.3"></a>
+## [1.37.3](https://github.com/oocx/tfplan2md/compare/v1.37.2...v1.37.3) (2026-03-15)
+
+### 🐛 Bug Fixes
+
+* handle null resource_changes/actions in tfplan.json gracefully ([9194c34](https://github.com/oocx/tfplan2md/commit/9194c34310e3cc1c19ff279fabff58f74811d91d))
+
+### 📚 Documentation
+
+* add code review report for issue 113 (ArgumentNullException fix) ([c52557c](https://github.com/oocx/tfplan2md/commit/c52557c6adabc6e424c3fe1647767585fc7adb1e))
+* add issue analysis for ArgumentNullException when resource_changes is missing ([3d0f80f](https://github.com/oocx/tfplan2md/commit/3d0f80f7cc4ed159de8c190fe235259179c2965b))
+* add release notes for fix [#113](https://github.com/oocx/tfplan2md/issues/113) null resource_changes ([0d49881](https://github.com/oocx/tfplan2md/commit/0d49881882f55cb026248b4bcf7263d963dfa836))
+* document graceful handling of plans without resource_changes ([1004c78](https://github.com/oocx/tfplan2md/commit/1004c786f44bb4e6ca910094f007886190540df3))
+* update work protocol for issue 113 developer entry ([9436a8d](https://github.com/oocx/tfplan2md/commit/9436a8d623f4e50aae06bdb246ebc08768e559d6))
+
 <a name="1.37.2"></a>
 ## [1.37.2](https://github.com/oocx/tfplan2md/compare/v1.37.1...v1.37.2) (2026-03-12)
 
