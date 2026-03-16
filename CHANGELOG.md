@@ -5,6 +5,28 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+<a name="1.37.4"></a>
+## [1.37.4](https://github.com/oocx/tfplan2md/compare/v1.37.3...v1.37.4) (2026-03-16)
+
+### 🐛 Bug Fixes
+
+* add sudo for UPX install in musl builds ([ad63ca2](https://github.com/oocx/tfplan2md/commit/ad63ca207320f0fbe0f65606c11c2c96dba5e7ab))
+* sensitive large output values no longer leak; JSON large values are pretty-printed ([de0cd1f](https://github.com/oocx/tfplan2md/commit/de0cd1f46dbd114c34b23d3040816c32eee85e34))
+
+### 📚 Documentation
+
+* add issue analysis for musl build failure (apt-get permission denied) ([9aef043](https://github.com/oocx/tfplan2md/commit/9aef0437dc936e81d08efcdd8d0c4fa90c3c938d))
+* add release notes for musl build fix ([a0ea32b](https://github.com/oocx/tfplan2md/commit/a0ea32bd16a6b9b3791a3d0138d16a68ed298969))
+* add technical writer work protocol entry for musl fix ([e7dee12](https://github.com/oocx/tfplan2md/commit/e7dee120df90d028040a25c7f82eb3a15940c0d6))
+* append developer work log entry to work-protocol.md ([30bffe8](https://github.com/oocx/tfplan2md/commit/30bffe8cd7c0e1e23516a5358f381ed0dfef9cbd))
+* code review report for sensitive large value fixes ([6798814](https://github.com/oocx/tfplan2md/commit/6798814ad4382ffae9779b1c2dac27583d6825c8))
+* code review report for sensitive large value fixes ([27d50dc](https://github.com/oocx/tfplan2md/commit/27d50dc7df1c86549b34f6de6e72caa8d3862662))
+* document correct behavior for sensitive and large output values ([eeeec06](https://github.com/oocx/tfplan2md/commit/eeeec06fb5a7c999fa4356fc311049fcf89046b5))
+* issue analysis for sensitive large value rendering bugs ([12aa3b6](https://github.com/oocx/tfplan2md/commit/12aa3b6151d8a1b902c950e7557083142df141c8))
+* release manager sign-off for sensitive large value fixes ([302815e](https://github.com/oocx/tfplan2md/commit/302815e97b0a80aeee6a67e41ff21a07354435a9))
+* release manager sign-off for sensitive large value fixes ([7f6bbc2](https://github.com/oocx/tfplan2md/commit/7f6bbc2f3f523ad297d759c81cd971a949243353))
+* UAT validation results for sensitive large value fixes ([48ee9f8](https://github.com/oocx/tfplan2md/commit/48ee9f8d0b1f385b741ff284f5e597ef1353f5fd))
+
 <a name="1.37.3"></a>
 ## [1.37.3](https://github.com/oocx/tfplan2md/compare/v1.37.2...v1.37.3) (2026-03-15)
 
