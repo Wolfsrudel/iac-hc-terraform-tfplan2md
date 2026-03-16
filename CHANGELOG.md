@@ -5,6 +5,29 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+<a name="1.38.0"></a>
+## [1.38.0](https://github.com/oocx/tfplan2md/compare/v1.37.4...v1.38.0) (2026-03-16)
+
+### ✨ Features
+
+* display principal_name, account_license_type, and licensing_source in azuredevops_user_entitlement summary ([1f49e72](https://github.com/oocx/tfplan2md/commit/1f49e72cd6ec8f315d08f99651f495b9b3ce013b))
+
+### 🐛 Bug Fixes
+
+* rename feature 048 to 115 (next free number across features/issues/workflow) ([4c99c92](https://github.com/oocx/tfplan2md/commit/4c99c92ee2b2cc062268c72f4ff0b468e0dcebe4))
+* resolve musl binary build failure due to Docker root ownership of artifacts ([28fe338](https://github.com/oocx/tfplan2md/commit/28fe33890cd7c87ca9d059e19058f3ac18d3e85e))
+
+### 📚 Documentation
+
+* add feature specification for azuredevops_user_entitlement summary fields ([186e946](https://github.com/oocx/tfplan2md/commit/186e946926f72a5e430304318e7e08c3225edc7c))
+* add release-notes.md for feature 115 (azuredevops_user_entitlement summary fields) ([1732124](https://github.com/oocx/tfplan2md/commit/1732124919c8d1bc64e1d9e42f97231c71ab5ec1))
+* architecture review for feature 048 ([b2a26ef](https://github.com/oocx/tfplan2md/commit/b2a26efc1b50dcf86408c811abce244550d12c3a))
+* code review for feature 048 ([ec72d65](https://github.com/oocx/tfplan2md/commit/ec72d65c0b8aa8adfe3bf8603d9b3a4c35717345))
+* document azuredevops_user_entitlement summary fields for feature 048 ([7d8792f](https://github.com/oocx/tfplan2md/commit/7d8792f86690b34acdae71a14940e51a2383f744))
+* tasks for feature 048 ([d4ac139](https://github.com/oocx/tfplan2md/commit/d4ac13921774bde925951ab7c978858ed9eb7d58))
+* test plan for feature 048 ([78bf0af](https://github.com/oocx/tfplan2md/commit/78bf0afec26924ceadc7b1c4722f4046f3ff08ac))
+* update work-protocol for feature 048 developer implementation ([c20d6df](https://github.com/oocx/tfplan2md/commit/c20d6df7a4de06213fe2cb8a030c583c062730b2))
+
 <a name="1.37.4"></a>
 ## [1.37.4](https://github.com/oocx/tfplan2md/compare/v1.37.3...v1.37.4) (2026-03-16)
 
