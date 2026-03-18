@@ -5,6 +5,23 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+<a name="1.40.0"></a>
+## [1.40.0](https://github.com/oocx/tfplan2md/compare/v1.39.0...v1.40.0) (2026-03-18)
+
+### ✨ Features
+
+* add BuildDefinitionRenderer for tabular variable rendering ([d2fe829](https://github.com/oocx/tfplan2md/commit/d2fe82927c3eab034a48540cd3ed915f0dab6be7))
+
+### 🐛 Bug Fixes
+
+* correct ossf/scorecard-action commit hash in scorecard workflow ([d2b1064](https://github.com/oocx/tfplan2md/commit/d2b10640fd1bc488a839a7d0a5b622b8322ce7ed))
+
+### 📚 Documentation
+
+* add issue analysis for build definition variable rendering ([3e276c9](https://github.com/oocx/tfplan2md/commit/3e276c925c7c83f62bd8a68e63a8cfcef1c5110d))
+* add release notes and documentation for build definition variable rendering ([8d44cad](https://github.com/oocx/tfplan2md/commit/8d44cadac566fa9bc203f931ac3b051a95954536))
+* update work protocol for issue 118 - implementation complete ([347df29](https://github.com/oocx/tfplan2md/commit/347df29957eb7233f7ce1d455510d369ed61f920))
+
 <a name="1.39.0"></a>
 ## [1.39.0](https://github.com/oocx/tfplan2md/compare/v1.38.0...v1.39.0) (2026-03-17)
 
