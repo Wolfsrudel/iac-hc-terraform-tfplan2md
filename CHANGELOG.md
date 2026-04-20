@@ -5,6 +5,22 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+<a name="1.41.1"></a>
+## [1.41.1](https://github.com/oocx/tfplan2md/compare/v1.41.0...v1.41.1) (2026-04-20)
+
+### 🐛 Bug Fixes
+
+* **azure:** map well-known Microsoft Graph permission GUIDs to display names ([#120](https://github.com/oocx/tfplan2md/issues/120)) ([4aa4b97](https://github.com/oocx/tfplan2md/commit/4aa4b977071e12d6f837d9a950eedf3be8544c94))
+
+### 📚 Documentation
+
+* add issue analysis for missing msgraph permission name mappings ([#120](https://github.com/oocx/tfplan2md/issues/120)) ([8e57b7e](https://github.com/oocx/tfplan2md/commit/8e57b7e0778ad7d66621d221a07f301db2b200c6))
+* document expanded Microsoft Graph permission mapping ([#120](https://github.com/oocx/tfplan2md/issues/120)) ([44d4857](https://github.com/oocx/tfplan2md/commit/44d4857202cdd4f4a637fa8198e894cdbc78edbd))
+* **issue-120:** add release notes ([153a6ff](https://github.com/oocx/tfplan2md/commit/153a6ff4cc1a48a612df5d574b178ce9e58c3260))
+* **issue-120:** append code reviewer work-protocol entry (approve) ([d44805a](https://github.com/oocx/tfplan2md/commit/d44805acdd99c05e65bef28ac1323170fdd088fd))
+* **issue-120:** append developer work-protocol entry ([ebd873a](https://github.com/oocx/tfplan2md/commit/ebd873afce894f8c660182579693ac652ae1010f))
+* **issue-120:** append release manager work-protocol entry ([c30c5f9](https://github.com/oocx/tfplan2md/commit/c30c5f965a56f2a18e2cb54774d5c135b0000431))
+
 <a name="1.41.0"></a>
 ## [1.41.0](https://github.com/oocx/tfplan2md/compare/v1.40.0...v1.41.0) (2026-04-01)
 
