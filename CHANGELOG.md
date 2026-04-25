@@ -5,6 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+<a name="1.42.0"></a>
+## [1.42.0](https://github.com/oocx/tfplan2md/compare/v1.41.1...v1.42.0) (2026-04-25)
+
+### ✨ Features
+
+* add imports/moves to summary table and hide zero-count rows ([5015cee](https://github.com/oocx/tfplan2md/commit/5015cee6385dcd2ccf75c0f883118939b83f4160))
+
+### 📚 Documentation
+
+* add release notes for summary table imports/moves enhancement ([0e347d8](https://github.com/oocx/tfplan2md/commit/0e347d89612bd0d70b77609065658e1ca91d19b6))
+* clarify imports/moves are orthogonal to action buckets ([6cad1cc](https://github.com/oocx/tfplan2md/commit/6cad1cc25f964c33af6d5ece9b9b7781a31d1ab1))
+
 <a name="1.41.1"></a>
 ## [1.41.1](https://github.com/oocx/tfplan2md/compare/v1.41.0...v1.41.1) (2026-04-20)
 
