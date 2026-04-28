@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+<a name="1.42.1"></a>
+## [1.42.1](https://github.com/oocx/tfplan2md/compare/v1.42.0...v1.42.1) (2026-04-28)
+
+### 🐛 Bug Fixes
+
+* improve OpenSSF scorecard score ([23d06fa](https://github.com/oocx/tfplan2md/commit/23d06fa9fe099cecec526d26c038821942e697d6))
+
 <a name="1.42.0"></a>
 ## [1.42.0](https://github.com/oocx/tfplan2md/compare/v1.41.1...v1.42.0) (2026-04-25)
 
