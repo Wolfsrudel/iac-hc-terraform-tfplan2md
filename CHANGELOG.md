@@ -5,6 +5,38 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+<a name="1.43.0"></a>
+## [1.43.0](https://github.com/oocx/tfplan2md/compare/v1.42.1...v1.43.0) (2026-04-30)
+
+### ✨ Features
+
+* **features/122:** plan-status banner, drift, relevant attrs, actions, deprecations (Tasks 5-13) ([99cb016](https://github.com/oocx/tfplan2md/commit/99cb016a2502a63b702b09a566c86b1d682780e7))
+* **parsing:** add ConfigurationDeprecationReader helper ([84f5e0b](https://github.com/oocx/tfplan2md/commit/84f5e0b90951f2450b18417cc087c0ca7b74b01d))
+* **parsing:** add Terraform 1.14/1.15 action and relevant-attribute records ([7c7ced8](https://github.com/oocx/tfplan2md/commit/7c7ced8909a49c770eabe4db26e3387f54caa31f))
+* **parsing:** extend TerraformPlan with optional Terraform 1.14/1.15 fields ([26a8c64](https://github.com/oocx/tfplan2md/commit/26a8c6444cd5a469e131083536781543b52ecae7))
+
+### 🐛 Bug Fixes
+
+* **azapi:** boolean values render as lowercase true/false (SNAPSHOT_UPDATE_OK) ([ae4e33c](https://github.com/oocx/tfplan2md/commit/ae4e33c27c8c2461dbc6e788d1829883c95182a7))
+* **feature/122:** fix deprecation warnings silently dropped when no SARIF findings; add sealed to PlanStatusModel/RelevantAttributeModel ([e407ad3](https://github.com/oocx/tfplan2md/commit/e407ad34a411c0942ad859962a10581ef03b527a))
+* **features/122:** remove broken in-flight test file to restore green build ([9dc1aad](https://github.com/oocx/tfplan2md/commit/9dc1aadb5588be0acbd05a5aa8cdcc36071fbd68))
+
+### 📚 Documentation
+
+* **features/122:** add architecture decisions for Terraform 1.14/1.15 support ([24e24bf](https://github.com/oocx/tfplan2md/commit/24e24bfc49c2d1a0e7a0898f24e7ed034bebbdfe))
+* **features/122:** add retrospective ([2c453c2](https://github.com/oocx/tfplan2md/commit/2c453c2a43d0ccfafff7994b920257ab21ec240b))
+* **features/122:** add specification for Terraform 1.14/1.15 support ([d3e32a0](https://github.com/oocx/tfplan2md/commit/d3e32a00824f6466ac04d5802a9d1b55cf7d3fe5))
+* **features/122:** add task breakdown for Terraform 1.14/1.15 support ([2a0fae6](https://github.com/oocx/tfplan2md/commit/2a0fae6b13dcba5bdec3364b69c4f1c013a8400a))
+* **features/122:** add Terraform 1.14/1.15 release analysis ([c407ce6](https://github.com/oocx/tfplan2md/commit/c407ce60ea175a6889e5385dc7c17a80136cab2f))
+* **features/122:** add test plan for Terraform 1.14/1.15 support ([b9431a8](https://github.com/oocx/tfplan2md/commit/b9431a8718789bb82f284c5799451361b8d81ab1))
+* **features/122:** address code review feedback on formatting consistency ([0e0e3c2](https://github.com/oocx/tfplan2md/commit/0e0e3c21a95d13bf46e10f6e1cf9f1c0145687c3))
+* **features/122:** append Code Reviewer work-protocol entry ([adcce38](https://github.com/oocx/tfplan2md/commit/adcce383e1a2fe39608f8b2698c5aa32d9a2f745))
+* **features/122:** append Developer work-protocol entry ([8ad5966](https://github.com/oocx/tfplan2md/commit/8ad59661e317c7b89845dfa7256aae567ed31fbd))
+* **features/122:** append Release Manager work-protocol entry and release notes ([34bb2a6](https://github.com/oocx/tfplan2md/commit/34bb2a61fd2ed52fdb8a204eb3d183ecc7a4e12a))
+* **features/122:** append UAT Tester work-protocol entry ([82bcdac](https://github.com/oocx/tfplan2md/commit/82bcdacf5c3a9df81903cc724c99435cd7ddd7db))
+* **features/122:** complete release manager work and release notes ([0940f69](https://github.com/oocx/tfplan2md/commit/0940f695a38e8637db1e9e11e118806d797bdd7c))
+* **features/122:** update features.md, README.md, and architecture.md for feature 122 ([3013afc](https://github.com/oocx/tfplan2md/commit/3013afc0735eb9820cfea2933cee7feca5dbb061))
+
 <a name="1.42.1"></a>
 ## [1.42.1](https://github.com/oocx/tfplan2md/compare/v1.42.0...v1.42.1) (2026-04-28)
 
