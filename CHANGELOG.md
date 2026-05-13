@@ -5,6 +5,30 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+<a name="1.43.1"></a>
+## [1.43.1](https://github.com/oocx/tfplan2md/compare/v1.43.0...v1.43.1) (2026-05-13)
+
+### 🐛 Bug Fixes
+
+* restore linux arm64 binary builds by fixing Docker platform pinning ([81504bf](https://github.com/oocx/tfplan2md/commit/81504bf8f479c57472743810960e777e5dbf87e4))
+* revert summary labels to markdown emphasis SNAPSHOT_UPDATE_OK ([eb6721c](https://github.com/oocx/tfplan2md/commit/eb6721cfcc2dc921e2eb97b9f05e59330ccfe811))
+* stop flagging pending imports as already imported ([9e0e356](https://github.com/oocx/tfplan2md/commit/9e0e3563bd99ddc4342d0199395fba4870aa8680))
+* use multi-arch manifest list digests for musl Alpine Docker images ([def13ee](https://github.com/oocx/tfplan2md/commit/def13eed5017be5773851f67c9cba04c6eccab1a))
+
+### 📚 Documentation
+
+* add code review for issue 123 ([6804f0f](https://github.com/oocx/tfplan2md/commit/6804f0fa3ae9f2612fb45c69946a784497dcac1c))
+* add issue analysis for import false positive ([657fb1b](https://github.com/oocx/tfplan2md/commit/657fb1b56a273967a80926bfb780be55e5193371))
+* add release notes for fix 123 (linux arm64 missing binary) ([2e7c598](https://github.com/oocx/tfplan2md/commit/2e7c5984ab1d85eea029ea00b7a6c60b0a160bfa))
+* add retrospective for fix 123 linux arm64 missing binary ([c41eb6e](https://github.com/oocx/tfplan2md/commit/c41eb6eb0820dd80d5c80589eada57541c7e38ba))
+* align pending-import docs with fix ([f42b988](https://github.com/oocx/tfplan2md/commit/f42b988b1de965ccce0720fe779ae70d44cc857e))
+* analyze linux arm64 missing binary bug ([82796bd](https://github.com/oocx/tfplan2md/commit/82796bdf2df34f3517ec1b4b5e56e5f79d89b6c1))
+* code review report and work protocol update for fix 123 ([120bde9](https://github.com/oocx/tfplan2md/commit/120bde91d79827daff82cf6aae49e397b1721734))
+* complete release verification artifacts for issue 123 ([be2d843](https://github.com/oocx/tfplan2md/commit/be2d843aad4bb2ba952156dcc0c0160112161f8d))
+* finalize code review after blocker rework ([8579675](https://github.com/oocx/tfplan2md/commit/85796758049ebb127bf1336724bb998c996b0307))
+* unblock focused UAT for issue 123 ([c1ca449](https://github.com/oocx/tfplan2md/commit/c1ca449453215de14eaf4263924674c9f7700755))
+* update documentation for linux arm64 build fix ([1c23405](https://github.com/oocx/tfplan2md/commit/1c234056ff6a166f895c10a9f53ae7f375d7b52d))
+
 <a name="1.43.0"></a>
 ## [1.43.0](https://github.com/oocx/tfplan2md/compare/v1.42.1...v1.43.0) (2026-04-30)
 
