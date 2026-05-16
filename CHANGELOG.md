@@ -5,6 +5,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+<a name="1.43.2"></a>
+## [1.43.2](https://github.com/oocx/tfplan2md/compare/v1.43.1...v1.43.2) (2026-05-16)
+
+### 🐛 Bug Fixes
+
+* **docker:** remove --locked-mode from Dockerfile to fix ILCompiler version mismatch ([0f0ff8a](https://github.com/oocx/tfplan2md/commit/0f0ff8ac0d8494f9f4b80325a2cb78bc15dc8e42))
+* **workflow:** refresh main project NuGet lock for locked-mode restore ([810f1f8](https://github.com/oocx/tfplan2md/commit/810f1f87b4d8d778acf006edd73076778e2ad599))
+* **workflow:** remove explicit AOT package refs that broke docker publish ([82b3249](https://github.com/oocx/tfplan2md/commit/82b32498ce15619863a63f3227281db6c4cb4c15))
+* **workflow:** stabilize locked restore across CI and Docker SDK contexts ([9d54c27](https://github.com/oocx/tfplan2md/commit/9d54c27f6706b3d00524d81fa1828433ae6735a0))
+
 <a name="1.43.1"></a>
 ## [1.43.1](https://github.com/oocx/tfplan2md/compare/v1.43.0...v1.43.1) (2026-05-13)
 
