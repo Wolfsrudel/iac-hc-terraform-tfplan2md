@@ -5,6 +5,24 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+<a name="1.43.3"></a>
+## [1.43.3](https://github.com/oocx/tfplan2md/compare/v1.43.2...v1.43.3) (2026-05-16)
+
+### 🐛 Bug Fixes
+
+* pin Alpine package versions in Dockerfile (alert [#99](https://github.com/oocx/tfplan2md/issues/99)) ([d9a060f](https://github.com/oocx/tfplan2md/commit/d9a060f5b0e68947e9e0c76bdd2fd6683b6b34ac))
+* pin SLSA generator to SHA digest (alert [#113](https://github.com/oocx/tfplan2md/issues/113)) ([9735901](https://github.com/oocx/tfplan2md/commit/97359012187cd81cbe1d34064162968759397cda))
+* update highlight.js HTML comment regex to prevent CodeQL alerts ([#42](https://github.com/oocx/tfplan2md/issues/42) [#43](https://github.com/oocx/tfplan2md/issues/43) [#44](https://github.com/oocx/tfplan2md/issues/44)) ([010f456](https://github.com/oocx/tfplan2md/commit/010f4561087447f6d3924dd6b1ce756413466820))
+
+### 📚 Documentation
+
+* add code review report and work protocol entries ([586e837](https://github.com/oocx/tfplan2md/commit/586e837de9f4f978f958ae303f0b69a97b324de3))
+* add developer work log entry to work-protocol ([ee086c1](https://github.com/oocx/tfplan2md/commit/ee086c18df06f85e2bea57d4157dd9787c981858))
+* add release manager verification log entry ([f40b08d](https://github.com/oocx/tfplan2md/commit/f40b08d9a2ac143339f6c6730ec06e8c4d698492))
+* add release notes for security alert remediation ([fec2d0d](https://github.com/oocx/tfplan2md/commit/fec2d0d00126fd0393a6f342aba631255e17cd3d))
+* add security alert issue analysis for 8 GitHub security/quality alerts ([94bb3b1](https://github.com/oocx/tfplan2md/commit/94bb3b19c8e5f5ce5ff6a462504b8ad7f2da4e22))
+* add technical writer work log entry — no doc updates needed ([4f03379](https://github.com/oocx/tfplan2md/commit/4f0337992bb574fb1b41504713cc5d974f71ce59))
+
 <a name="1.43.2"></a>
 ## [1.43.2](https://github.com/oocx/tfplan2md/compare/v1.43.1...v1.43.2) (2026-05-16)
 
