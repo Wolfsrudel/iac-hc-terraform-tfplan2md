@@ -5,6 +5,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+<a name="1.44.0"></a>
+## [1.44.0](https://github.com/oocx/tfplan2md/compare/v1.43.3...v1.44.0) (2026-05-19)
+
+### ✨ Features
+
+* enable multi-platform Docker image build (linux/amd64, linux/arm64) ([b7ebd8b](https://github.com/oocx/tfplan2md/commit/b7ebd8bcb51a7c3dc0a7f6db9cc3f340f0f6c371))
+
+### 📚 Documentation
+
+* add release notes and work protocol for multi-platform image build (issue [#657](https://github.com/oocx/tfplan2md/issues/657)) ([675cc15](https://github.com/oocx/tfplan2md/commit/675cc1531042969db8a84193543d2fba4713b966))
+
 <a name="1.43.3"></a>
 ## [1.43.3](https://github.com/oocx/tfplan2md/compare/v1.43.2...v1.43.3) (2026-05-16)
 
