@@ -19,10 +19,12 @@ Ensure every change — including simple, single-agent tasks — satisfies the r
 scripts/git-diff.sh --name-only origin/main...HEAD
 ```
 
-**Category A — Docs/agents only** (all changed files match `^(docs/|\.github/agents/|\.github/skills/|\.github/copilot-instructions\.md$|\.github/gh-cli-instructions\.md$|\.github/pull_request_template\.md$)`):
-→ Skip to [Step 5 (Commit hygiene)](#step-5--commit-hygiene). Build/test/work-item checks are not required.
+**Category A — Docs only** (all changed files are under `docs/` *except* `docs/agents.md` and `docs/spec.md`, or are `website/`, `website.old/`, `assets/`, `tests/`):
+→ Skip to [Step 6 (Commit hygiene)](#step-6--commit-hygiene). Build/test/work-item checks are not required.
 
-**Category B — Code/tooling** (any file in `src/`, `scripts/`, `.github/workflows/`, `examples/`, `docs/agents.md`, `docs/spec.md`, `README.md`, or `CONTRIBUTING.md`):
+**Category B — Code/tooling** (any file in `src/`, `scripts/`, `.github/` (any subdirectory or file), `examples/`, `docs/agents.md`, `docs/spec.md`, `README.md`, or `CONTRIBUTING.md`):
+
+> **Important:** ALL files under `.github/` — including `.github/skills/`, `.github/agents/`, `.github/copilot-instructions.md`, `.github/hooks/`, `.github/workflows/` — are Category B. There are no sub-folder exemptions for `.github/`.
 → Complete all steps below.
 
 ---
