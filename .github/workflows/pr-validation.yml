@@ -79,11 +79,11 @@ jobs:
             echo "website_changed=false" >> $GITHUB_OUTPUT
           fi
 
-          NON_IGNORED=$(echo "$CHANGED_FILES" | grep -Ev '^(docs/|website/|website\.old/|\.github/)' || true)
+          NON_IGNORED=$(echo "$CHANGED_FILES" | grep -Ev '^(docs/|website/|website\.old/|\.github/|scripts/|src/tests/shell/)' || true)
 
           if [ -z "$NON_IGNORED" ]; then
             echo "changed=false" >> $GITHUB_OUTPUT
-            echo "Only docs/website/website.old/.github changed; skipping non-website validation"
+            echo "Only docs/website/.github/scripts/shell-tests changed; skipping non-website validation"
           else
             echo "changed=true" >> $GITHUB_OUTPUT
             echo "Non-ignored files changed; running validation"

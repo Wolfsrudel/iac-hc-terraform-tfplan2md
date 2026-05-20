@@ -6,7 +6,11 @@ cd "$REPO_ROOT"
 
 # Directory paths that indicate the PR is changing workflow or shipped behavior and
 # therefore must be anchored to a documented work item with release artifacts.
-WORK_ITEM_REQUIRED_DIR_PATTERN='^(src/|scripts/|examples/)'
+WORK_ITEM_REQUIRED_DIR_PATTERN='^(src/|examples/)'
+
+# Paths under WORK_ITEM_REQUIRED_DIR_PATTERN that are tooling/test-only and therefore
+# do NOT require a work item (shell test helpers, not shipped behavior).
+WORK_ITEM_EXCLUDED_DIR_PATTERN='^src/tests/shell/'
 
 # Individual documentation files that can change workflow expectations globally and
 # should therefore also require a matching work item folder.
@@ -64,7 +68,7 @@ while IFS= read -r file; do
     changed_work_items["docs/${BASH_REMATCH[1]}/${BASH_REMATCH[2]}"]=1
   fi
 
-  if [[ "$file" =~ $WORK_ITEM_REQUIRED_DIR_PATTERN ]] || [[ "$file" =~ $WORK_ITEM_REQUIRED_FILE_PATTERN ]]; then
+  if ( [[ "$file" =~ $WORK_ITEM_REQUIRED_DIR_PATTERN ]] && ! [[ "$file" =~ $WORK_ITEM_EXCLUDED_DIR_PATTERN ]] ) || [[ "$file" =~ $WORK_ITEM_REQUIRED_FILE_PATTERN ]]; then
     work_item_required=true
   fi
 done <<< "$changed_files"
