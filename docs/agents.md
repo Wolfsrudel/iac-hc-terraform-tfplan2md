@@ -128,6 +128,7 @@ Format:
 
 | Skill Name | Description |
 | :--- | :--- |
+| `pre-pr-checklist` | **Mandatory before every PR.** Ordered checklist of minimum requirements every agent must verify before pushing or creating a PR (work item folder, formatting, build, tests, coverage, snapshot token, demo artifacts, commit hygiene, local guardrail scripts). |
 | `arc42-documentation` | Create comprehensive architecture documentation using the arc42 template structure (12 sections covering introduction, constraints, context, solution strategy, building blocks, runtime, deployment, concepts, decisions, quality, risks, and glossary). |
 | `coding-agent-workflow` | Standard workflow for GitHub Copilot coding agents including report_progress usage, delegation handling, and PR communication patterns. |
 | `create-agent-skill` | Create a new Agent Skill following project standards and templates. |
