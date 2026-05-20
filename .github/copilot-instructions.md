@@ -118,6 +118,12 @@ When you cannot proceed because you need Maintainer input (for example, ambiguou
 
 Note: `docs/agents.md` is a helpful index, but `.github/skills/` is the authoritative list of skills.
 
+### Pre-PR Checklist (MANDATORY for all agents)
+
+Before **any** `report_progress` call or PR creation that includes code or tooling changes, you **must** invoke the `pre-pr-checklist` skill. This applies equally to simple single-agent tasks and full multi-agent workflows — there are no exceptions.
+
+Skipping this step is the primary cause of first-attempt CI failures for simple tasks.
+
 ## Plan Mode Instructions
 - Continue to ask for more details until you have a clear understanding of the requirements
 - Only ask one question at a time

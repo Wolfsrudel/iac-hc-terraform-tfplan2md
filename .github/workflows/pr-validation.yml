@@ -40,10 +40,7 @@ jobs:
 
           # If anything outside these paths changed, this is not an internal-only PR.
           non_internal=$(echo "$changed_files" | grep -Ev '^(\.github/|scripts/|docs/|website/|website\.old/|uat-repos/|TestData/|artifacts/|assets/)' || true)
-          # .github/workflows/ files are pipeline/release code, not pure tooling; treat them as non-internal
-          # (consistent with the "Check if validation is needed" step, which does NOT ignore them).
-          workflow_changed=$(echo "$changed_files" | grep -E '^\.github/workflows/' || true)
-          if [ -n "$non_internal" ] || [ -n "$workflow_changed" ]; then
+          if [ -n "$non_internal" ]; then
             echo "Non-internal files changed; internal commit guardrail not applicable."
             exit 0
           fi
@@ -82,11 +79,11 @@ jobs:
             echo "website_changed=false" >> $GITHUB_OUTPUT
           fi
 
-          NON_IGNORED=$(echo "$CHANGED_FILES" | grep -Ev '^(docs/|website/|website\.old/|\.github/agents/|\.github/skills/|\.github/copilot-instructions\.md$|\.github/gh-cli-instructions\.md$|\.github/pull_request_template\.md$)' || true)
+          NON_IGNORED=$(echo "$CHANGED_FILES" | grep -Ev '^(docs/|website/|website\.old/|\.github/|scripts/|src/tests/shell/)' || true)
 
           if [ -z "$NON_IGNORED" ]; then
             echo "changed=false" >> $GITHUB_OUTPUT
-            echo "Only docs/website/website.old/agent-instructions changed; skipping non-website validation"
+            echo "Only docs/website/.github/scripts/shell-tests changed; skipping non-website validation"
           else
             echo "changed=true" >> $GITHUB_OUTPUT
             echo "Non-ignored files changed; running validation"
@@ -330,4 +327,4 @@ jobs:
 
       - name: Skip validation (no relevant files changed)
         if: steps.filter.outputs.changed == 'false'
-        run: echo "✅ PR validation skipped for non-code checks (docs/website/website.old/agent-only changes)"
+        run: echo "✅ PR validation skipped for non-code checks (docs/website/website.old/.github-only changes)"

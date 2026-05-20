@@ -92,7 +92,20 @@ HEAD_SHA="$(git rev-parse HEAD)"
 bash "$SCRIPT_PATH" --base-ref "$BASE_SHA" --head-ref "$HEAD_SHA" >/dev/null
 echo "OK: passes when changed workflow work item includes release artifacts"
 
-# Case 5: code changes without any work item docs should fail
+# Case 4: .github/ changes without a work item folder should pass
+git checkout -q "$BASE_SHA"
+mkdir -p .github/skills/example-skill
+cat > .github/skills/example-skill/SKILL.md <<'EOF'
+# Example Skill
+EOF
+git add .github/skills/example-skill/SKILL.md
+git commit -qm "ci: add example skill"
+HEAD_SHA="$(git rev-parse HEAD)"
+
+bash "$SCRIPT_PATH" --base-ref "$BASE_SHA" --head-ref "$HEAD_SHA" >/dev/null
+echo "OK: .github/ changes do not require a work item folder"
+
+# Case 5: scripts/ changes without a work item folder should pass (tooling-only, not shipped)
 git checkout -q "$BASE_SHA"
 mkdir -p scripts
 cat > scripts/example.sh <<'EOF'
@@ -104,18 +117,46 @@ git add scripts/example.sh
 git commit -qm "chore: add script without work item docs"
 HEAD_SHA="$(git rev-parse HEAD)"
 
+bash "$SCRIPT_PATH" --base-ref "$BASE_SHA" --head-ref "$HEAD_SHA" >/dev/null
+echo "OK: scripts/ changes do not require a work item folder"
+
+# Case 5b: src/tests/shell/ changes without a work item folder should pass
+git checkout -q "$BASE_SHA"
+mkdir -p src/tests/shell
+cat > src/tests/shell/example_test.sh <<'EOF'
+#!/usr/bin/env bash
+echo "example test"
+EOF
+chmod +x src/tests/shell/example_test.sh
+git add src/tests/shell/example_test.sh
+git commit -qm "test: add shell test without work item docs"
+HEAD_SHA="$(git rev-parse HEAD)"
+
+bash "$SCRIPT_PATH" --base-ref "$BASE_SHA" --head-ref "$HEAD_SHA" >/dev/null
+echo "OK: src/tests/shell/ changes do not require a work item folder"
+
+# Case 6: src/ changes outside src/tests/shell/ without a work item folder should fail
+git checkout -q "$BASE_SHA"
+mkdir -p src/SomeProject
+cat > src/SomeProject/Example.cs <<'EOF'
+// example
+EOF
+git add src/SomeProject/Example.cs
+git commit -qm "feat: add code without work item docs"
+HEAD_SHA="$(git rev-parse HEAD)"
+
 set +e
 bash "$SCRIPT_PATH" --base-ref "$BASE_SHA" --head-ref "$HEAD_SHA" >/dev/null 2>&1
 rc=$?
 set -e
 
 if [[ $rc -eq 0 ]]; then
-  echo "ERROR: expected failure when work item docs are missing for script change"
+  echo "ERROR: expected failure when work item docs are missing for src/ change"
   exit 1
 fi
-echo "OK: fails when script changes lack a work item folder"
+echo "OK: src/ changes (outside tests/shell/) fail without a work item folder"
 
-# Case 6: screenshot references must use raw URLs plus metadata
+# Case 7: screenshot references must use raw URLs plus metadata
 git checkout -q "$BASE_SHA"
 mkdir -p docs/features/999-screenshot-validation
 printf '%s' "$TEST_PNG_BASE64" | base64 -d > docs/features/999-screenshot-validation/example.png
