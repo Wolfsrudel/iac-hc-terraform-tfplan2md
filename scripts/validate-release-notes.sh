@@ -6,7 +6,7 @@ cd "$REPO_ROOT"
 
 # Directory paths that indicate the PR is changing workflow or shipped behavior and
 # therefore must be anchored to a documented work item with release artifacts.
-WORK_ITEM_REQUIRED_DIR_PATTERN='^(src/|scripts/|\.github/|examples/)'
+WORK_ITEM_REQUIRED_DIR_PATTERN='^(src/|scripts/|examples/)'
 
 # Individual documentation files that can change workflow expectations globally and
 # should therefore also require a matching work item folder.

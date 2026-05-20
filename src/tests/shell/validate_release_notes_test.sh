@@ -92,6 +92,19 @@ HEAD_SHA="$(git rev-parse HEAD)"
 bash "$SCRIPT_PATH" --base-ref "$BASE_SHA" --head-ref "$HEAD_SHA" >/dev/null
 echo "OK: passes when changed workflow work item includes release artifacts"
 
+# Case 4: .github/ changes without a work item folder should pass
+git checkout -q "$BASE_SHA"
+mkdir -p .github/skills/example-skill
+cat > .github/skills/example-skill/SKILL.md <<'EOF'
+# Example Skill
+EOF
+git add .github/skills/example-skill/SKILL.md
+git commit -qm "ci: add example skill"
+HEAD_SHA="$(git rev-parse HEAD)"
+
+bash "$SCRIPT_PATH" --base-ref "$BASE_SHA" --head-ref "$HEAD_SHA" >/dev/null
+echo "OK: .github/ changes do not require a work item folder"
+
 # Case 5: code changes without any work item docs should fail
 git checkout -q "$BASE_SHA"
 mkdir -p scripts
