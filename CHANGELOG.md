@@ -5,6 +5,33 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+<a name="1.45.0"></a>
+## [1.45.0](https://github.com/oocx/tfplan2md/compare/v1.44.0...v1.45.0) (2026-06-01)
+
+### ✨ Features
+
+* implement inline relevant attributes (Tasks 1-7, partial - build fixes in progress) ([86d03be](https://github.com/oocx/tfplan2md/commit/86d03be4b31cb7ac874e06438277be30c0f42639))
+
+### 🐛 Bug Fixes
+
+* fix CA1859 build error in ReportModelBuilder.PlanContext.cs ([dc3452a](https://github.com/oocx/tfplan2md/commit/dc3452ac3df2d46add388a47f9ba2f437b2caf98))
+* use compile-generator for SLSA provenance step ([74178c7](https://github.com/oocx/tfplan2md/commit/74178c7cd6708352317dd0a4591c4d9bf91f966e))
+* use tag ref for SLSA generator instead of SHA + compile-generator ([e93357c](https://github.com/oocx/tfplan2md/commit/e93357c5001976823be4610ed4c083ad208a74ef))
+
+### 📚 Documentation
+
+* add architecture for inline-relevant-attributes (feature 660) ([66a96de](https://github.com/oocx/tfplan2md/commit/66a96de47a17d31541f67d5c4b1e2c2f2d3c3d50))
+* add feature 660 release notes ([104284c](https://github.com/oocx/tfplan2md/commit/104284c91528afa7106cffd9741bb1f4a62a128e))
+* add feature specification for 660-inline-relevant-attributes ([690f92e](https://github.com/oocx/tfplan2md/commit/690f92e5040ea406fb6c658f1e254617861fa188))
+* add pre-pr-checklist skill and mandate it in agent instructions ([041c732](https://github.com/oocx/tfplan2md/commit/041c7322783be8cb4d49728d0702b290b73e2660))
+* add tasks for inline-relevant-attributes (feature 660) ([1fbdfa9](https://github.com/oocx/tfplan2md/commit/1fbdfa90bd0e8b4c0d11b494caa4c63b5acff4e3))
+* add test plan and UAT test plan for feature 660 inline relevant attributes ([4fefd4f](https://github.com/oocx/tfplan2md/commit/4fefd4f5ab2e939f8801e6e35525aa0337dd8ba1))
+* add work item for pre-pr-checklist and validation exemption changes ([ed9da1b](https://github.com/oocx/tfplan2md/commit/ed9da1b78b97e4c763a32d208835580dfcb5abae))
+* add work item for SLSA release build fix (PR [#659](https://github.com/oocx/tfplan2md/issues/659)) ([a1e605d](https://github.com/oocx/tfplan2md/commit/a1e605deedc47be98d408767d0c946f5e2686859))
+* correct release notes for SLSA fix (remove stale compile-generator reference) ([4ebab93](https://github.com/oocx/tfplan2md/commit/4ebab93a96fa866329ee34db5b1da312dc62966b))
+* finalize feature 660 workflow log ([6f1afbe](https://github.com/oocx/tfplan2md/commit/6f1afbe45e161c58b674dd9817fa5e54c005803f))
+* fix pre-pr-checklist Category A and add missing work item folder ([846827b](https://github.com/oocx/tfplan2md/commit/846827b23f9abefbcc603bc4b23bd6ca94e02f52))
+
 <a name="1.44.0"></a>
 ## [1.44.0](https://github.com/oocx/tfplan2md/compare/v1.43.3...v1.44.0) (2026-05-19)
 
