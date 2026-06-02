@@ -5,6 +5,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+<a name="1.45.1"></a>
+## [1.45.1](https://github.com/oocx/tfplan2md/compare/v1.45.0...v1.45.1) (2026-06-02)
+
+### 🐛 Bug Fixes
+
+* disable musl arm64 AOT in Docker build ([c3109e1](https://github.com/oocx/tfplan2md/commit/c3109e1d40e8452b7d4ecc4d362541ac6798ca50))
+* exempt src Dockerfile from work-item release artifacts check ([974a631](https://github.com/oocx/tfplan2md/commit/974a63126bc35b0a678aab3143109cfd39bf2ebe))
+
 <a name="1.45.0"></a>
 ## [1.45.0](https://github.com/oocx/tfplan2md/compare/v1.44.0...v1.45.0) (2026-06-01)
 
