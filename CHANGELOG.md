@@ -5,6 +5,20 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+<a name="1.45.2"></a>
+## [1.45.2](https://github.com/oocx/tfplan2md/compare/v1.45.1...v1.45.2) (2026-06-05)
+
+### 🐛 Bug Fixes
+
+* suppress no-change status warning and drift noise ([40c6823](https://github.com/oocx/tfplan2md/commit/40c682339fc3417705fc742b4cef91e55203dca9))
+
+### 📚 Documentation
+
+* add code reviewer log for issue 661 ([f4ec27f](https://github.com/oocx/tfplan2md/commit/f4ec27f45746ac8afc8e15b9d608a76984db8d1c))
+* add release notes and screenshots for issue 661 plan status drift fix ([e859b87](https://github.com/oocx/tfplan2md/commit/e859b87f4d25fea8f5b8678bb62d99d388ce0127))
+* add retrospective for issue 661 ([7381985](https://github.com/oocx/tfplan2md/commit/7381985698d13b0846e9cb17b64c8500b73897f9))
+* update issue 661 behavior notes ([2a3589d](https://github.com/oocx/tfplan2md/commit/2a3589d01ce113cefa5ab89b52b1a0c4be0d2680))
+
 <a name="1.45.1"></a>
 ## [1.45.1](https://github.com/oocx/tfplan2md/compare/v1.45.0...v1.45.1) (2026-06-02)
 
